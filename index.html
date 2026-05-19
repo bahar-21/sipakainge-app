@@ -1,0 +1,1428 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#2563eb" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="SIPAKAINGE" />
+  <link rel="manifest" href="./manifest.json" />
+  <title>SIPAKAINGE</title>
+  <style>
+    :root{--blue:#2563eb;--blue-dark:#1d4ed8;--bg:#f5faff;--card:#fff;--text:#07122b;--muted:#64748b;--border:#dbe5f0;--hitam:#16213a;--merah:#ef4444;--kuning:#f59e0b;--hijau:#10b981;--soft:#eef6ff;--shadow:0 2px 8px rgba(15,23,42,.08);--shadow-soft:0 1px 4px rgba(15,23,42,.07)}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Arial,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.35;-webkit-tap-highlight-color:transparent}.app{max-width:760px;margin:0 auto;min-height:100vh;background:linear-gradient(180deg,#f2f9ff 0%,#f7fbff 45%,#f5faff 100%);padding-bottom:72px}header{position:sticky;top:0;z-index:20;background:rgba(234,247,255,.96);backdrop-filter:blur(8px);border-bottom:1px solid #b7ddf6;padding:8px 12px}.tabs{display:flex;gap:5px;overflow-x:auto;scrollbar-width:none}.tabs::-webkit-scrollbar{display:none}.tab{border:1px solid #cbd5e1;background:white;color:#111827;border-radius:8px;padding:8px 12px;font-size:13px;font-weight:800;white-space:nowrap;box-shadow:var(--shadow-soft);transition:.15s}.tab.active{background:var(--blue);border-color:var(--blue);color:white;box-shadow:0 3px 10px rgba(37,99,235,.23)}main{padding:10px 12px 26px}.summary-box{background:#eef9ff;border:1px solid #d3ecff;border-radius:12px;padding:12px 10px;margin-bottom:12px}.summary-row{background:white;border:1px solid var(--border);border-radius:10px;padding:11px 12px;margin-bottom:8px;box-shadow:var(--shadow);display:flex;align-items:center;justify-content:space-between;gap:10px;font-weight:900}.summary-row:last-child{margin-bottom:0}.summary-row.main{border-left:4px solid var(--blue)}.big-percent{font-size:23px;color:var(--blue);font-weight:900;letter-spacing:-.4px}.dots{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:12px;font-weight:900;margin-top:2px}.dot-item{display:inline-flex;align-items:center;gap:5px;border-radius:999px}.dot{width:9px;height:9px;border-radius:999px;display:inline-block}.hitam{background:var(--hitam)}.merah{background:var(--merah)}.kuning{background:var(--kuning)}.hijau{background:var(--hijau)}.toolbar{display:grid;grid-template-columns:1fr auto auto;gap:7px;margin-bottom:9px}input,select{border:1px solid var(--border);border-radius:9px;padding:10px 12px;background:white;font-size:13px;width:100%;min-width:0;outline:none;transition:.15s}input:focus,select:focus{border-color:#93c5fd;box-shadow:0 0 0 3px rgba(147,197,253,.25)}.icon-btn{border:1px solid var(--border);border-radius:9px;width:38px;background:white;font-weight:900;color:var(--blue);box-shadow:var(--shadow-soft)}.card{background:white;border:1px solid var(--border);border-radius:11px;padding:10px 11px;margin-bottom:7px;box-shadow:var(--shadow-soft);overflow:hidden}.card.open{border-color:var(--blue);box-shadow:0 0 0 1px rgba(37,99,235,.75),var(--shadow)}.card-head{display:flex;justify-content:space-between;gap:6px;align-items:flex-start;margin-bottom:6px}.card-title{font-weight:900;font-size:14px;text-transform:uppercase;letter-spacing:-.2px;line-height:1.2}.action-row{display:flex;gap:6px}.small-btn{border:1px solid var(--border);background:#f8fafc;color:var(--blue);border-radius:7px;width:25px;height:25px;font-weight:900;font-size:11px}.risk-line{display:flex;align-items:center;justify-content:space-between;width:100%;gap:10px;margin:8px 0 5px}.risk-percent{margin-left:auto;text-align:right;font-weight:900;font-size:12px;white-space:nowrap;min-width:88px}.risk-percent.HIJAU{color:var(--hijau)}.risk-percent.KUNING{color:#f59e0b}.risk-percent.MERAH{color:var(--merah)}.risk-percent.HITAM{color:var(--hitam)}.risk-chip{border-radius:999px;padding:4px 10px;font-size:10px;font-weight:900;border:1px solid var(--border);background:#f8fafc;min-width:58px;text-align:center}.risk-chip.HIJAU{color:#059669;background:#ecfdf5;border-color:#c5f3df}.risk-chip.KUNING{color:#d97706;background:#fffbeb;border-color:#fdecc8}.risk-chip.MERAH{color:var(--merah);background:#fff1f2;border-color:#ffd0d6}.risk-chip.HITAM{color:var(--hitam);background:#f1f5f9}.bar-track{height:4px;background:#e5e7eb;border-radius:999px;overflow:hidden;margin-top:6px}.bar-fill{height:100%;border-radius:999px}.pos-card{background:#fbfdff;border:1px solid var(--border);border-left:3px solid var(--hijau);border-radius:9px;padding:8px 9px;margin-top:8px}.pos-title-row{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:5px}.pos-title{font-weight:900;font-size:12px;text-transform:uppercase;line-height:1.25}.clickable-dot{cursor:pointer;padding:4px 2px}.overlay{position:fixed;inset:0;background:rgba(15,23,42,.58);z-index:50;display:none;align-items:flex-start;justify-content:center;padding:45px 8px 12px}.overlay.show{display:flex}.panel{width:min(100%,720px);max-height:88vh;overflow:auto;background:#f8fbff;border-radius:10px;border:1px solid #cfe8ff;box-shadow:0 16px 40px rgba(15,23,42,.2)}.panel-head{position:sticky;top:0;background:#bfeaff;padding:11px 12px;border-bottom:1px solid #9bd8f6;z-index:2;display:flex;justify-content:space-between;gap:8px}.panel-title{color:#0b51b7;font-weight:900;font-size:15px}.panel-subtitle{font-size:11px;margin-top:4px;color:#0f2942}.close-btn{border:0;background:white;color:#ef4444;width:30px;height:30px;border-radius:50%;font-size:19px;line-height:1;box-shadow:var(--shadow-soft)}.panel-body{padding:10px}.pos-heading{color:var(--blue);font-weight:900;font-size:12px;margin:10px 0}.child-card{background:white;border:1px solid var(--border);border-radius:10px;padding:10px;margin-bottom:7px}.child-top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}.child-name{font-weight:900;font-size:14px;letter-spacing:-.15px}.child-meta{margin-top:4px;font-size:11px;color:#334155;line-height:1.5}.mini-badge{display:inline-block;background:var(--blue);color:white;border-radius:6px;padding:4px 7px;font-size:10px;font-weight:900;margin-top:4px}.anak-card{background:white;border:1px solid var(--border);border-radius:12px;padding:10px;margin-bottom:8px;box-shadow:var(--shadow-soft);border-left:4px solid var(--hijau);cursor:pointer}.anak-card.HITAM{border-left-color:var(--hitam)}.anak-card.MERAH{border-left-color:var(--merah)}.anak-card.KUNING{border-left-color:var(--kuning)}.anak-card.HIJAU{border-left-color:var(--hijau)}.anak-main{display:grid;grid-template-columns:minmax(0,1fr) minmax(112px,38%);gap:8px;align-items:start}.anak-title{font-size:13px;font-weight:900;line-height:1.25;text-transform:uppercase}.no-buku-pill{display:inline-block;background:#eff6ff;color:#1d4ed8;border:1px solid #bfdbfe;border-radius:7px;padding:2px 6px;margin-right:5px;font-size:11px;font-weight:900}.anak-ident{font-size:11px;color:#334155;line-height:1.45;margin-top:4px}.anak-right{text-align:right;font-size:11px;color:#334155;display:grid;grid-template-rows:auto auto auto;gap:4px;min-width:0}.risk-row{display:flex;justify-content:flex-end;align-items:center;gap:5px;min-height:18px}.risk-dot{width:18px;height:18px;border-radius:999px;display:inline-block;box-shadow:var(--shadow-soft);border:2px solid white}.risk-dot.HIJAU{background:var(--hijau)}.risk-dot.KUNING{background:var(--kuning)}.risk-dot.MERAH{background:var(--merah)}.risk-dot.HITAM{background:var(--hitam)}.risk-badge{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:5px 11px;font-size:11px;font-weight:900;letter-spacing:.25px;border:1px solid var(--border);box-shadow:var(--shadow-soft);line-height:1;white-space:nowrap}.risk-badge .risk-dot{width:9px;height:9px;border:0;box-shadow:none}.risk-badge.HIJAU{background:#ecfdf5;color:#059669;border-color:#bbf7d0}.risk-badge.KUNING{background:#fff7ed;color:#d97706;border-color:#fde68a}.risk-badge.MERAH{background:#fff1f2;color:#dc2626;border-color:#fecaca}.risk-badge.HITAM{background:#f1f5f9;color:#16213a;border-color:#cbd5e1}.rek-line{display:flex;justify-content:flex-end;align-items:flex-start;gap:4px;min-width:0}.rek-icon{font-size:14px;line-height:1.2;flex:0 0 auto}.rek-text{font-weight:900;color:#075985;line-height:1.25;word-break:break-word;min-width:0}.hp-mini{font-size:10px;color:#16a34a;margin-top:0;font-weight:800;white-space:nowrap}.layanan-strip{margin-top:8px;border-radius:9px;padding:7px 9px;text-align:center;font-size:12px;font-weight:900;line-height:1.3}.layanan-strip.SUNTIK{background:#eff6ff;color:#1d4ed8;border:1px solid #bfdbfe}.layanan-strip.BATAL{background:#fff7ed;color:#c2410c;border:1px solid #fed7aa}.layanan-strip.BELUM{background:#fff1f2;color:#dc2626;border:1px solid #fecdd3}.layanan-strip.LENGKAP{background:#f1f5f9;color:#475569;border:1px solid #e2e8f0}.history{margin-top:8px;border-top:1px dashed #cbd5e1;padding-top:8px;display:none}.child-card.open .history{display:block}.history-title{font-size:10px;font-weight:900;color:var(--blue);margin-bottom:6px}.history-row{display:grid;grid-template-columns:88px 1fr;gap:6px;background:#f8fafc;border:1px solid #eef2f7;border-radius:7px;padding:6px;margin-bottom:4px;font-size:11px}.history-date{font-weight:800;color:#334155}.history-vax{font-weight:800}.bottom-nav{position:fixed;left:0;right:0;bottom:0;background:white;border-top:1px solid var(--border);display:grid;grid-template-columns:repeat(4,1fr);max-width:760px;margin:0 auto;z-index:40;box-shadow:0 -3px 12px rgba(15,23,42,.1);padding:3px 4px 4px}.nav{border:0;background:white;color:#64748b;padding:7px 2px 6px;font-size:11px;font-weight:900;border-radius:10px}.nav.active{color:var(--blue);background:#eff6ff}.view{display:none}.view.active{display:block}.input-filter{background:white;border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:10px;box-shadow:var(--shadow)}.filter-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.label{font-size:11px;font-weight:900;margin-bottom:6px;color:#0f172a}.search-action{display:flex;gap:7px;margin:10px;align-items:center;}.pending-badge{min-width:52px;border:1px solid #fecaca;background:#fff1f2;color:#dc2626;border-radius:9px;padding:4px 5px;text-align:center;font-size:9px;font-weight:900;line-height:1.1;box-shadow:var(--shadow-soft)}.pending-badge.zero{background:#ecfdf5;border-color:#bbf7d0;color:#059669}.pending-badge b{display:block;font-size:16px;line-height:1}.hasil-filter-badge{min-width:46px;border:1px solid #bfdbfe;background:#eff6ff;color:#1d4ed8;border-radius:9px;padding:6px 8px;text-align:center;font-size:10px;font-weight:900;line-height:1.1;box-shadow:var(--shadow-soft)}.hasil-filter-badge b{display:block;font-size:17px;line-height:1}.chip-filter{display:flex;flex-wrap:wrap;gap:5px}.chip-filter label{display:inline-flex;align-items:center;gap:4px;border:1px solid #dbeafe;background:#f8fbff;border-radius:999px;padding:7px 9px;font-size:11px;font-weight:900;color:#334155;line-height:1;white-space:nowrap}.chip-filter input{width:auto;margin:0;accent-color:var(--blue)}.chip-filter label:has(input:checked){background:#eff6ff;border-color:#93c5fd;color:#1d4ed8;box-shadow:0 0 0 2px rgba(147,197,253,.18)}.plus-btn{background:#22c55e;color:white;border:0;border-radius:9px;width:38px;font-size:22px;font-weight:900;box-shadow:var(--shadow-soft)}.counter-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;margin-bottom:9px}.counter{background:white;border:1px solid var(--border);border-radius:10px;text-align:center;padding:8px 2px;font-weight:900;box-shadow:var(--shadow-soft);cursor:pointer}.counter.active{border-color:var(--blue);box-shadow:0 0 0 2px rgba(37,99,235,.22);background:#eff6ff}.counter small{font-size:10px;color:#64748b}.counter .n{font-size:20px;color:var(--blue);line-height:1.1}.counter.belum .n{color:#b45309}.counter.suntik .n{color:#059669}.counter.batal .n{color:#ef4444}.input-child{border-left:4px solid var(--hijau);padding:12px}.input-child.HITAM{border-left-color:var(--hitam)}.input-child.KUNING{border-left-color:var(--kuning)}.input-child.MERAH{border-left-color:var(--merah)}.recommend{background:#eff6ff;border:1px solid #cfe1ff;border-radius:8px;padding:8px;margin:8px 0;font-size:12px;color:#075985;font-weight:800;text-align:center}.form-modal{position:fixed;inset:0;background:rgba(15,23,42,.58);z-index:80;display:none;align-items:flex-end;justify-content:center;padding:12px}.form-modal.show{display:flex}.form-modal-box{width:min(100%,720px);max-height:92vh;overflow:auto;background:#f8fbff;border-radius:18px 18px 0 0;border:1px solid #cfe8ff;box-shadow:0 -12px 32px rgba(15,23,42,.2);padding:14px}.sub-modal{position:fixed;inset:0;background:rgba(15,23,42,.55);z-index:90;display:none;align-items:flex-end;justify-content:center;padding:12px}.sub-modal.show{display:flex}.sub-modal-box{width:min(100%,720px);max-height:82vh;overflow:auto;background:white;border-radius:18px 18px 0 0;border:1px solid #cfe8ff;box-shadow:0 -12px 32px rgba(15,23,42,.22);padding:14px}.riwayat-add-row{display:grid;grid-template-columns:24px 1fr 132px;gap:6px;align-items:center;border:1px solid #dbeafe;background:#eff6ff;border-radius:9px;padding:7px;margin-bottom:6px}.riwayat-add-row label{font-size:12px;font-weight:900}.riwayat-add-row small{display:block;font-size:10px;color:#64748b;font-weight:700;margin-top:2px}.form-modal-head{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid #dbeafe}.form-modal-title{font-size:15px;font-weight:900;color:#0b51b7}.form-area{display:block}.input-child.open .form-area{display:block}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.section-small{font-size:11px;font-weight:900;color:#0b51b7;margin:8px 0;border-bottom:1px solid #cfe1ff;padding-bottom:4px}.choice-row{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:8px 0}.choice{border:1px solid var(--border);border-radius:8px;padding:9px;text-align:center;font-weight:900;background:white}.choice.active{background:#eef6ff;border-color:#93c5fd;color:var(--blue);box-shadow:0 0 0 2px rgba(147,197,253,.22)}.vax-list{display:grid;grid-template-columns:1fr 1fr;gap:7px}.vax-check{background:#eff6ff;border:1px solid #cfe1ff;border-radius:8px;padding:8px;font-size:12px;font-weight:900}.action-form-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.save-btn{width:100%;border:0;background:var(--blue);color:white;border-radius:9px;padding:11px;font-weight:900;box-shadow:0 4px 10px rgba(37,99,235,.25)}.cancel-btn{width:100%;border:1px solid #cbd5e1;background:white;color:#475569;border-radius:9px;padding:11px;font-weight:900}.note-input{margin-top:8px}.muted-note{font-size:11px;color:#059669;font-style:italic;margin-top:6px}.history-table{background:#eef6ff;border:1px solid #dbeafe;border-radius:9px;padding:6px}.history-line{display:grid;grid-template-columns:1fr 1fr;gap:4px;font-size:12px;font-weight:800;margin-bottom:4px;align-items:center}.history-line input{padding:6px;border-radius:5px}.history-date-group{background:white;border:1px solid #dbeafe;border-radius:9px;padding:8px;margin-bottom:7px;font-size:12px;line-height:1.5;display:flex;gap:6px;align-items:flex-start;flex-wrap:wrap}.history-date-label{font-weight:900;color:#0f172a;white-space:nowrap}.history-vaksin-text{font-weight:800;color:#334155;flex:1;min-width:180px}.history-chip small{color:#dc2626;font-size:10px}.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}.detail-box{background:#f8fbff;border:1px solid #dbeafe;border-radius:10px;padding:9px;font-size:12px;line-height:1.45}.detail-box b{color:#0f172a}.detail-section{font-size:11px;font-weight:900;color:#0b51b7;margin:10px 0 6px;border-bottom:1px solid #cfe1ff;padding-bottom:4px}.detail-chip-wrap{display:flex;flex-wrap:wrap;gap:6px}.detail-chip{display:inline-block;background:#eff6ff;border:1px solid #bfdbfe;color:#075985;border-radius:999px;padding:5px 8px;font-size:12px;font-weight:900}.detail-chip.warn{background:#fff7ed;border-color:#fed7aa;color:#c2410c}.detail-chip.danger{background:#fff1f2;border-color:#fecdd3;color:#dc2626}.riwayat-date-row{background:#f8fbff;border:1px solid #dbeafe;border-radius:10px;padding:9px;margin-bottom:8px}.riwayat-date-row-head{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;margin-bottom:8px}.riwayat-pilih-list{display:grid;grid-template-columns:1fr 1fr;gap:6px}.riwayat-pilih-item{background:#eff6ff;border:1px solid #cfe1ff;border-radius:8px;padding:7px;font-size:12px;font-weight:900}.riwayat-pilih-item input{width:auto;margin-right:5px}.riwayat-date-remove{border:0;background:#fee2e2;color:#dc2626;border-radius:8px;width:32px;height:32px;font-weight:900}.label-kejar,.label-kejar-riwayat{display:inline-block;background:#fee2e2;color:#dc2626;border:1px solid #fecaca;border-radius:999px;padding:1px 5px;font-size:9px;font-weight:900;margin-left:3px;vertical-align:middle}.label-batal-riwayat{display:inline-block;background:#fff7ed;color:#c2410c;border:1px solid #fed7aa;border-radius:999px;padding:1px 6px;font-size:10px;font-weight:900;vertical-align:middle}.history-empty-note{font-size:11px;color:#64748b;font-style:italic;padding:7px}.reason-select{margin-top:8px}.placeholder{background:white;border:1px dashed var(--border);border-radius:12px;padding:22px;text-align:center;color:var(--muted);font-weight:800;box-shadow:var(--shadow-soft)}.toast{position:fixed;left:12px;right:12px;bottom:74px;max-width:736px;margin:0 auto;background:#0f172a;color:white;border-radius:10px;padding:10px 12px;font-size:12px;font-weight:800;display:none;z-index:60}.toast.show{display:block}.report-actions{display:flex;justify-content:flex-end;margin:8px 0 10px}.print-btn{border:0;background:var(--blue);color:white;border-radius:9px;padding:10px 14px;font-weight:900;box-shadow:0 4px 10px rgba(37,99,235,.25)}.report-paper{background:white;border:1px solid var(--border);border-radius:12px;padding:14px;box-shadow:var(--shadow);color:#1f2937}.kop-report-wrap{display:flex;align-items:center;justify-content:center;gap:8px}.kop-logo{width:58px;height:58px;object-fit:contain;flex:0 0 auto}.kop-report{text-align:center;font-weight:900;line-height:1.25;font-size:11px;letter-spacing:.4px;flex:0 1 auto}.kop-report .unit{font-size:16px;letter-spacing:1px}.kop-report .addr{font-size:10px;font-style:italic;font-weight:700}.kop-line{border-top:3px solid #111;border-bottom:1px solid #111;height:5px;margin:8px 0 18px}.report-meta-top{display:flex;justify-content:flex-end;font-size:10px;font-weight:700;color:#334155;margin-top:-8px;margin-bottom:6px}.report-title{text-align:center;font-size:15px;font-weight:900;text-decoration:underline;margin-bottom:6px}.report-subtitle{text-align:center;font-size:11px;color:#64748b;margin-bottom:14px}.report-top{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:12px}.report-stat{border:1px solid #d7dde7;border-radius:8px;background:#fbfdff;padding:8px;font-size:11px;text-align:center;font-weight:900}.report-stat small{display:block;color:#64748b;font-size:10px}.report-stat .num{font-size:22px;color:#111827}.report-stat.total .num{color:var(--blue)}.report-stat.lengkap .num{color:#64748b}.report-stat.belum .num{color:#b45309}.report-stat.suntik .num{color:#059669}.report-stat.batal .num{color:#ef4444}.vaksin-summary{display:grid;grid-template-columns:repeat(7,1fr);gap:7px;margin-bottom:12px}.vaksin-card{border:1px solid #d7dde7;border-radius:8px;background:#fbfdff;padding:8px;text-align:center;font-weight:900}.vaksin-card small{display:block;color:#64748b;font-size:10px}.vaksin-card .num{font-size:20px;color:#2563eb}.report-section{font-size:13px;font-weight:900;margin:14px 0 7px;border-bottom:1px solid #d7dde7;padding-bottom:5px}.report-table{width:100%;border-collapse:collapse;font-size:11px;margin-bottom:10px}.report-table th,.report-table td{border:1.5px solid #111;padding:5px 6px;vertical-align:middle}.report-table th{background:#f1f5f9;text-align:center;vertical-align:middle;font-weight:900}.report-table .total-row{background:#e2e8f0;font-weight:900}.pos-report{border:1px solid #d7dde7;border-radius:9px;padding:8px;margin-bottom:10px;page-break-inside:avoid;background:#fbfdff}.pos-report-head{display:flex;justify-content:space-between;gap:8px;border-bottom:1px dashed #d7dde7;padding-bottom:6px;margin-bottom:8px;font-weight:900}.status-label{display:inline-block;border-radius:999px;color:white;padding:3px 8px;font-size:9px;font-weight:900;margin:6px 0}.status-label.HITAM{background:var(--hitam)}.status-label.MERAH{background:var(--merah)}.status-label.KUNING{background:var(--kuning)}.status-label.HIJAU{background:var(--hijau)}.status-label.SUNTIK{background:#059669}.status-label.BATAL{background:#dc2626}.layanan-blue{color:#2563eb;font-weight:900;font-size:10px;line-height:1.2;word-break:break-word}.layanan-orange{color:#d97706;font-weight:900;font-size:10px;line-height:1.2}.layanan-red{color:#dc2626;font-weight:900;font-size:10px;line-height:1.2}.status-warna{font-weight:900}.status-warna.HIJAU{color:#059669}.status-warna.KUNING{color:#d97706}.status-warna.MERAH{color:#dc2626}.status-warna.HITAM{color:#16213a}.ttd-row{display:grid;grid-template-columns:1fr 1fr;gap:30px;margin-top:34px;text-align:center;font-size:11px;page-break-inside:avoid}.ttd-name{margin-top:52px;font-weight:900;text-decoration:underline}.ews-chart{border:1px solid #d7dde7;border-radius:10px;padding:10px;background:#fbfdff;margin-bottom:14px}.ews-chart-title{font-size:12px;font-weight:900;margin-bottom:10px;color:#0f172a}.ews-bar-row{display:grid;grid-template-columns:120px 1fr 60px;gap:8px;align-items:center;margin-bottom:7px}.ews-bar-label{font-size:11px;font-weight:900}.ews-bar-track{height:18px;background:#e5e7eb;border-radius:999px;overflow:hidden;position:relative}.ews-bar-fill{height:100%;border-radius:999px;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;color:white;font-size:10px;font-weight:900}.ews-bar-value{text-align:right;font-size:11px;font-weight:900}.print-only{display:none}@media print{body{background:white}.app{max-width:none;background:white;padding:0}.bottom-nav,.input-filter,.report-actions,header,.toolbar{display:none!important}main{padding:0}.view{display:block}.view:not(#viewLaporan){display:none!important}.report-paper{border:0;box-shadow:none;border-radius:0;padding:0}.print-only{display:block}.screen-only{display:none!important}@page{size:A4 portrait;margin:10mm}.report-table{font-size:9px}.report-table th,.report-table td{padding:4px}.report-title{font-size:14px}.pos-report{border:0;padding:0;margin-bottom:8px}.report-top{gap:6px}.report-stat .num{font-size:18px}}@media(max-width:520px){main{padding-left:8px;padding-right:8px}.summary-row{padding:10px}.filter-grid{grid-template-columns:1fr}.form-grid{grid-template-columns:1fr}.counter-grid{gap:3px}.counter{padding:7px 1px}.counter .n{font-size:18px}.card{padding:11px}.tabs{padding-bottom:1px}.history-line{grid-template-columns:1fr 112px}.report-top,.vaksin-summary{grid-template-columns:1fr 1fr}.report-table{font-size:10px}}
+  </style>
+</head>
+<body>
+  <div class="app">
+    <section id="viewDashboard" class="view active">
+      <header><div class="tabs"><button class="tab active" onclick="setKategori('SEMUA')">Semua</button><button class="tab" onclick="setKategori('BAYI')">Bayi (&lt;12)</button><button class="tab" onclick="setKategori('BADUTA')">Baduta (12-23)</button><button class="tab" onclick="setKategori('BALITA')">Balita (24-59)</button></div></header>
+      <main><section class="summary-box" id="summaryBox"></section><div class="toolbar" style="grid-template-columns:1fr auto auto"><input id="searchInput" placeholder="Cari Desa atau Posyandu..." oninput="searchText=this.value; renderDashboard(); simpanStateUI()"/><button class="icon-btn">↕</button><button class="icon-btn" onclick="updateDataPublik()" title="Update data terbaru">↻</button></div><section id="desaList"></section></main>
+    </section>
+    <section id="viewInput" class="view"><main><div class="input-filter"><div class="filter-grid"><div><div class="label">Bulan Layanan</div><input id="bulanLayananInput" type="month" onchange="renderInputList()"></div><div><div class="label">Posyandu</div><select id="filterPosyandu" onchange="renderInputList()"><option value="SEMUA">Semua Posyandu</option></select></div></div></div><div class="search-action"><input id="cariInput" placeholder="🔍 Cari nama anak atau no. buku" oninput="renderInputList()"/><button class="plus-btn" onclick="bukaFormTambah()">+</button><button class="icon-btn" onclick="kirimWABelumBatal()" title="Kirim daftar Belum/Batal via WhatsApp">WA</button><button class="icon-btn" onclick="syncManual()" title="Sync Firestore">↻</button><button class="icon-btn" onclick="resetDataLokalImunisasiYA()" title="Reset data lokal">🧹</button><div id="pendingSyncInfo" class="pending-badge zero" title="Data pending sync"><b>0</b>Pending</div></div><div style="display:grid;grid-template-columns:1fr auto;gap:7px;margin:-2px 0 9px"><button class="cancel-btn" onclick="backupKeGoogleSheet()" style="padding:9px">☁ Backup Sheet</button><button class="icon-btn" onclick="previewBackupSheet()" title="Preview data backup">👁</button></div><div class="counter-grid" id="inputCounters"></div><section id="inputList"></section></main></section>
+    <section id="viewCari" class="view"><main><div class="input-filter"><div class="filter-grid"><div><div class="label">Cari Anak / Orang Tua / No Buku / NIK / ID ASIK</div><input id="cariCepatText" placeholder="Ketik kata kunci..." oninput="renderCariList()"></div><div><div class="label">Bulan Pelayanan</div><input id="bulanCariInput" type="month" onchange="renderCariList()"></div><div><div class="label">Desa/Kelurahan</div><select id="filterCariDesa" onchange="isiPosCari();renderCariList()"><option value="SEMUA">Semua Desa/Kelurahan</option></select></div><div><div class="label">Posyandu</div><select id="filterCariPosyandu" onchange="renderCariList()"><option value="SEMUA">Semua Posyandu</option></select></div><div><div class="label">Warna Risiko <small style="color:#64748b">(boleh gabung)</small></div><div id="filterCariWarna" class="chip-filter"><label><input type="checkbox" value="HIJAU" onchange="renderCariList()">Hijau</label><label><input type="checkbox" value="KUNING" onchange="renderCariList()">Kuning</label><label><input type="checkbox" value="MERAH" onchange="renderCariList()">Merah</label><label><input type="checkbox" value="HITAM" onchange="renderCariList()">Hitam</label></div></div><div><div class="label">Status Pelayanan <small style="color:#64748b">(boleh gabung)</small></div><div id="filterCariStatus" class="chip-filter"><label><input type="checkbox" value="LENGKAP" onchange="renderCariList()">Lengkap</label><label><input type="checkbox" value="BELUM" onchange="renderCariList()">Belum</label><label><input type="checkbox" value="SUNTIK" onchange="renderCariList()">Suntik</label><label><input type="checkbox" value="BATAL" onchange="renderCariList()">Batal</label></div></div></div><div style="display:grid;grid-template-columns:1fr auto auto auto;gap:7px;margin-top:10px"><button class="cancel-btn" onclick="resetCariFilter()" style="padding:9px">Reset Filter</button><button class="icon-btn" onclick="kirimWACariFilter()" title="Kirim daftar hasil filter via WhatsApp">WA</button><button class="icon-btn" onclick="updateDataPublik()" title="Update data terbaru">↻</button><div id="cariTotalBadge" class="hasil-filter-badge" title="Total hasil filter"><b>0</b>Hasil</div></div></div><div id="cariSummary" class="card" style="font-size:12px;font-weight:900;color:#475569"></div><section id="cariList"></section></main></section>
+    <section id="viewLaporan" class="view"><main><div class="input-filter"><div class="filter-grid"><div><div class="label">Bulan Mulai</div><input id="bulanLaporan" type="month" onchange="renderLaporan()"></div><div id="boxBulanSampaiLaporan" style="display:none"><div class="label">Sampai Bulan</div><input id="bulanSampaiLaporan" type="month" onchange="renderLaporan()"></div><div><div class="label">Jenis Laporan</div><select id="jenisLaporan" onchange="renderLaporan()"><option value="HASIL_PUSKESMAS">Rekapitulasi Hasil Imunisasi Puskesmas</option><option value="DESA">Laporan Hasil Imunisasi Desa</option><option value="PUSKESMAS">Rekapitulasi EWS Puskesmas</option><option value="VAKSIN">Laporan Pemakaian Vaksin</option><option value="KEJAR">Laporan Imunisasi Kejar</option><option value="IDL_IBL">Laporan IDL dan IBL</option><option value="ASIK">Laporan Belum Input ASIK</option></select></div><div id="boxDesaLaporan"><div class="label">Pilih Desa/Kelurahan</div><select id="pilihDesaLaporan" onchange="onDesaLaporanChange()"></select></div><div id="boxPosyanduLaporan"><div class="label">Pilih Posyandu</div><select id="pilihPosyanduLaporan" onchange="renderLaporan()"><option value="SEMUA">Semua Posyandu</option></select></div><div id="boxKelompokUmurLaporan" style="display:none"><div class="label">Kelompok Umur</div><select id="kelompokUmurLaporan" onchange="renderLaporan()"><option value="TOTAL">Total / Semua Sasaran 0-59 bln</option><option value="BAYI">Bayi (&lt;12 bln)</option><option value="BADUTA">Baduta (12-&lt;24 bln)</option><option value="BALITA">Balita (&gt;24-&lt;60 bln)</option></select></div></div></div><section id="laporanPreview"></section></main></section>
+  </div>
+  <nav class="bottom-nav"><button class="nav active" onclick="setPage('Dashboard',this)">Pantau</button><button class="nav" onclick="setPage('Input',this)">Input</button><button class="nav" onclick="setPage('Cari',this)">Cari</button><button class="nav" onclick="setPage('Laporan',this)">Laporan</button></nav>
+  <div class="overlay" id="overlay"><div class="panel"><div class="panel-head"><div><div class="panel-title" id="panelTitle">Daftar Sasaran</div><div class="panel-subtitle" id="panelSubtitle"></div></div><button class="close-btn" onclick="closePanel()">×</button></div><div class="panel-body" id="panelBody"></div></div></div>
+  <div class="toast" id="toast"></div><div class="sub-modal" id="detailAnakModal"><div class="sub-modal-box"><div class="form-modal-head"><div class="form-modal-title" id="detailAnakTitle">Detail Anak</div><button class="close-btn" onclick="closeDetailAnakModal()">×</button></div><div id="detailAnakBody"></div></div></div><div class="form-modal" id="formModal"><div class="form-modal-box"><div class="form-modal-head"><div class="form-modal-title" id="formModalTitle">Input Pelayanan</div><button class="close-btn" onclick="closeFormModal()">×</button></div><div id="formModalBody"></div></div></div><div class="sub-modal" id="riwayatModal"><div class="sub-modal-box"><div class="form-modal-head"><div class="form-modal-title" id="riwayatModalTitle">Tambah Riwayat</div><button class="close-btn" onclick="closeRiwayatModal()">×</button></div><div id="riwayatModalBody"></div></div></div>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
+  <script>
+    let kategoriAktif='SEMUA',openDesa='',searchText='',openInputId='',inputMode='',inputFilter='BELUM',riwayatInputTerbuka='';
+    const INPUT_PIN_HASH=967239064;
+    const INPUT_PIN_TTL=24*60*60*1000;
+    const INPUT_PIN_KEY='SIPAKAINGE_INPUT_AKSES_V1';
+    const DEBUG_SIPAKAINGE=false;
+
+    const firebaseConfig={apiKey:"AIzaSyBEqXlzAL09Y8Iwu0qgAgPrjIl8MYXVS5Q",authDomain:"sipakainge-1fa81.firebaseapp.com",projectId:"sipakainge-1fa81",storageBucket:"sipakainge-1fa81.firebasestorage.app",messagingSenderId:"114027789254",appId:"1:114027789254:web:5eb6b51ea7e481a45b10c7",measurementId:"G-S9QFXF6K5X"};
+    const FIRESTORE_COLLECTION='Imunisasi_YA';
+    const BACKUP_WEBAPP_URL='https://script.google.com/macros/s/AKfycbxW_luHqMLOy-u5HP5V0zbZ_GzmeHvjqdgkf9dpz40hGfoWHf5HHn3eaZoDkXMBFC9fmA/exec'; // isi dengan URL Web App Google Apps Script saat backup Sheet sudah dibuat
+    const DB_NAME='SIPAKAINGE_DB_IMUNISASI-YA';
+    const DB_VERSION=1;
+    const STORE_DATA='Imunisasi_YA';
+    const STORE_PENDING='Pending_Sync';
+    const LAST_SYNC_KEY='SIPAKAINGE_LAST_SYNC_AT_V1';
+    const LAST_BACKUP_KEY='SIPAKAINGE_LAST_BACKUP_AT_V1';
+    let dbFirestore=null;
+
+    const desaList=['CARAWALI','CIRO-CIROE','MATTIROTASI','BUAE','BATU LAPPA','ULUALE','LAWAWOI','LANTANG','ARAWALLE','BULUCENRANA'];
+    const posMap={'CARAWALI':['PYD BONSAI 1-CARAWALI','PYD BANSAI 2-CARAWALI'],'CIRO-CIROE':['PYD CEMPAKA-CIRO-CIROE','PYD DAHLIA-CIRO-CIROE'],'MATTIROTASI':['PYD MATTIRORASI 1','PYD MATTIRORASI 2'],'BUAE':['PYD BUAE 1','PYD BUAE 2','PYD BUAE 3'],'BATU LAPPA':['PYD MELATI-BATU LAPPA','PYD MAWAR-BATU LAPPA'],'ULUALE':['PYD TERATAI-ULUALE','PYD KENANGA-ULUALE'],'LAWAWOI':['PYD SEHATI-LAWAWOI','PYD HARAPAN-LAWAWOI'],'LANTANG':['PYD BUNDA-LANTANG'],'ARAWALLE':['PYD NUSA INDAH-ARAWALLE'],'BULUCENRANA':['PYD PERMATA-BULUCENRANA']};
+    const anakData=[];
+
+    const MESIN_SIPAKAINGE={
+      indikatorDasar:['BCG','DPT1','DPT2','DPT3','PCV1','PCV2','MR1'],
+      indikatorLanjutan:['PCV3','DPT4','MR2'],
+      indikatorFinal:['BCG','DPT1','DPT2','DPT3','PCV1','PCV2','MR1','PCV3','DPT4','MR2'],
+      jadwal:{
+        HB0:{mulai:0,akhirIdeal:1,kelompok:'DASAR'},
+        BCG:{mulai:0,akhirIdeal:2,batasAkhir:12,kelompok:'DASAR'},
+        OPV1:{mulai:0,akhirIdeal:2,kelompok:'DASAR'},
+        OPV2:{mulai:2,akhirIdeal:3,kelompok:'DASAR',setelah:'OPV1',minHari:28},
+        OPV3:{mulai:3,akhirIdeal:4,kelompok:'DASAR',setelah:'OPV2',minHari:28},
+        OPV4:{mulai:4,akhirIdeal:9,kelompok:'DASAR',setelah:'OPV3',minHari:28},
+        DPT1:{mulai:2,akhirIdeal:3,kelompok:'DASAR'},
+        DPT2:{mulai:3,akhirIdeal:4,kelompok:'DASAR',setelah:'DPT1',minHari:28},
+        DPT3:{mulai:4,akhirIdeal:9,kelompok:'DASAR',setelah:'DPT2',minHari:28},
+        PCV1:{mulai:2,akhirIdeal:3,kelompok:'DASAR'},
+        PCV2:{mulai:3,akhirIdeal:12,kelompok:'DASAR',setelah:'PCV1',minHari:28},
+        IPV1:{mulai:4,akhirIdeal:9,kelompok:'DASAR'},
+        IPV2:{mulai:9,akhirIdeal:12,kelompok:'DASAR',setelah:'IPV1',minHari:28},
+        MR1:{mulai:9,akhirIdeal:12,kelompok:'DASAR'},
+        ROTA1:{mulai:2,akhirIdeal:3,batasAkhir:7,kelompok:'DASAR'},
+        ROTA2:{mulai:3,akhirIdeal:4,batasAkhir:7,kelompok:'DASAR',setelah:'ROTA1',minHari:28},
+        ROTA3:{mulai:4,akhirIdeal:7,batasAkhir:7,kelompok:'DASAR',setelah:'ROTA2',minHari:28},
+        PCV3:{mulai:12,akhirIdeal:13,kelompok:'LANJUTAN',setelah:'PCV2',minHari:56},
+        DPT4:{mulai:18,akhirIdeal:24,kelompok:'LANJUTAN',setelah:'DPT3',minHari:180},
+        MR2:{mulai:18,akhirIdeal:24,kelompok:'LANJUTAN',setelah:'MR1',minHari:180}
+      }
+    };
+
+    function toast(msg){const el=document.getElementById('toast');if(!el){alert(msg);return}el.textContent=msg;el.classList.add('show');clearTimeout(window.__toast);window.__toast=setTimeout(()=>el.classList.remove('show'),3600)}
+    function setupPWA(){
+      try{
+        if('serviceWorker' in navigator){
+          window.addEventListener('load',()=>{
+            navigator.serviceWorker.register('./sw.js')
+              .then(()=>console.log('PWA Service Worker aktif. Aplikasi siap dibuka offline setelah pernah dimuat.'))
+              .catch(err=>console.warn('Service Worker belum aktif. Pastikan file sw.js ada dan aplikasi dibuka via Live Server/HTTPS, bukan file://',err));
+          });
+        }
+      }catch(e){console.warn('Setup PWA gagal:',e)}
+    }
+    function notif(msg){toast(msg)}
+    function safeCounter(c){return{HITAM:Number(c?.HITAM||0),MERAH:Number(c?.MERAH||0),KUNING:Number(c?.KUNING||0),HIJAU:Number(c?.HIJAU||0)}}
+    function statusDots(c,onClick){c=safeCounter(c);const fn=onClick||(()=> '');return`<div class="dots"><span class="dot-item clickable-dot" onclick="${fn('HITAM')}"><i class="dot hitam"></i>${c.HITAM}</span><span class="dot-item clickable-dot" onclick="${fn('MERAH')}"><i class="dot merah"></i>${c.MERAH}</span><span class="dot-item clickable-dot" onclick="${fn('KUNING')}"><i class="dot kuning"></i>${c.KUNING}</span><span class="dot-item clickable-dot" onclick="${fn('HIJAU')}"><i class="dot hijau"></i>${c.HIJAU}</span></div>`}
+    function assertTest(nama,kondisi){if(!DEBUG_SIPAKAINGE)return;if(!kondisi)throw new Error('TEST GAGAL: '+nama);console.log('✅ '+nama)}
+
+    function firebaseSiap(){return firebaseConfig.apiKey&&firebaseConfig.projectId}
+    let firestoreSettingsApplied=false;
+    function initFirebase(){if(!firebaseSiap()){console.warn('Firebase config belum diisi.');return false}if(!firebase.apps.length)firebase.initializeApp(firebaseConfig);dbFirestore=firebase.firestore();if(!firestoreSettingsApplied){try{dbFirestore.settings({ignoreUndefinedProperties:true});firestoreSettingsApplied=true}catch(e){firestoreSettingsApplied=true;console.warn('Firestore settings dilewati:',e.message)}}return true}
+    function hapusDBLama(){return new Promise(resolve=>{const r=indexedDB.deleteDatabase(DB_NAME);r.onsuccess=()=>resolve();r.onerror=()=>resolve();r.onblocked=()=>resolve()})}
+    function bukaDBDasar(){return new Promise((resolve,reject)=>{const req=indexedDB.open(DB_NAME,DB_VERSION);req.onupgradeneeded=e=>{const db=e.target.result;if(!db.objectStoreNames.contains(STORE_DATA))db.createObjectStore(STORE_DATA,{keyPath:'APP_ID'});if(!db.objectStoreNames.contains(STORE_PENDING))db.createObjectStore(STORE_PENDING,{keyPath:'id',autoIncrement:true})};req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error)})}
+    async function bukaDB(){let db=await bukaDBDasar();if(!db.objectStoreNames.contains(STORE_DATA)||!db.objectStoreNames.contains(STORE_PENDING)){db.close();await hapusDBLama();db=await bukaDBDasar()}return db}
+    async function simpanLokal(item){resetAnalisaCache();perbaruiStatusIDL_IBL(item);const db=await bukaDB();const tx=db.transaction(STORE_DATA,'readwrite');tx.objectStore(STORE_DATA).put(item);return new Promise((res,rej)=>{tx.oncomplete=res;tx.onerror=()=>rej(tx.error)})}
+    async function simpanBanyakLokal(list){resetAnalisaCache();(list||[]).forEach(perbaruiStatusIDL_IBL);const db=await bukaDB();const tx=db.transaction(STORE_DATA,'readwrite');const store=tx.objectStore(STORE_DATA);list.forEach(x=>store.put(x));return new Promise((res,rej)=>{tx.oncomplete=res;tx.onerror=()=>rej(tx.error)})}
+    async function bacaLokal(){const db=await bukaDB();const tx=db.transaction(STORE_DATA,'readonly');const req=tx.objectStore(STORE_DATA).getAll();return new Promise((res,rej)=>{req.onsuccess=()=>res(req.result||[]);req.onerror=()=>rej(req.error)})}
+    async function hapusPendingByAPPID(appId){
+      if(!appId)return 0;
+      const db=await bukaDB();
+      const tx=db.transaction(STORE_PENDING,'readwrite');
+      const store=tx.objectStore(STORE_PENDING);
+      const req=store.getAll();
+      return new Promise((res,rej)=>{
+        req.onsuccess=()=>{
+          let n=0;
+          (req.result||[]).forEach(p=>{
+            if(String(p?.data?.APP_ID||'')===String(appId)){
+              store.delete(p.id);
+              n++;
+            }
+          });
+          tx.oncomplete=()=>res(n);
+        };
+        req.onerror=()=>rej(req.error);
+        tx.onerror=()=>rej(tx.error);
+      });
+    }
+    async function simpanPending(item,aksi='UPSERT'){
+      const appId=String(item?.APP_ID||'');
+      if(appId)await hapusPendingByAPPID(appId);
+      const db=await bukaDB();
+      const tx=db.transaction(STORE_PENDING,'readwrite');
+      tx.objectStore(STORE_PENDING).add({aksi,data:item,waktu:new Date().toISOString(),APP_ID:appId});
+      return new Promise((res,rej)=>{tx.oncomplete=async()=>{await updatePendingInfo();res()};tx.onerror=()=>rej(tx.error)})
+    }
+    async function bacaPending(){const db=await bukaDB();const tx=db.transaction(STORE_PENDING,'readonly');const req=tx.objectStore(STORE_PENDING).getAll();return new Promise((res,rej)=>{req.onsuccess=()=>res(req.result||[]);req.onerror=()=>rej(req.error)})}
+    async function hapusPending(id){const db=await bukaDB();const tx=db.transaction(STORE_PENDING,'readwrite');tx.objectStore(STORE_PENDING).delete(id);return new Promise((res,rej)=>{tx.oncomplete=res;tx.onerror=()=>rej(tx.error)})}
+    async function hitungPending(){
+      try{
+        const list=await bacaPending();
+        const unik=new Set();
+        list.forEach(p=>unik.add(String(p?.data?.APP_ID||p?.APP_ID||p?.id||'')));
+        return unik.size;
+      }catch(e){console.warn('Gagal hitung pending',e);return 0}
+    }
+    async function updatePendingInfo(){const n=await hitungPending();const el=document.getElementById('pendingSyncInfo');if(el){el.classList.toggle('zero',n===0);el.innerHTML=`<b>${n}</b>Pending`;el.title=n===0?'Tidak ada data pending sync':`${n} data belum terkirim ke Firestore`;}return n}
+
+    function nilaiField(obj, daftar){for(const nama of daftar){if(obj[nama]!==undefined&&obj[nama]!==null&&String(obj[nama]).trim()!=='')return obj[nama]}return''}
+    function normalisasiJK(v){const s=String(v||'').trim().toUpperCase();if(s==='LAKI-LAKI'||s==='L'||s==='LK'||s==='♂')return'♂';if(s==='PEREMPUAN'||s==='P'||s==='PR'||s==='♀')return'♀';return v||''}
+    function normalisasiDesa(v){const s=String(v||'').trim().toUpperCase();const map={'BATULAPPA':'BATU LAPPA','BATU LAPPA':'BATU LAPPA','CIROE':'CIRO-CIROE','CIROCIROE':'CIRO-CIROE','CIRO-CIROE':'CIRO-CIROE'};return map[s]||s}
+    function normalisasiPos(v){return String(v||'').trim().toUpperCase()}
+    function isNoBukuValid(noBuku){const n=String(noBuku||'').trim();return /^\d{4}$/.test(n)}
+    function ambilPosImunisasi(raw){const langsung=nilaiField(raw,['POSYANDU','Posyandu','posyandu','Nama_Posyandu','NAMA_POSYANDU','Posyandu_Sasaran']);if(langsung)return langsung;const key=Object.keys(raw).find(k=>k.startsWith('Pos_Imunisasi_')&&String(raw[k]||'').trim()!=='');return key?raw[key]:''}
+    function normalisasiFirestore(raw,id){const a={...raw};a.APP_ID=String(nilaiField(raw,['APP_ID','App_ID','app_id','ID_APP'])||id||'');a.No_Buku=String(nilaiField(raw,['No_Buku','NO_BUKU','no_buku','No Buku','NO BUKU','NoBuku'])||'').trim();a.NAMA=String(nilaiField(raw,['Nama_Anak','NAMA_ANAK','nama_anak','NAMA','Nama','nama'])||'-').trim();a.ORTU=String(nilaiField(raw,['Nama_Orang_Tua','NAMA_ORANG_TUA','Nama_Ortu','NAMA_ORTU','ORTU','ortu'])||'-').trim();a.JK=normalisasiJK(nilaiField(raw,['Jenis_Kelamin_Anak','JENIS_KELAMIN_ANAK','Jenis_Kelamin','JENIS_KELAMIN','JK','jk']));a.DESA=normalisasiDesa(nilaiField(raw,['Kelurahan_atau_Desa','KELURAHAN_ATAU_DESA','Kelurahan atau Desa','DESA','Desa','desa','Kelurahan','KELURAHAN']));a.POSYANDU=normalisasiPos(ambilPosImunisasi(raw));a.TGL_LAHIR=String(nilaiField(raw,['Tanggal_Lahir_Anak','TANGGAL_LAHIR_ANAK','Tanggal_Lahir','TGL_LAHIR','TANGGAL_LAHIR','tgl_lahir'])||'').trim();a.NO_HP=String(nilaiField(raw,['No__HP','No_HP','NO_HP','No HP','NO HP'])||'').trim();a.CATATAN=raw.Catatan||raw.CATATAN||'';a.KETERANGAN=raw.Keterangan||raw.KETERANGAN||'';a.UMUR_BULAN=Number(nilaiField(raw,['UMUR_BULAN','Umur_Bulan','umur_bulan'])||hitungUmurBulanTanggal(a.TGL_LAHIR,new Date()));a.RIWAYAT=Array.isArray(raw.RIWAYAT)?normalisasiRiwayatImunisasi(raw.RIWAYAT):buatRiwayatDariKolom(raw);a.RIWAYAT_BATAL=normalisasiRiwayatBatal(raw.RIWAYAT_BATAL||raw.Riwayat_Batal||raw.riwayat_batal||[]);a.Tanggal_IDL=raw.Tanggal_IDL||raw.TANGGAL_IDL||raw.IDL||'';a.Tanggal_IBL=raw.Tanggal_IBL||raw.TANGGAL_IBL||raw.IBL||'';a.Vaksin_Belum_ASIK=normalisasiVaksinBelumASIK(raw.Vaksin_Belum_ASIK||raw.VAKSIN_BELUM_ASIK||raw.vaksin_belum_asik||[]);a.Status_ASIK=raw.Status_ASIK||raw.STATUS_ASIK||statusASIKDariList(a.Vaksin_Belum_ASIK);a.Tanggal_Cek_ASIK=raw.Tanggal_Cek_ASIK||raw.TANGGAL_CEK_ASIK||'';a.Updated_At=firestoreTimestampToISO(raw.Updated_At)||raw.Updated_At||'';perbaruiStatusIDL_IBL(a);return a}
+    function tglRiwayat(t){if(!t)return'';if(typeof t==='object'&&typeof t.toDate==='function')return ubahISOkeTanggal(t.toDate().toISOString().slice(0,10));if(String(t).includes('-'))return ubahISOkeTanggal(String(t).slice(0,10));return String(t)}
+    function tanggalRiwayatISO(t){if(!t)return'';if(typeof t==='object'&&typeof t.toDate==='function')return t.toDate().toISOString().slice(0,10);if(String(t).includes('-'))return String(t).slice(0,10);return ubahTanggalKeISO(String(t))}
+    function normalisasiAlasanBatal(v){const s=String(v||'').trim().toUpperCase();if(s.includes('SAKIT'))return'Sakit';if(s.includes('TUNDA')||s.includes('IJIN')||s.includes('IZIN'))return'Tunda';if(s.includes('PINDAH'))return'Pindah';if(s.includes('MENOLAK')||s.includes('TOLAK'))return'Menolak';return''}
+    function alasanBatalDisimpan(v){return ['Sakit','Tunda','Pindah','Menolak'].includes(normalisasiAlasanBatal(v))}
+    function normalisasiRiwayatImunisasi(list){return (Array.isArray(list)?list:[]).map(r=>{
+      if(Array.isArray(r))return [tglRiwayat(r[0]||''),String(r[1]||'')];
+      return [tglRiwayat(r.TANGGAL||r.tanggal||r.Tanggal||''),String(r.VAKSIN||r.vaksin||r.ANTIGEN||r.antigen||r.ISI||r.isi||'')];
+    }).filter(r=>r[0]&&r[1])}
+    function riwayatUntukFirestore(list){return normalisasiRiwayatImunisasi(list).map(r=>({TANGGAL:ubahTanggalKeISO(r[0])||r[0],VAKSIN:String(r[1]||'')}))}
+    function normalisasiRiwayatBatal(list){return (Array.isArray(list)?list:[]).map(r=>({TANGGAL:String(r.TANGGAL||r.tanggal||'').slice(0,10),ALASAN:normalisasiAlasanBatal(r.ALASAN||r.alasan||r.KETERANGAN||r.keterangan),CATATAN:r.CATATAN||r.catatan||'',SUMBER:r.SUMBER||r.sumber||'APLIKASI'})).filter(r=>r.TANGGAL&&alasanBatalDisimpan(r.ALASAN))}
+    function normalisasiVaksinBelumASIK(v){
+      const arr=Array.isArray(v)?v:String(v||'').split(',');
+      return [...new Set(arr.map(x=>normalizeAntigen(x)).filter(Boolean))];
+    }
+    function statusASIKDariList(list){return normalisasiVaksinBelumASIK(list).length?'BELUM':'YA'}
+    function tambahVaksinBelumASIK(anak,vaksin){
+      const lama=normalisasiVaksinBelumASIK(anak.Vaksin_Belum_ASIK||[]);
+      const baru=normalisasiVaksinBelumASIK([...(lama||[]),...(vaksin||[])]);
+      anak.Vaksin_Belum_ASIK=baru;
+      anak.Status_ASIK=baru.length?'BELUM':'YA';
+      if(baru.length)anak.Tanggal_Cek_ASIK=anak.Tanggal_Cek_ASIK||'';
+      return anak;
+    }
+    function tambahRiwayatBatalRingan(anak,tanggal,alasan,catatan){const alasanNorm=normalisasiAlasanBatal(alasan);if(!alasanBatalDisimpan(alasanNorm))return;anak.RIWAYAT_BATAL=normalisasiRiwayatBatal(anak.RIWAYAT_BATAL||[]);const sudahAda=anak.RIWAYAT_BATAL.some(r=>r.TANGGAL===tanggal&&r.ALASAN===alasanNorm);if(!sudahAda)anak.RIWAYAT_BATAL.push({TANGGAL:tanggal,ALASAN:alasanNorm,CATATAN:catatan||'',SUMBER:'APLIKASI'})}
+    function buatRiwayatDariKolom(a){const map=[['Tanggal_Imunisasi_HB0','HB0'],['Tanggal_Imunisasi_BCG_1','BCG'],['Tanggal_Imunisasi_POLIO_1','OPV1'],['Tanggal_Imunisasi_POLIO_2','OPV2'],['Tanggal_Imunisasi_POLIO_3','OPV3'],['Tanggal_Imunisasi_POLIO_4','OPV4'],['Tanggal_Imunisasi_DPT-Hb-Hib_1','DPT1'],['Tanggal_Imunisasi_DPT-Hb-Hib_2','DPT2'],['Tanggal_Imunisasi_DPT-Hb-Hib_3','DPT3'],['Tanggal_Imunisasi_DPT-Hb-Hib_4','DPT4'],['Tanggal_Imunisasi_PCV_1','PCV1'],['Tanggal_Imunisasi_PCV_2','PCV2'],['Tanggal_Imunisasi_PCV_3','PCV3'],['Tanggal_Imunisasi_IPV_1','IPV1'],['Tanggal_Imunisasi_IPV_2','IPV2'],['Tanggal_Imunisasi_MR_1','MR1'],['Tanggal_Imunisasi_MR_2','MR2'],['Tanggal_Imunisasi_ROTA_1','ROTA1'],['Tanggal_Imunisasi_ROTA_2','ROTA2'],['Tanggal_Imunisasi_ROTA_3','ROTA3']];return map.map(([kolom,vaksin])=>{const t=a[kolom]||a[kolom.toUpperCase()]||'';return t?[tglRiwayat(t),vaksin]:null}).filter(Boolean)}
+
+    function nowISO(){return new Date().toISOString()}
+    function getLastSyncAt(){try{return localStorage.getItem(LAST_SYNC_KEY)||''}catch(e){return''}}
+    function setLastSyncAt(v){try{localStorage.setItem(LAST_SYNC_KEY,String(v||nowISO()))}catch(e){}}
+    function getLastBackupAt(){try{return localStorage.getItem(LAST_BACKUP_KEY)||''}catch(e){return''}}
+    function setLastBackupAt(v){try{localStorage.setItem(LAST_BACKUP_KEY,String(v||nowISO()))}catch(e){}}
+    function firestoreTimestampToISO(v){
+      if(!v)return'';
+      if(typeof v==='object'&&typeof v.toDate==='function')return v.toDate().toISOString();
+      if(v instanceof Date)return v.toISOString();
+      return String(v);
+    }
+    function sentuhUpdatedAt(item){
+      if(item)item.Updated_At=nowISO();
+      return item;
+    }
+    function bersihkanUntukFirestore(value){
+      if(value===undefined||typeof value==='function')return undefined;
+      if(value===null)return null;
+      if(typeof value==='number'&&!isFinite(value))return'';
+      if(Array.isArray(value)){
+        // Firestore tidak mendukung nested array. Array seperti RIWAYAT: [[tgl,vaksin]]
+        // dikirim sebagai array object: [{TANGGAL,VAKSIN}].
+        if(value.some(Array.isArray))return riwayatUntukFirestore(value).map(bersihkanUntukFirestore);
+        return value.map(bersihkanUntukFirestore).filter(v=>v!==undefined);
+      }
+      if(value&&typeof value==='object'){
+        if(value instanceof Date)return value.toISOString().slice(0,10);
+        const out={};
+        Object.entries(value).forEach(([k,v])=>{
+          if(k.startsWith('__'))return;
+          const clean=bersihkanUntukFirestore(v);
+          if(clean!==undefined)out[k]=clean;
+        });
+        return out;
+      }
+      return value;
+    }
+    function pesanErrorFirestore(e){return (e?.code?e.code+' - ':'')+(e?.message||String(e||'Error'))}
+    async function kirimFirestore(item){perbaruiStatusIDL_IBL(item);if(!navigator.onLine)throw new Error('offline');if(!initFirebase())throw new Error('firebase-config-belum-diisi');if(!item.APP_ID)throw new Error('APP_ID kosong');if(!item.Updated_At)sentuhUpdatedAt(item);const dataKirim=bersihkanUntukFirestore(item);dataKirim.RIWAYAT=riwayatUntukFirestore(item.RIWAYAT||[]);dataKirim.Updated_At=item.Updated_At;await dbFirestore.collection(FIRESTORE_COLLECTION).doc(String(item.APP_ID)).set(dataKirim,{merge:true})}
+    async function simpanAman(item){sentuhUpdatedAt(item);await simpanLokal(item);try{await kirimFirestore(item);await simpanLokal(item);notif('Data tersimpan lokal dan terkirim ke Firestore.')}catch(e){console.error('Kirim Firestore gagal:',e);await simpanPending(item);notif('Data tersimpan lokal, tetapi Firestore gagal: '+pesanErrorFirestore(e)+'. Masuk pending sync.')}}
+    function pendingTerbaruPerAPPID(list){
+      const map=new Map();
+      (list||[]).forEach(p=>{
+        const key=String(p?.data?.APP_ID||p?.APP_ID||p?.id||'');
+        if(!key)return;
+        const lama=map.get(key);
+        if(!lama||String(p.waktu||'')>=String(lama.waktu||''))map.set(key,p);
+      });
+      return [...map.values()].sort((a,b)=>String(a.waktu||'').localeCompare(String(b.waktu||'')));
+    }
+    async function bersihkanDuplikatPending(){
+      const list=await bacaPending();
+      const keep=new Set(pendingTerbaruPerAPPID(list).map(p=>p.id));
+      let hapus=0;
+      for(const p of list){
+        if(!keep.has(p.id)){await hapusPending(p.id);hapus++}
+      }
+      if(hapus)console.log('Pending duplikat dibersihkan:',hapus);
+      await updatePendingInfo();
+      return hapus;
+    }
+    async function kirimPendingSync(){if(!navigator.onLine){console.warn('Pending sync dilewati: offline');await updatePendingInfo();return}if(!initFirebase()){console.warn('Pending sync dilewati: Firebase belum siap');await updatePendingInfo();return}await bersihkanDuplikatPending();const list=pendingTerbaruPerAPPID(await bacaPending());let sukses=0;for(const p of list){try{await kirimFirestore(p.data);await hapusPending(p.id);sukses++}catch(e){console.warn('Pending gagal:',pesanErrorFirestore(e),e);notif('Pending sync belum terkirim: '+pesanErrorFirestore(e));break}}await updatePendingInfo();if(sukses){console.log(sukses+' data unik pending sync terkirim.');notif(sukses+' data unik pending terkirim ke Firestore.')}}
+    async function tarikFirestore(){try{resetAnalisaCache();if(!navigator.onLine){notif('Offline. Firestore belum bisa dibaca.');return}if(!initFirebase()){notif('Firebase config belum diisi.');return}const lastSync=getLastSyncAt();const modeIncremental=!!lastSync;console.log(modeIncremental?'Mulai sync perubahan Firestore sejak: '+lastSync:'Mulai sync awal/full Firestore:',FIRESTORE_COLLECTION);let ref=dbFirestore.collection(FIRESTORE_COLLECTION);if(modeIncremental)ref=ref.where('Updated_At','>',lastSync).orderBy('Updated_At','asc');const snap=await ref.get();console.log('Firestore snapshot size:',snap.size);const list=[];let maxUpdatedAt=lastSync||nowISO();snap.forEach(doc=>{const raw=doc.data();const item=normalisasiFirestore(raw,doc.id);item.Updated_At=firestoreTimestampToISO(raw.Updated_At)||item.Updated_At||nowISO();if(item.Updated_At>maxUpdatedAt)maxUpdatedAt=item.Updated_At;list.push(item)});if(list.length)await simpanBanyakLokal(list);if(modeIncremental){const lokal=await bacaLokal();anakData.length=0;lokal.filter(a=>isNoBukuValid(a.No_Buku)).forEach(a=>anakData.push(a))}else{anakData.length=0;list.filter(a=>isNoBukuValid(a.No_Buku)).forEach(a=>anakData.push(a))}setLastSyncAt(maxUpdatedAt);const tanpaNoBuku=list.filter(a=>!isNoBukuValid(a.No_Buku)).length;console.log('Contoh hasil normalisasi Firestore:',list.slice(0,5).map(a=>({APP_ID:a.APP_ID,No_Buku:a.No_Buku,NAMA:a.NAMA,DESA:a.DESA,POSYANDU:a.POSYANDU,TGL_LAHIR:a.TGL_LAHIR,Updated_At:a.Updated_At,RIWAYAT:a.RIWAYAT})));isiFilterPosyandu();renderDashboard();renderInputList();renderCariList();if(document.getElementById('viewLaporan')?.classList.contains('active'))renderLaporan();notif((modeIncremental?'Update data selesai. Perubahan dibaca: ':'Sync awal selesai. Dokumen dibaca: ')+list.length+', tampil/dihitung lokal: '+anakData.length+(tanpaNoBuku?', tidak tampil karena No_Buku tidak valid: '+tanpaNoBuku:''))}catch(e){console.error('Gagal sync Firestore:',e);notif('Gagal sync Firestore: '+(e.code||e.name||'Error')+' - '+(e.message||e))}}
+    async function updateDataPublik(){console.log('Update data publik ditekan');try{await tarikFirestore()}catch(e){console.error('Update data gagal:',e);notif('Update data gagal: '+(e.message||e))}}
+    async function syncManual(){console.log('Tombol sync ditekan');try{await kirimPendingSync();await tarikFirestore()}catch(e){console.error('Sync manual gagal:',e);notif('Sync manual gagal: '+(e.message||e))}}
+
+    const HEADER_BACKUP_YA=['APP_ID','ID_ASIK','NIK Anak','Nama Anak','Tanggal Lahir Anak','Jenis Kelamin Anak','Nama Orang Tua','Kelurahan atau Desa','Pos Imunisasi BCG 1','Tanggal Imunisasi HB0','Tanggal Imunisasi BCG 1','Tanggal Imunisasi POLIO 1','Tanggal Imunisasi POLIO 2','Tanggal Imunisasi POLIO 3','Tanggal Imunisasi POLIO 4','Tanggal Imunisasi DPT-Hb-Hib 1','Tanggal Imunisasi DPT-Hb-Hib 2','Tanggal Imunisasi DPT-Hb-Hib 3','Tanggal Imunisasi IPV 1','Tanggal Imunisasi IPV 2','Tanggal Imunisasi ROTA 1','Tanggal Imunisasi ROTA 2','Tanggal Imunisasi ROTA 3','Tanggal Imunisasi PCV 1','Tanggal Imunisasi PCV 2','Tanggal Imunisasi MR 1','Tanggal Imunisasi PCV 3','Tanggal Imunisasi DPT-Hb-Hib 4','Tanggal Imunisasi MR 2','No. HP','Keterangan','Catatan','No_Buku','Warna_Risiko','Jumlah_Vaksin_Tertinggal','Vaksin_Tertinggal','Tanggal_IDL','Tanggal_IBL','Status_ASIK','Vaksin_Belum_ASIK','Tanggal_Cek_ASIK','Terakhir_Backup'];
+    const HEADER_BACKUP_TIDAK=['EVENT_ID','APP_ID','ID_ASIK','Nama Anak','Tanggal','Bulan','Kelurahan atau Desa','Posyandu','Alasan','Catatan','Sumber','Warna_Risiko','Jumlah_Vaksin_Tertinggal','Vaksin_Tertinggal','Terakhir_Backup'];
+    function fieldBackup(a,names){return nilaiField(a,names)}
+    function risikoBackup(a){const analisa=analisaAnak(a,new Date().toISOString().slice(0,10));const kebutuhan=analisa.risiko.kebutuhan||analisa.tertinggal||[];return{warna:analisa.warnaRisiko,jumlah:kebutuhan.length,vaksin:kebutuhan.join(', ')}}
+    function tanggalAntigenBackup(a,v){return getTanggalAntigen(a,v)||''}
+    function rowBackupYA(a){perbaruiStatusIDL_IBL(a);const r=risikoBackup(a);return{
+      'APP_ID':a.APP_ID||'',
+      'ID_ASIK':fieldBackup(a,['ID_ASIK','Id_Asik','id_asik'])||'',
+      'NIK Anak':fieldBackup(a,['NIK_Anak','NIK Anak','NIK_ANAK'])||'',
+      'Nama Anak':a.NAMA||'',
+      'Tanggal Lahir Anak':a.TGL_LAHIR||'',
+      'Jenis Kelamin Anak':a.JK||'',
+      'Nama Orang Tua':a.ORTU||'',
+      'Kelurahan atau Desa':a.DESA||'',
+      'Pos Imunisasi BCG 1':a.POSYANDU||'',
+      'Tanggal Imunisasi HB0':tanggalAntigenBackup(a,'HB0'),
+      'Tanggal Imunisasi BCG 1':tanggalAntigenBackup(a,'BCG'),
+      'Tanggal Imunisasi POLIO 1':tanggalAntigenBackup(a,'OPV1'),
+      'Tanggal Imunisasi POLIO 2':tanggalAntigenBackup(a,'OPV2'),
+      'Tanggal Imunisasi POLIO 3':tanggalAntigenBackup(a,'OPV3'),
+      'Tanggal Imunisasi POLIO 4':tanggalAntigenBackup(a,'OPV4'),
+      'Tanggal Imunisasi DPT-Hb-Hib 1':tanggalAntigenBackup(a,'DPT1'),
+      'Tanggal Imunisasi DPT-Hb-Hib 2':tanggalAntigenBackup(a,'DPT2'),
+      'Tanggal Imunisasi DPT-Hb-Hib 3':tanggalAntigenBackup(a,'DPT3'),
+      'Tanggal Imunisasi IPV 1':tanggalAntigenBackup(a,'IPV1'),
+      'Tanggal Imunisasi IPV 2':tanggalAntigenBackup(a,'IPV2'),
+      'Tanggal Imunisasi ROTA 1':tanggalAntigenBackup(a,'ROTA1'),
+      'Tanggal Imunisasi ROTA 2':tanggalAntigenBackup(a,'ROTA2'),
+      'Tanggal Imunisasi ROTA 3':tanggalAntigenBackup(a,'ROTA3'),
+      'Tanggal Imunisasi PCV 1':tanggalAntigenBackup(a,'PCV1'),
+      'Tanggal Imunisasi PCV 2':tanggalAntigenBackup(a,'PCV2'),
+      'Tanggal Imunisasi MR 1':tanggalAntigenBackup(a,'MR1'),
+      'Tanggal Imunisasi PCV 3':tanggalAntigenBackup(a,'PCV3'),
+      'Tanggal Imunisasi DPT-Hb-Hib 4':tanggalAntigenBackup(a,'DPT4'),
+      'Tanggal Imunisasi MR 2':tanggalAntigenBackup(a,'MR2'),
+      'No. HP':a.NO_HP||'',
+      'Keterangan':a.KETERANGAN||'',
+      'Catatan':a.CATATAN||'',
+      'No_Buku':a.No_Buku||'',
+      'Warna_Risiko':r.warna,
+      'Jumlah_Vaksin_Tertinggal':r.jumlah,
+      'Vaksin_Tertinggal':r.vaksin,
+      'Tanggal_IDL':a.Tanggal_IDL||'',
+      'Tanggal_IBL':a.Tanggal_IBL||'',
+      'Status_ASIK':a.Status_ASIK||statusASIKDariList(a.Vaksin_Belum_ASIK||[]),
+      'Vaksin_Belum_ASIK':normalisasiVaksinBelumASIK(a.Vaksin_Belum_ASIK||[]).join(', '),
+      'Tanggal_Cek_ASIK':a.Tanggal_Cek_ASIK||'',
+      'Terakhir_Backup':new Date().toISOString()
+    }}
+    function eventIdBatal(a,r){return [a.APP_ID||'',String(r.TANGGAL||'').slice(0,10),normalisasiAlasanBatal(r.ALASAN||'')].join('|')}
+    function rowBackupTidak(a,r){const rb=risikoBackup(a);return{'EVENT_ID':eventIdBatal(a,r),'APP_ID':a.APP_ID||'','ID_ASIK':fieldBackup(a,['ID_ASIK','Id_Asik','id_asik'])||'','Nama Anak':a.NAMA||'','Tanggal':String(r.TANGGAL||'').slice(0,10),'Bulan':String(r.TANGGAL||'').slice(0,7),'Kelurahan atau Desa':a.DESA||'','Posyandu':a.POSYANDU||'','Alasan':normalisasiAlasanBatal(r.ALASAN||''),'Catatan':r.CATATAN||'','Sumber':r.SUMBER||'APLIKASI','Warna_Risiko':rb.warna,'Jumlah_Vaksin_Tertinggal':rb.jumlah,'Vaksin_Tertinggal':rb.vaksin,'Terakhir_Backup':new Date().toISOString()}}
+    function buildPayloadBackup(){
+      const lastBackup=getLastBackupAt();
+      const modeIncremental=!!lastBackup;
+      const semua=anakData.filter(a=>isNoBukuValid(a.No_Buku));
+      const data=modeIncremental?semua.filter(a=>String(a.Updated_At||'')>lastBackup):semua;
+      const imunisasiYA=data.map(rowBackupYA);
+      const imunisasiTIDAK=[];
+      data.forEach(a=>normalisasiRiwayatBatal(a.RIWAYAT_BATAL||[]).forEach(r=>imunisasiTIDAK.push(rowBackupTidak(a,r))));
+      return{aksi:'BACKUP_SIPAKAINGE',versi:'1.1',mode:modeIncremental?'INCREMENTAL':'FULL',lastBackupAt:lastBackup,waktu:new Date().toISOString(),sheets:{Imunisasi_YA:{key:'APP_ID',header:HEADER_BACKUP_YA,rows:imunisasiYA},Imunisasi_TIDAK:{key:'EVENT_ID',header:HEADER_BACKUP_TIDAK,rows:imunisasiTIDAK}}}
+    }
+    function previewBackupSheet(){const p=buildPayloadBackup();notif(`Preview backup ${p.mode}: Imunisasi_YA ${p.sheets.Imunisasi_YA.rows.length} anak berubah, Imunisasi_TIDAK ${p.sheets.Imunisasi_TIDAK.rows.length} kejadian berubah.`);console.log('PAYLOAD BACKUP SIPAKAINGE',p)}
+    async function backupKeGoogleSheet(){
+      try{
+        if(!inputTerbuka()){
+          notif('Backup Sheet hanya untuk admin/pengelola. Buka halaman Input dengan PIN terlebih dahulu.');
+          return;
+        }
+        if(!navigator.onLine){
+          notif('Backup Sheet membutuhkan internet. Data offline tetap aman di IndexedDB/Pending Sync.');
+          return;
+        }
+        notif('Menyiapkan backup: kirim pending dan ambil update terbaru dulu...');
+        await kirimPendingSync();
+        await tarikFirestore();
+        const payload=buildPayloadBackup();
+        if(!BACKUP_WEBAPP_URL){
+          console.log('PAYLOAD BACKUP SIPAKAINGE',payload);
+          notif('URL Apps Script belum diisi. Payload backup ditampilkan di Console.');
+          return;
+        }
+        if(!confirm(`Backup ${payload.mode} ke Google Sheet? YA: ${payload.sheets.Imunisasi_YA.rows.length} anak berubah, TIDAK: ${payload.sheets.Imunisasi_TIDAK.rows.length} kejadian berubah.`))return;
+
+        // Google Apps Script sering diblokir CORS saat dipanggil dari HTML lokal/file://.
+        // mode no-cors membuat data tetap terkirim, tetapi respons tidak bisa dibaca aplikasi.
+        await fetch(BACKUP_WEBAPP_URL,{
+          method:'POST',
+          mode:'no-cors',
+          headers:{'Content-Type':'text/plain;charset=utf-8'},
+          body:JSON.stringify(payload)
+        });
+
+        setLastBackupAt(payload.waktu);
+        notif('Backup incremental dikirim ke Google Sheet. Silakan cek sheet Imunisasi_YA dan Imunisasi_TIDAK.');
+        console.log('PAYLOAD BACKUP TERKIRIM (no-cors)',payload);
+      }catch(e){
+        console.error(e);
+        notif('Backup Sheet gagal dikirim: '+(e.message||e));
+      }
+    }
+
+    async function migrasiTanggalIDLIBL(){
+      try{
+        const data=anakData.filter(a=>isNoBukuValid(a.No_Buku));
+        let berubah=0, idl=0, ibl=0;
+        for(const a of data){
+          const lamaIDL=a.Tanggal_IDL||'';
+          const lamaIBL=a.Tanggal_IBL||'';
+          perbaruiStatusIDL_IBL(a);
+          if(a.Tanggal_IDL)idl++;
+          if(a.Tanggal_IBL)ibl++;
+          if((a.Tanggal_IDL||'')!==lamaIDL||(a.Tanggal_IBL||'')!==lamaIBL){
+            berubah++;
+            await simpanLokal(a);
+            await simpanPending(a,'UPSERT');
+          }
+        }
+        renderDashboard();
+        renderInputList();
+        if(document.getElementById('viewLaporan')?.classList.contains('active'))renderLaporan();
+        notif(`Migrasi IDL/IBL selesai. Diubah: ${berubah} anak. IDL lengkap: ${idl}. IBL lengkap: ${ibl}. Tekan ↻ atau onlinekan aplikasi untuk kirim ke Firestore.`);
+        kirimPendingSync();
+      }catch(e){
+        console.error('Migrasi IDL/IBL gagal:',e);
+        notif('Migrasi IDL/IBL gagal: '+(e.message||e));
+      }
+    }
+    async function resetDataLokalImunisasiYA(){
+
+  const pin = prompt(
+    "RESET DATABASE LOKAL\n\n" +
+    "Masukkan PIN Admin:"
+  );
+
+  // Ganti PIN sesuai keinginan
+  const ADMIN_PIN = "0201";
+
+  if(pin !== ADMIN_PIN){
+    alert("PIN salah.");
+    return;
+  }
+
+  const yakin = confirm(
+    "Semua data lokal offline akan dihapus.\n\n" +
+    "Lanjutkan reset?"
+  );
+
+  if(!yakin) return;
+
+  try{
+
+    // Tutup koneksi database lama
+    if(window.db){
+      db.close();
+    }
+
+    // Hapus database lama & baru
+    indexedDB.deleteDatabase("SIPAKAINGE_DB");
+    indexedDB.deleteDatabase("SIPAKAINGE_DB_IMUNISASI_YA");
+
+    // Bersihkan localStorage
+    localStorage.removeItem(LAST_SYNC_KEY);
+    localStorage.removeItem(LAST_BACKUP_KEY);
+    localStorage.removeItem("SIPAKAINGE_UI_STATE_V1");
+
+    anakData.length = 0;
+
+    renderDashboard();
+    renderInputList();
+    renderCariList();
+
+    alert(
+      "Reset berhasil.\n\n" +
+      "Refresh aplikasi lalu tekan tombol ↻ Sync."
+    );
+
+  }catch(err){
+
+    console.error(err);
+
+    alert(
+      "Reset gagal:\n" +
+      (err.message || err)
+    );
+
+  }
+}
+    async function muatAwalHematQuota(){initFirebase();if(DEBUG_SIPAKAINGE)await runTests();const lokal=await bacaLokal().catch(e=>{console.warn('Gagal baca lokal',e);return[]});if(lokal.length){anakData.length=0;lokal.filter(a=>isNoBukuValid(a.No_Buku)).forEach(a=>anakData.push(a));isiFilterPosyandu();renderDashboard();renderInputList();pulihkanStateUI();console.log('Data dimuat dari IndexedDB: '+anakData.length+' sasaran valid, tanpa auto-read Firestore.')}else{console.log('IndexedDB kosong. Tekan ↻ untuk tarik Firestore.');renderDashboard();renderInputList();pulihkanStateUI()}kirimPendingSync()}
+    window.addEventListener('online',kirimPendingSync);
+
+    function kategoriUmur(u){if(u<12)return'BAYI';if(u<24)return'BADUTA';if(u<=59)return'BALITA';return'LAINNYA'}
+    function dataKategori(){return kategoriAktif==='SEMUA'?anakData:anakData.filter(a=>kategoriUmur(a.UMUR_BULAN)===kategoriAktif)}
+    function warnaDariSelisih(selisih){
+      if(selisih>=4)return'HIJAU';
+      if(selisih>=2)return'KUNING';
+      if(selisih>=0)return'MERAH';
+      return'HITAM';
+    }
+    function warnaDariTertinggal(jumlah){
+      if(jumlah===0)return'HIJAU';
+      if(jumlah<=3)return'KUNING';
+      if(jumlah<=6)return'MERAH';
+      return'HITAM';
+    }
+    function bobotWarna(warna){return {HIJAU:0,KUNING:1,MERAH:2,HITAM:3}[warna]??0}
+    function pilihTerberat(a,b){return bobotWarna(a.warna)>=bobotWarna(b.warna)?a:b}
+    function sisaVaksinIndikator(a,daftar){return daftar.filter(v=>!sudah(a,v))}
+    function sisaVaksinIndikatorSesuaiUsia(a,daftar){return daftar.filter(v=>!sudah(a,v)&&vaksinBolehDiberikan(a,v))}
+    function hitungMonitoringDasar(a){
+      const umur=Number(a.UMUR_BULAN||0);
+      const sisaKesempatan=Math.max(0,12-umur);
+      const kebutuhan=sisaVaksinIndikator(a,MESIN_SIPAKAINGE.indikatorDasar);
+      const selisih=sisaKesempatan-kebutuhan.length;
+      const tertinggalUsia=sisaVaksinIndikatorSesuaiUsia(a,MESIN_SIPAKAINGE.indikatorDasar);
+      const warna=(kebutuhan.length===0||tertinggalUsia.length===0)?'HIJAU':warnaDariSelisih(selisih);
+      return{jenis:'MONITORING DASAR',warna,selisih,sisaKesempatan,sisaVaksin:kebutuhan.length,tertinggalUsia:tertinggalUsia.length,kebutuhan};
+    }
+    function hitungMonitoringLanjutan(a){
+      const umur=Number(a.UMUR_BULAN||0);
+      const sisaKesempatan=Math.max(0,24-umur);
+      const kebutuhan=sisaVaksinIndikator(a,MESIN_SIPAKAINGE.indikatorLanjutan);
+      const selisih=sisaKesempatan-kebutuhan.length;
+      const tertinggalUsia=sisaVaksinIndikatorSesuaiUsia(a,MESIN_SIPAKAINGE.indikatorLanjutan);
+      const warna=(kebutuhan.length===0||tertinggalUsia.length===0)?'HIJAU':warnaDariSelisih(selisih);
+      return{jenis:'MONITORING LANJUTAN',warna,selisih,sisaKesempatan,sisaVaksin:kebutuhan.length,tertinggalUsia:tertinggalUsia.length,kebutuhan};
+    }
+    function hitungEvaluasiDasar(a){
+      const kebutuhan=sisaVaksinIndikator(a,MESIN_SIPAKAINGE.indikatorDasar);
+      return{jenis:'EVALUASI DASAR',warna:warnaDariTertinggal(kebutuhan.length),tertinggal:kebutuhan.length,kebutuhan};
+    }
+    function hitungEvaluasiFinal(a){
+      const kebutuhan=sisaVaksinIndikator(a,MESIN_SIPAKAINGE.indikatorFinal);
+      return{jenis:'EVALUASI FINAL',warna:warnaDariTertinggal(kebutuhan.length),tertinggal:kebutuhan.length,kebutuhan};
+    }
+    function hitungRisikoAnak(a){
+      const umur=Number(a.UMUR_BULAN||0);
+      if(umur<12)return hitungMonitoringDasar(a);
+      if(umur<24)return pilihTerberat(hitungMonitoringLanjutan(a),hitungEvaluasiDasar(a));
+      return hitungEvaluasiFinal(a);
+    }
+    function getStatusRisiko(a){return warnaRisikoAnak(a,a?.__TGL_FORM||getTanggalLayananInput())}
+    function getStatus(a){return getStatusRisiko(a)}
+    function normalizeAntigen(v){return String(v||'').trim().toUpperCase().replace('POLIO','OPV').replace('DPT-HB-HIB','DPT')}
+    function isiRiwayat(r){return Array.isArray(r)?String(r[1]||''):String(r?.VAKSIN||r?.vaksin||r?.ANTIGEN||r?.antigen||r?.ISI||r?.isi||'')}
+    function tglRiwayatItem(r){return Array.isArray(r)?r[0]:(r?.TANGGAL||r?.tanggal||r?.Tanggal||'')}
+    function getAntigenRiwayat(a){return (a.RIWAYAT||[]).flatMap(r=>isiRiwayat(r).split(',').map(v=>normalizeAntigen(v)))}
+    function getTanggalAntigen(a,v){const target=normalizeAntigen(v);const ketemu=(a.RIWAYAT||[]).map(r=>({tgl:tanggalRiwayatISO(tglRiwayatItem(r)),antigen:isiRiwayat(r).split(',').map(x=>normalizeAntigen(x))})).filter(r=>r.tgl&&r.antigen.includes(target)).sort((x,y)=>new Date(y.tgl)-new Date(x.tgl))[0];return ketemu?ketemu.tgl:''}
+    function tanggalVaksinPertama(a,v){const target=normalizeAntigen(v);const ketemu=(a.RIWAYAT||[]).flatMap(r=>isiRiwayat(r).split(',').map(x=>({tgl:tanggalRiwayatISO(tglRiwayatItem(r)),antigen:normalizeAntigen(x)}))).filter(r=>r.tgl&&r.antigen===target).sort((x,y)=>new Date(x.tgl)-new Date(y.tgl))[0];return ketemu?ketemu.tgl:''}
+    function tanggalLengkapSebelumUsia(a,daftar,batasBulan){
+      const lahir=a.TGL_LAHIR||a.TANGGAL_LAHIR||'';
+      if(!lahir)return'';
+      const tanggal=daftar.map(v=>tanggalVaksinPertama(a,v));
+      if(tanggal.some(t=>!t))return'';
+      const terakhir=tanggal.sort((x,y)=>new Date(y)-new Date(x))[0];
+      return hitungUmurBulanTanggal(lahir,terakhir)<batasBulan?terakhir:'';
+    }
+    function hitungTanggalIDL(a){return tanggalLengkapSebelumUsia(a,['BCG','DPT1','DPT2','DPT3','PCV1','PCV2','IPV1','MR1'],12)}
+    function hitungTanggalIBL(a){return tanggalLengkapSebelumUsia(a,['PCV3','DPT4','MR2'],24)}
+    function statusIDL(a){const t=hitungTanggalIDL(a);return{lengkap:!!t,tanggal:t}}
+    function statusIBL(a){const t=hitungTanggalIBL(a);return{lengkap:!!t,tanggal:t}}
+    function perbaruiStatusIDL_IBL(a){if(!a)return a;const idl=hitungTanggalIDL(a),ibl=hitungTanggalIBL(a);a.Tanggal_IDL=idl;a.Tanggal_IBL=ibl;a.Status_IDL=idl?'LENGKAP':'';a.Status_IBL=ibl?'LENGKAP':'';return a}
+
+    /* =========================================================
+       MESIN LOGIKA SIPAKAINGE TERPADU
+       Satu pintu baca hasil analisis anak.
+       Catatan: fungsi lama tetap dipertahankan sebagai komponen mesin,
+       tetapi kartu, laporan, backup, dan fitur baru diarahkan ke analisaAnak().
+       ========================================================= */
+    const ANALISA_CACHE=new Map();
+    function kunciAnalisaAnak(a,tanggal){
+      const riwayatKey=JSON.stringify(a?.RIWAYAT||[]);
+      const batalKey=JSON.stringify(a?.RIWAYAT_BATAL||[]);
+      const asikKey=JSON.stringify(a?.Vaksin_Belum_ASIK||[]);
+      return [a?.APP_ID||a?.No_Buku||a?.NAMA||'',tanggal,a?.TGL_LAHIR||'',a?.No_Buku||'',riwayatKey,batalKey,asikKey,a?.Status_ASIK||''].join('|');
+    }
+    function resetAnalisaCache(){ANALISA_CACHE.clear()}
+    function analisaAnak(a,tanggalAcuan){
+      const tanggal=tanggalAcuan||a?.__TGL_FORM||getTanggalLayananInput();
+      const cacheKey=kunciAnalisaAnak(a,tanggal);
+      if(ANALISA_CACHE.has(cacheKey))return ANALISA_CACHE.get(cacheKey);
+      const anak={...a,__TGL_FORM:tanggal,UMUR_BULAN:hitungUmurBulanTanggal(a?.TGL_LAHIR,tanggal)};
+      const risiko=hitungRisikoAnak(anak);
+      const rekomendasi=getRekomendasiPemberian(anak);
+      const tertinggal=vaksinTertinggalSesuaiUsia(anak);
+      const rutinDasar=rekomendasi.filter(v=>klasifikasiPemberian(anak,v).status==='RUTIN DASAR');
+      const rutinLanjutan=rekomendasi.filter(v=>klasifikasiPemberian(anak,v).status==='RUTIN LANJUTAN');
+      const kejar=rekomendasi.filter(v=>klasifikasiPemberian(anak,v).isKejar);
+      const idl=statusIDL(anak);
+      const ibl=statusIBL(anak);
+      const vaksinBelumASIK=normalisasiVaksinBelumASIK(anak.Vaksin_Belum_ASIK||[]);
+      const hasil={
+        anak,
+        tanggalAcuan:tanggal,
+        umurBulan:anak.UMUR_BULAN,
+        warnaRisiko:risiko.warna,
+        risiko,
+        rekomendasi,
+        tertinggal,
+        rutinDasar,
+        rutinLanjutan,
+        kejar,
+        idl,
+        ibl,
+        statusASIK:anak.Status_ASIK||statusASIKDariList(vaksinBelumASIK),
+        vaksinBelumASIK,
+        tanggalCekASIK:anak.Tanggal_Cek_ASIK||''
+      };
+      ANALISA_CACHE.set(cacheKey,hasil);
+      if(ANALISA_CACHE.size>3000){const first=ANALISA_CACHE.keys().next().value;ANALISA_CACHE.delete(first)}
+      return hasil;
+    }
+    function warnaRisikoAnak(a,tanggalAcuan){return analisaAnak(a,tanggalAcuan).warnaRisiko}
+    function selisihHari(tglAwal,tglAkhir){const a=new Date(tglAwal),b=new Date(tglAkhir);if(isNaN(a)||isNaN(b))return 0;return Math.floor((b-a)/86400000)}
+    function sudah(a,v){return getAntigenRiwayat(a).includes(v)}
+    function metaVaksin(v){return MESIN_SIPAKAINGE.jadwal[v]||null}
+    function intervalMemenuhi(a,v){const m=metaVaksin(v);if(!m||!m.setelah||!m.minHari)return true;if(!sudah(a,m.setelah))return false;const tglSebelum=getTanggalAntigen(a,m.setelah);const tglAcuan=getTanggalFormLayanan(a);if(!tglSebelum||!tglAcuan)return false;return selisihHari(tglSebelum,tglAcuan)>=m.minHari}
+    function vaksinBolehDiberikan(a,v){const u=Number(a.UMUR_BULAN||0),m=metaVaksin(v);if(!m)return false;if(u<m.mulai)return false;if(m.batasAkhir!==undefined&&u>=m.batasAkhir)return false;if(v==='HB0'&&u>1)return false;if(!intervalMemenuhi(a,v))return false;return true}
+    function dueByAge(a){return Object.keys(MESIN_SIPAKAINGE.jadwal).filter(v=>vaksinBolehDiberikan(a,v))}
+    function getTertinggal(a){return dueByAge(a).filter(v=>!sudah(a,v))}
+    function vaksinTertinggalSesuaiUsia(a){
+      const u=Number(a.UMUR_BULAN||0);
+      return Object.keys(MESIN_SIPAKAINGE.jadwal).filter(v=>{
+        const m=metaVaksin(v);
+        if(!m||sudah(a,v))return false;
+        if(u<m.mulai)return false;
+        if(m.batasAkhir!==undefined&&u>=m.batasAkhir)return false;
+        if(v==='HB0'&&u>1)return false;
+        if(m.setelah&&sudah(a,m.setelah)){
+          const tglSebelum=getTanggalAntigen(a,m.setelah);
+          const tglAcuan=getTanggalFormLayanan(a);
+          if(!tglSebelum||!tglAcuan)return false;
+          return selisihHari(tglSebelum,tglAcuan)>=m.minHari;
+        }
+        return true;
+      });
+    }
+    function nextDose(a,series){return series.find(v=>!sudah(a,v))||''}
+    function getRekomendasiPemberian(a){const t=getTertinggal(a);const calon=[nextDose(a,['HB0']),nextDose(a,['BCG']),nextDose(a,['OPV1','OPV2','OPV3','OPV4']),nextDose(a,['DPT1','DPT2','DPT3','DPT4']),nextDose(a,['PCV1','PCV2','PCV3']),nextDose(a,['IPV1','IPV2']),nextDose(a,['MR1','MR2']),nextDose(a,['ROTA1','ROTA2','ROTA3'])].filter(Boolean);return calon.filter(v=>t.includes(v))}
+    function tambahHariISO(tgl,hari){const d=new Date(tgl);if(isNaN(d))return'';d.setDate(d.getDate()+Number(hari||0));return d.toISOString().slice(0,10)}
+    function tanggalUsiaBulan(tglLahir,bulan){const d=new Date(tglLahir);if(isNaN(d))return getTanggalLayananInput();d.setMonth(d.getMonth()+Number(bulan||0));return d.toISOString().slice(0,10)}
+    function vaksinTertinggalRiwayat(a){return analisaAnak(a,a.__TGL_FORM||getTanggalLayananInput()).rekomendasi}
+    function kandidatRiwayatTanggal(a){return analisaAnak(a,a.__TGL_FORM||getTanggalLayananInput()).rekomendasi}
+    function klasifikasiPemberian(a,v){
+      const u=Number(a.UMUR_BULAN||0),m=metaVaksin(v);
+      if(!m)return{vaksin:v,kelompok:'LAINNYA',status:'KEBUTUHAN IMUNISASI',label:'Kebutuhan Imunisasi',isKejar:false};
+      if(m.batasAkhir!==undefined&&u>=m.batasAkhir)return{vaksin:v,kelompok:m.kelompok,status:'LEWAT USIA',label:'Lewat Usia',isKejar:false};
+      if(u<m.mulai)return{vaksin:v,kelompok:m.kelompok,status:'BELUM WAKTUNYA',label:'Belum Waktunya',isKejar:false};
+      const tidakDilabelKejar=['HB0','BCG','ROTA1','ROTA2','ROTA3'];
+      const kejarDasar=m.kelompok==='DASAR'&&u>=12&&!tidakDilabelKejar.includes(v);
+      const kejarLanjutan=m.kelompok==='LANJUTAN'&&u>=24;
+      if(kejarDasar||kejarLanjutan)return{vaksin:v,kelompok:m.kelompok,status:'KEJAR',label:'Kejar',isKejar:true};
+      return{vaksin:v,kelompok:m.kelompok,status:m.kelompok==='LANJUTAN'?'RUTIN LANJUTAN':'RUTIN DASAR',label:m.kelompok==='LANJUTAN'?'Rutin Lanjutan':'Rutin Dasar',isKejar:false}
+    }
+    function badgeKejarHTML(){return '<span class="label-kejar">Kejar</span>'}
+    function labelVaksin(a,v){const k=klasifikasiPemberian(a,v);return `${v}${k.isKejar?' '+badgeKejarHTML():''}`}
+    function labelVaksinRiwayatHTML(a,v){return labelVaksin(a,v)}
+    function jenisRekom(a,v){const k=klasifikasiPemberian(a,v);return k.isKejar?'Kejar':''}
+
+    function buatCounterKosong(){return{HITAM:0,MERAH:0,KUNING:0,HIJAU:0}}
+    function buatRekapKosong(nama){return{nama,total:0,status:buatCounterKosong(),irw:0,pidl:0,kategori:'HITAM',anak:[],posyandu:{}}}
+    function calcIRW(c){c=safeCounter(c);const t=c.HITAM+c.MERAH+c.KUNING+c.HIJAU;if(!t)return{cakupan:0,irw:0,kategori:'HITAM'};const irw=((c.KUNING*1)+(c.MERAH*3)+(c.HITAM*5))/t,cakupan=Math.max(0,(1-irw/5)*100);let k='HITAM';if(cakupan>=90)k='HIJAU';else if(cakupan>=70)k='KUNING';else if(cakupan>=50)k='MERAH';return{cakupan,irw,kategori:k}}
+    function finalkanRekap(item){item.status=safeCounter(item.status);const hasil=calcIRW(item.status);item.total=(item.anak||[]).length;item.irw=hasil.irw;item.pidl=hasil.cakupan;item.kategori=hasil.kategori;return item}
+    function buildMesinRekap(data){const hasil={total:buatRekapKosong('TOTAL'),desa:{},posyandu:{},kebutuhanVaksin:{},input:{TOTAL:0,LENGKAP:0,BELUM:0,SUNTIK:0,BATAL:0}};(data||[]).forEach(anak=>{const analisa=analisaAnak(anak,anak.__TGL_FORM||getTanggalLayananInput());const status=analisa.warnaRisiko;const desa=anak.DESA||'-';const pos=anak.POSYANDU||'-';const rekom=analisa.rekomendasi;const inputStatus=getInputStatus(anak);hasil.total.anak.push(anak);hasil.total.status[status]=(hasil.total.status[status]||0)+1;hasil.input.TOTAL++;hasil.input[inputStatus]=(hasil.input[inputStatus]||0)+1;if(!hasil.desa[desa])hasil.desa[desa]=buatRekapKosong(desa);hasil.desa[desa].anak.push(anak);hasil.desa[desa].status[status]=(hasil.desa[desa].status[status]||0)+1;if(!hasil.desa[desa].posyandu[pos])hasil.desa[desa].posyandu[pos]=buatRekapKosong(pos);hasil.desa[desa].posyandu[pos].anak.push(anak);hasil.desa[desa].posyandu[pos].status[status]=(hasil.desa[desa].posyandu[pos].status[status]||0)+1;if(!hasil.posyandu[pos])hasil.posyandu[pos]=buatRekapKosong(pos);hasil.posyandu[pos].anak.push(anak);hasil.posyandu[pos].status[status]=(hasil.posyandu[pos].status[status]||0)+1;rekom.forEach(v=>{const antigen=v.replace(/[0-9]/g,'');hasil.kebutuhanVaksin[antigen]=(hasil.kebutuhanVaksin[antigen]||0)+1})});finalkanRekap(hasil.total);Object.values(hasil.desa).forEach(d=>{finalkanRekap(d);Object.values(d.posyandu).forEach(p=>finalkanRekap(p))});Object.values(hasil.posyandu).forEach(p=>finalkanRekap(p));return hasil}
+    function countKategoriWilayah(items){const r=buatCounterKosong();Object.values(items||{}).forEach(item=>{const k=item?.kategori||'HITAM';r[k]=(r[k]||0)+1});return r}
+
+    function getBulanBerjalan(){const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`}
+    function getBulanLaporan(){return document.getElementById('bulanLaporan')?.value||getBulanBerjalan()}
+    function formatBulanLaporan(value){const nama=['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];const [y,m]=String(value||getBulanBerjalan()).split('-').map(Number);return `${nama[(m||1)-1]} ${y||new Date().getFullYear()}`}
+    function hitungUmurBulanPada(tglLahir,bulanLaporan){const [y,m]=String(bulanLaporan||getBulanBerjalan()).split('-').map(Number);return hitungUmurBulanTanggal(tglLahir,new Date(y,m,0))}
+    function hitungUmurBulanTanggal(tglLahir,tanggalAcuan){const lahir=new Date(tglLahir);const acuan=new Date(tanggalAcuan);if(isNaN(lahir)||isNaN(acuan))return 0;let umur=(acuan.getFullYear()-lahir.getFullYear())*12+(acuan.getMonth()-lahir.getMonth());if(acuan.getDate()<lahir.getDate())umur--;return Math.max(0,umur)}
+    function getBulanLayananInput(){return document.getElementById('bulanLayananInput')?.value||getBulanBerjalan()}
+    function getTanggalLayananInput(){return new Date().toISOString().slice(0,10)}
+    function getAnakUntukTanggalHariIni(a){return {...a,UMUR_BULAN:hitungUmurBulanTanggal(a.TGL_LAHIR,new Date())}}
+    function getAnakUntukTanggalLayanan(a,tanggal){return {...a,__TGL_FORM:tanggal,UMUR_BULAN:hitungUmurBulanTanggal(a.TGL_LAHIR,tanggal)}}
+    function denganUmurLayanan(a){return getAnakUntukTanggalHariIni(a)}
+    function bulanImunisasiSetelahStatus(a){const mulai=String(a?.STATUS_KHUSUS?.MULAI_TANGGAL||'').slice(0,10);if(!mulai)return'';const ketemu=(a.RIWAYAT||[]).map(r=>ubahTanggalKeISO(r[0]||'')).filter(t=>t&&t>=mulai).sort()[0];return ketemu?ketemu.slice(0,7):''}
+    function statusKhususValid(a){return !!(a?.STATUS_KHUSUS&&['PINDAH','MENOLAK'].includes(String(a.STATUS_KHUSUS.JENIS||'').toUpperCase()))}
+    function statusKhususAktif(a){return statusKhususAktifPadaBulan(a,getBulanLayananInput())}
+    function statusKhususAktifPadaBulan(a,bulan){
+      if(!statusKhususValid(a))return false;
+      const mulai=String(a.STATUS_KHUSUS.MULAI_BULAN||a.STATUS_KHUSUS.MULAI_TANGGAL||'').slice(0,7);
+      if(!mulai||String(bulan)<mulai)return false;
+      const berakhir=String(a.STATUS_KHUSUS.BERAKHIR_BULAN||bulanImunisasiSetelahStatus(a)||'').slice(0,7);
+      if(berakhir&&String(bulan)>=berakhir)return false;
+      return true;
+    }
+    function alasanStatusKhusus(a){return normalisasiAlasanBatal(a?.STATUS_KHUSUS?.JENIS||'')}
+    function adaImunisasiBulan(a,bulan){return (a.RIWAYAT||[]).some(r=>String(ubahTanggalKeISO(r[0]||'')).slice(0,7)===bulan)}
+    function cocokBulanLayanan(a){
+      // Jangan menyaring sasaran berdasarkan TGL_PELAYANAN terakhir.
+      // Semua anak dengan No_Buku valid harus tetap muncul di bulan layanan,
+      // sedangkan status BELUM/SUNTIK/BATAL/LENGKAP ditentukan oleh getInputStatus().
+      return isNoBukuValid(a?.No_Buku);
+    }
+    function getKelompokUmurLaporan(){return document.getElementById('kelompokUmurLaporan')?.value||'TOTAL'}
+    function namaKelompokUmurLaporan(k){return k==='BAYI'?'KELOMPOK BAYI <12 BLN':k==='BADUTA'?'KELOMPOK BADUTA 12-23 BLN':k==='BALITA'?'KELOMPOK BALITA 24-59 BLN':'SELURUH SASARAN 0-59 BLN'}
+    function cocokKelompokUmur(a,k){if(k==='BAYI')return a.UMUR_BULAN<12;if(k==='BADUTA')return a.UMUR_BULAN>=12&&a.UMUR_BULAN<24;if(k==='BALITA')return a.UMUR_BULAN>=24&&a.UMUR_BULAN<60;return a.UMUR_BULAN>=0&&a.UMUR_BULAN<60}
+    function dataLaporanAktif(pakaiKelompok=false){const bulan=getBulanLaporan();const kelompok=getKelompokUmurLaporan();const tglAcuan=akhirBulanISO(bulan);return anakData.filter(a=>isNoBukuValid(a.No_Buku)).map(a=>({...a,__BULAN_LAPORAN:bulan,__TGL_FORM:tglAcuan,UMUR_BULAN:hitungUmurBulanTanggal(a.TGL_LAHIR,tglAcuan)})).filter(a=>pakaiKelompok?cocokKelompokUmur(a,kelompok):cocokKelompokUmur(a,'TOTAL'))}
+    function dataKategoriBulanLaporan(){return dataLaporanAktif(false)}
+    function riwayatImunisasiBulan(a,bulan=getBulanLaporan()){return normalisasiRiwayatImunisasi(a.RIWAYAT||[]).filter(r=>String(ubahTanggalKeISO(r[0]||'')).slice(0,7)===bulan)}
+    function riwayatBatalBulan(a,bulan=getBulanLaporan()){return normalisasiRiwayatBatal(a.RIWAYAT_BATAL||[]).filter(r=>String(r.TANGGAL||'').slice(0,7)===bulan)}
+    function pemberianPadaBulan(a,bulan=getBulanLaporan()){const dariRiwayat=riwayatImunisasiBulan(a,bulan).flatMap(r=>String(r[1]||'').split(',').map(x=>x.trim()).filter(Boolean));if(dariRiwayat.length)return [...new Set(dariRiwayat)].join(', ');if(String(a.TGL_PELAYANAN||'').slice(0,7)===bulan&&a.INPUT_BULAN==='SUNTIK')return pemberianBulanIni(a);return''}
+    function adaImunisasiYaBulan(a,bulan){return !!pemberianPadaBulan(a,bulan)}
+    function alasanBatalPadaBulan(a,bulan=getBulanLaporan()){const b=riwayatBatalBulan(a,bulan).sort((x,y)=>new Date(y.TANGGAL)-new Date(x.TANGGAL))[0];if(b)return b.ALASAN;if(String(a.TGL_PELAYANAN||'').slice(0,7)===bulan&&a.INPUT_BULAN==='BATAL')return alasanBatal(a);if(statusKhususAktifPadaBulan(a,bulan)&&!adaImunisasiYaBulan(a,bulan))return alasanStatusKhusus(a);return''}
+    function getStatusLayananBulan(a,bulan=getBulanLaporan()){if(pemberianPadaBulan(a,bulan))return'SUNTIK';if(alasanBatalPadaBulan(a,bulan))return'BATAL';const tanggal=akhirBulanISO(bulan);const acuan=getAnakUntukTanggalLayanan(a,tanggal);return analisaAnak(acuan,tanggal).rekomendasi.length?'BELUM':'LENGKAP'}
+
+    function getInputStatus(a){
+  const bulan=getBulanLayananInput();
+
+  // Status Input memakai tanggal layanan/hari ini,
+  // bukan akhir bulan filter.
+  const tanggalAcuan=a.__TGL_FORM||getTanggalLayananInput();
+  const acuan=getAnakUntukTanggalLayanan(a,tanggalAcuan);
+  const rekomendasi=analisaAnak(acuan,tanggalAcuan).rekomendasi;
+
+  const suntikInputAplikasi =
+    a.INPUT_BULAN === 'SUNTIK' &&
+    String(a.TGL_PELAYANAN || '').slice(0,7) === bulan;
+
+  const batalInputAplikasi =
+    a.INPUT_BULAN === 'BATAL' &&
+    String(a.TGL_PELAYANAN || '').slice(0,7) === bulan;
+
+  const adaSuntikBulanIni = adaImunisasiYaBulan(a, bulan);
+
+  // PRIORITAS BARU:
+  // Jika ada pelayanan imunisasi pada bulan filter,
+  // anak tetap masuk menu SUNTIK meskipun setelah itu lengkap.
+  if(suntikInputAplikasi || adaSuntikBulanIni) return 'SUNTIK';
+
+  if(batalInputAplikasi) return 'BATAL';
+
+  if(statusKhususAktifPadaBulan(a,bulan)) return 'BATAL';
+
+  if(rekomendasi.length === 0) return 'LENGKAP';
+
+  return 'BELUM';
+}
+    function nilaiRisikoKartu(a){const r=analisaAnak(a,a?.__TGL_FORM||getTanggalLayananInput()).risiko;return r.selisih!==undefined?r.selisih:(r.tertinggal!==undefined?r.tertinggal:(r.kebutuhan||[]).length)}
+    function rekomendasiRingkas(a){const r=analisaAnak(a,a?.__TGL_FORM||getTanggalLayananInput()).rekomendasi;if(!r.length)return'✓';if(r.length<=2)return r.map(v=>labelVaksin(a,v)).join(', ');return r.slice(0,2).map(v=>labelVaksin(a,v)).join(', ')+' +'+(r.length-2)}
+    function akhirBulanISO(bulan){const [y,m]=String(bulan||getBulanBerjalan()).split('-').map(Number);return new Date(y,m,0).toISOString().slice(0,10)}
+    function bulanSudahLewat(bulan){return String(bulan||'')<getBulanBerjalan()}
+    function layananKartu(a){const st=getInputStatus(a);const bulan=getBulanLayananInput();const riwayatYa=riwayatImunisasiBulan(a,bulan).sort((x,y)=>new Date(ubahTanggalKeISO(y[0]))-new Date(ubahTanggalKeISO(x[0])))[0];const tgl=statusKhususAktifPadaBulan(a,bulan)?akhirBulanISO(bulan):(riwayatYa?ubahTanggalKeISO(riwayatYa[0]):(a.TGL_PELAYANAN?String(a.TGL_PELAYANAN).slice(0,10):getTanggalLayananInput()));const tglText=formatTanggalRiwayatTampil(tgl);if(st==='SUNTIK')return{status:'SUNTIK',teks:`${tglText} : ${labelDaftarVaksinHTML(a,pemberianPadaBulan(a,bulan)||pemberianBulanIni(a)||'-',tgl)}`};if(st==='BATAL')return{status:'BATAL',teks:`${tglText} : ${properCase(alasanBatal(a))}`};if(st==='BELUM')return{status:'KOSONG',teks:''};return{status:'LENGKAP',teks:'Lengkap sesuai usia'}}
+    function renderAnakCard(a,opsi={}){const status=getStatus(a),layanan=layananKartu(a),onclick=opsi.onclick||'',hp=a.NO_HP?`WA: ${a.NO_HP}`:'WA: -',labelStatus=properCase(status);return`<div class="anak-card ${status}" ${onclick}><div class="anak-main"><div><div class="anak-title"><span class="no-buku-pill">${a.No_Buku||'-'}</span>${properCase(a.NAMA)}</div><div class="anak-ident">${properCase(a.ORTU||'-')}<br>${a.JK==='♀'?'♀':'♂'} • ${formatTanggalIndonesia(a.TGL_LAHIR)} (${a.UMUR_BULAN} bln)<br>${a.POSYANDU||'-'}</div></div><div class="anak-right"><div class="risk-row"><span class="risk-badge ${status}" title="${status}"><span class="risk-dot ${status}"></span>${labelStatus}</span></div><div class="rek-line"><span class="rek-icon">💉</span><span class="rek-text">${rekomendasiRingkas(a)}</span></div><div class="hp-mini">${hp}</div></div></div>${layanan.teks?`<div class="layanan-strip ${layanan.status}">${layanan.teks}</div>`:''}</div>`}
+    function getPosyanduLaporan(){return document.getElementById('pilihPosyanduLaporan')?.value||'SEMUA'}
+    function buildLaporanDesa(namaDesa){const bulan=getBulanLaporan();const posFilter=getPosyanduLaporan();const dataDasar=dataKategoriBulanLaporan().filter(a=>a.DESA===namaDesa).filter(a=>posFilter==='SEMUA'||a.POSYANDU===posFilter).sort(urutNoBuku);const mesin=buildMesinRekap(dataDasar);const desa=mesin.desa[namaDesa];if(!desa)return null;const layanan=hitungLayananBulan(desa.anak,bulan);const rincian={SUNTIK:[],BATAL_BELUM:[]};desa.anak.forEach(a=>{const st=getStatusLayananBulan(a,bulan);if(st==='SUNTIK')rincian.SUNTIK.push(a);if(st==='BATAL'||st==='BELUM')rincian.BATAL_BELUM.push(a)});rincian.SUNTIK.sort(urutNoBuku);rincian.BATAL_BELUM.sort(urutNoBuku);const posyanduLayanan={};Object.entries(desa.posyandu).forEach(([nama,p])=>{p.anak=(p.anak||[]).sort(urutNoBuku);posyanduLayanan[nama]={...p,layanan:hitungLayananBulan(p.anak,bulan)}});return{desa:namaDesa,total:desa.total,status:safeCounter(desa.status),irw:desa.irw,pidl:desa.pidl,kategori:desa.kategori,posyandu:posyanduLayanan,rincian,layanan}}
+    function hitungCapaianLayanan(data,bulan=getBulanLaporan()){const r={TOTAL:(data||[]).length,LENGKAP:0,SUNTIK:0,MANGKIR:0,SAKIT:0,TUNDA:0,PINDAH:0,MENOLAK:0,API:0};(data||[]).forEach(a=>{const st=getStatusLayananBulan(a,bulan);if(st==='LENGKAP')r.LENGKAP++;else if(st==='SUNTIK')r.SUNTIK++;else if(st==='BELUM')r.MANGKIR++;else if(st==='BATAL'){const alasan=String(alasanBatalPadaBulan(a,bulan)||alasanBatal(a)).toUpperCase();if(alasan.includes('SAKIT'))r.SAKIT++;else if(alasan.includes('TUNDA'))r.TUNDA++;else if(alasan.includes('PINDAH'))r.PINDAH++;else if(alasan.includes('MENOLAK')||alasan.includes('TOLAK'))r.MENOLAK++;else r.MENOLAK++}});r.API=r.TOTAL?((r.LENGKAP+r.SUNTIK)/r.TOTAL)*100:0;return r}
+    function buildLaporanPuskesmas(pakaiKelompok=false){const bulan=getBulanLaporan();const mesin=buildMesinRekap(dataLaporanAktif(pakaiKelompok));const hasil={...mesin.total,desa:{},totalLayanan:null};Object.entries(mesin.desa).forEach(([nama,d])=>{hasil.desa[nama]={...d,status:safeCounter(d.status),anak:(d.anak||[]).sort(urutNoBuku),layanan:hitungCapaianLayanan(d.anak,bulan)};Object.entries(d.posyandu).forEach(([pnama,p])=>{hasil.desa[nama].posyandu[pnama]={...p,status:safeCounter(p.status),anak:(p.anak||[]).sort(urutNoBuku),layanan:hitungCapaianLayanan(p.anak,bulan)}})});hasil.status=safeCounter(hasil.status);hasil.total=hasil.anak.length;hasil.totalLayanan=hitungCapaianLayanan(mesin.total.anak,bulan);return hasil}
+
+    function renderSummary(){const mesin=buildMesinRekap(dataKategori()),data=mesin.total.anak,c=safeCounter(mesin.total.status);const desaAktif=Object.keys(mesin.desa).length,posAktif=Object.keys(mesin.posyandu).length;document.getElementById('summaryBox').innerHTML=`<div class="summary-row main"><span>Total Cakupan</span><span class="big-percent">${formatPct(mesin.total.pidl)}</span></div><div class="summary-row"><span>Sasaran (${data.length} Anak)</span>${statusDots(c,()=> '')}</div><div class="summary-row"><span>Desa/Kel (${desaAktif} Desa/Kel)</span>${statusDots(countKategoriWilayah(mesin.desa),()=> '')}</div><div class="summary-row"><span>Posyandu (${posAktif} Pos)</span>${statusDots(countKategoriWilayah(mesin.posyandu),()=> '')}</div>`}
+    function daftarDesaAktif(mesin){return [...desaList.filter(d=>mesin.desa[d]),...Object.keys(mesin.desa).filter(d=>!desaList.includes(d))]}
+    function renderDashboard(){resetAnalisaCache();renderSummary();const key=searchText.toUpperCase().trim(),mesin=buildMesinRekap(dataKategori()),daftar=daftarDesaAktif(mesin).sort((a,b)=>Number(mesin.desa[b]?.pidl || 0) - Number(mesin.desa[a]?.pidl || 0));document.getElementById('desaList').innerHTML=daftar.filter(d=>!key||d.includes(key)||Object.keys(mesin.desa[d].posyandu).some(p=>p.includes(key))).map(desa=>{const item=mesin.desa[desa],is=openDesa===desa;return`<div class="card ${is?'open':''}"><div onclick="toggleDesa('${desa}')"><div class="card-head"><div style="flex:1"><div style="display:flex;justify-content:space-between;align-items:flex-start;gap:6px"><span class="card-title">${desa} (${item.total} Anak)</span><div class="action-row"><button class="small-btn" title="Tampilkan semua sasaran" onclick="event.stopPropagation();showChildren('${desa}','','SEMUA')">👥</button></div></div></div></div><div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:2px"><div class="status-row-under">${statusDots(item.status,st=>`event.stopPropagation(); showChildren('${desa}','','${st}')`)}</div><span class="risk-percent ${item.kategori}">${item.kategori} ${formatPct(item.pidl)}</span></div><div class="bar-track"><div class="bar-fill" style="width:${item.pidl}%;background:var(--${item.kategori.toLowerCase()})"></div></div></div>${is?renderPosyanduList(desa,mesin):''}</div>`}).join('')||'<div class="placeholder">Belum ada sasaran valid. Tekan tombol ↻ untuk sync Firestore.<br><br>Catatan: hanya data dengan No_Buku tepat 4 digit angka yang tampil/dihitung.</div>'}
+    function renderPosyanduList(desa,mesin){const posItems=mesin.desa[desa]?.posyandu||{};return Object.values(posItems).sort((a,b)=>Number(b.pidl||0)-Number(a.pidl||0)).map((p,i)=>`<div class="pos-card"><div class="pos-title-row"><div class="pos-title">${i+1}. ${p.nama}</div><button class="small-btn" title="Tampilkan semua sasaran" onclick="event.stopPropagation();showChildren('${desa}','${p.nama}','SEMUA')">👥</button></div><div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:2px"><div class="status-row-under">${statusDots(p.status,st=>`showChildren('${desa}','${p.nama}','${st}')`)}</div><span class="risk-percent ${p.kategori}">${p.kategori} ${formatPct(p.pidl)}</span></div><div class="bar-track"><div class="bar-fill" style="width:${p.pidl}%;background:var(--${p.kategori.toLowerCase()})"></div></div></div>`).join('')}
+    function urutanRisiko(status){return {HITAM:1,MERAH:2,KUNING:3,HIJAU:4}[status]||9}
+    function urutAnakPrioritas(a,b){
+      const wa=urutanRisiko(getStatus(a)),wb=urutanRisiko(getStatus(b));
+      if(wa!==wb)return wa-wb;
+      return Number(a.No_Buku||9999)-Number(b.No_Buku||9999);
+    }
+    function showChildren(desa,pos,status){const semua=status==='SEMUA';const data=dataKategori().filter(a=>a.DESA===desa).filter(a=>!pos||a.POSYANDU===pos).filter(a=>semua||getStatus(a)===status).sort(urutAnakPrioritas);document.getElementById('panelSubtitle').textContent=`Desa ${desa}${pos?' • Posyandu '+pos:''} • ${semua?'Semua sasaran':'Status '+status}`;document.getElementById('panelBody').innerHTML=`<div class="pos-heading">📍 ${pos||'SEMUA POSYANDU'} • ${data.length} anak</div>${data.map(renderChild).join('')||'<div class="child-card">Tidak ada sasaran</div>'}`;document.getElementById('overlay').classList.add('show')}
+    function renderChild(a){return renderAnakCard(a,{onclick:`onclick="openDetailAnak('${a.APP_ID}',event)"`})}
+    function closeDetailAnakModal(){document.getElementById('detailAnakModal').classList.remove('show');document.getElementById('detailAnakBody').innerHTML=''}
+    function openDetailAnak(appId,e){
+      if(e){e.stopPropagation();}
+      const anak=anakData.find(a=>a.APP_ID===appId);
+      if(!anak)return;
+      const aHariIni=getAnakUntukTanggalHariIni(anak);
+      const status=getStatus(aHariIni);
+      const analisaDetail=analisaAnak(aHariIni,getTanggalLayananInput());
+      const rekom=analisaDetail.rekomendasi;
+      const tertinggal=analisaDetail.tertinggal;
+      document.getElementById('detailAnakTitle').innerHTML=`${properCase(aHariIni.NAMA||'-')} <span class="risk-dot ${status}" style="vertical-align:middle;margin-left:6px"></span>`;
+      document.getElementById('detailAnakBody').innerHTML=`
+        <div class="detail-grid">
+          <div class="detail-box"><b>📘 No Buku</b><br>${aHariIni.No_Buku||'-'}</div>
+          <div class="detail-box"><b>☎ No HP</b><br>${aHariIni.NO_HP||'-'}</div>
+          <div class="detail-box"><b>👪 Orang Tua</b><br>${properCase(aHariIni.ORTU||'-')}</div>
+          <div class="detail-box"><b>${aHariIni.JK==='♀'?'♀':'♂'} JK / Umur</b><br>${aHariIni.JK==='♀'?'Perempuan':'Laki-laki'} • ${aHariIni.UMUR_BULAN} bln</div>
+          <div class="detail-box"><b>🎂 Tgl Lahir</b><br>${formatTanggalIndonesia(aHariIni.TGL_LAHIR)}</div>
+          <div class="detail-box"><b>🏥 Posyandu</b><br>${aHariIni.POSYANDU||'-'}</div>
+        </div>
+        <div class="detail-section">💉 REKOMENDASI PEMBERIAN</div>
+        <div class="detail-chip-wrap">${rekom.length?rekom.map(v=>`<span class="detail-chip">${labelVaksin(aHariIni,v)}</span>`).join(''):'<span class="detail-chip">Tidak ada</span>'}</div>
+        <div class="detail-section">⚠️ VAKSIN TERTINGGAL / KEBUTUHAN</div>
+        <div class="detail-chip-wrap">${tertinggal.length?tertinggal.map(v=>`<span class="detail-chip warn">${labelVaksin(aHariIni,v)}</span>`).join(''):'<span class="detail-chip">Tidak ada</span>'}</div>
+        <div class="detail-section">⏱ RIWAYAT</div>
+        <div class="history-table">${renderRiwayatEditor(aHariIni,'detail',true)}</div>
+      `;
+      document.getElementById('detailAnakModal').classList.add('show');
+    }
+
+    function setInputFilter(f){inputFilter=f;openInputId='';inputMode='';renderInputList();simpanStateUI()}
+    function nomorBukuSort(a){return Number(String(a?.No_Buku||'999999').replace(/[^0-9]/g,'')||999999)}
+    function urutNoBuku(a,b){return nomorBukuSort(a)-nomorBukuSort(b)||String(a.NAMA||'').localeCompare(String(b.NAMA||''),'id')}
+    function inputDataByFilter(){const q=(document.getElementById('cariInput')?.value||'').toUpperCase(),pos=document.getElementById('filterPosyandu')?.value||'SEMUA';let data=anakData.filter(a=>isNoBukuValid(a.No_Buku)).filter(cocokBulanLayanan).map(denganUmurLayanan).filter(a=>pos==='SEMUA'||a.POSYANDU===pos).filter(a=>!q||String(a.NAMA).toUpperCase().includes(q)||String(a.No_Buku).includes(q));if(inputFilter!=='TOTAL')data=data.filter(a=>getInputStatus(a)===inputFilter);return data.sort(urutNoBuku)}
+    function renderInputCounters(){const pos=document.getElementById('filterPosyandu')?.value||'SEMUA';const data=anakData.filter(a=>isNoBukuValid(a.No_Buku)).filter(cocokBulanLayanan).map(denganUmurLayanan).filter(a=>pos==='SEMUA'||a.POSYANDU===pos);const counts={TOTAL:data.length,LENGKAP:0,BELUM:0,SUNTIK:0,BATAL:0};data.forEach(a=>{counts[getInputStatus(a)]++});document.getElementById('inputCounters').innerHTML=`<div class="counter ${inputFilter==='TOTAL'?'active':''}" onclick="setInputFilter('TOTAL')"><small>Total</small><div class="n">${counts.TOTAL}</div></div><div class="counter ${inputFilter==='LENGKAP'?'active':''}" onclick="setInputFilter('LENGKAP')"><small>Lengkap</small><div class="n" style="color:#64748b">${counts.LENGKAP}</div></div><div class="counter belum ${inputFilter==='BELUM'?'active':''}" onclick="setInputFilter('BELUM')"><small>Belum</small><div class="n">${counts.BELUM}</div></div><div class="counter suntik ${inputFilter==='SUNTIK'?'active':''}" onclick="setInputFilter('SUNTIK')"><small>Suntik</small><div class="n">${counts.SUNTIK}</div></div><div class="counter batal ${inputFilter==='BATAL'?'active':''}" onclick="setInputFilter('BATAL')"><small>Batal</small><div class="n">${counts.BATAL}</div></div>`}
+    function hitungKebutuhanVaksinBelum(list){
+      const mapKelompok={
+        BCG:'BCG',
+        DPT1:'DPT',DPT2:'DPT',DPT3:'DPT',DPT4:'DPT',
+        OPV1:'OPV',OPV2:'OPV',OPV3:'OPV',OPV4:'OPV',
+        PCV1:'PCV',PCV2:'PCV',PCV3:'PCV',
+        ROTA1:'ROTA',ROTA2:'ROTA',ROTA3:'ROTA',
+        IPV1:'IPV',IPV2:'IPV',
+        MR1:'MR',MR2:'MR'
+      };
+      const hasil={};
+      (list||[]).forEach(a=>{
+        analisaAnak(a,a.__TGL_FORM||getTanggalLayananInput()).rekomendasi.forEach(v=>{
+          const grup=mapKelompok[v]||v;
+          hasil[grup]=(hasil[grup]||0)+1;
+        });
+      });
+      return hasil;
+    }
+    function renderRingkasanKebutuhanBelum(list){
+      if(inputFilter!=='BELUM')return'';
+      const hitung=hitungKebutuhanVaksinBelum(list);
+      const urut=['HB0','BCG','OPV','DPT','ROTA','PCV','IPV','MR'].filter(v=>hitung[v]);
+      if(!urut.length)return'<div class="card" style="font-size:12px;font-weight:900;color:#64748b">Kebutuhan vaksin dari rekomendasi: tidak ada</div>';
+      return `<div class="card"><div class="section-small" style="margin-top:0">💉 KEBUTUHAN VAKSIN DARI MENU BELUM</div><div class="detail-chip-wrap">${urut.map(v=>`<span class="detail-chip">${v} ${hitung[v]}</span>`).join('')}</div></div>`;
+    }
+    function teksRekomWA(a){const r=analisaAnak(a,a.__TGL_FORM||getTanggalLayananInput()).rekomendasi;return r.length?r.map(v=>String(v).replace(/<[^>]*>/g,'')).join(', '):'-'}
+    function dataBelumBatalUntukWA(){
+      const pos=document.getElementById('filterPosyandu')?.value||'SEMUA';
+      const q=(document.getElementById('cariInput')?.value||'').toUpperCase();
+      return anakData.filter(a=>isNoBukuValid(a.No_Buku)).filter(cocokBulanLayanan).map(denganUmurLayanan).filter(a=>pos==='SEMUA'||a.POSYANDU===pos).filter(a=>!q||String(a.NAMA).toUpperCase().includes(q)||String(a.No_Buku).includes(q)).filter(a=>['BELUM','BATAL'].includes(getInputStatus(a))).sort(urutAnakPrioritas);
+    }
+    function buatPesanWABelumBatal(){
+      const data=dataBelumBatalUntukWA();
+      const urutan=['MANGKIR','SAKIT','TUNDA','PINDAH','MENOLAK','BATAL'];
+      const kelompok={};
+
+      data.forEach(a=>{
+        const st=getInputStatus(a);
+        const status=st==='BATAL'?properCase(alasanBatal(a)).toUpperCase():'MANGKIR';
+        if(!kelompok[status])kelompok[status]=[];
+        kelompok[status].push(a);
+      });
+
+      const statusList=[...urutan.filter(s=>kelompok[s]),...Object.keys(kelompok).filter(s=>!urutan.includes(s))];
+      const blok=statusList.map(status=>{
+        const daftar=kelompok[status].map((a,i)=>[
+          `${i+1}. *${properCase(a.NAMA)}* (${a.UMUR_BULAN} bln)`,
+          `   Ortu: ${properCase(a.ORTU||'-')}`,
+          `   [${teksRekomWA(a)}]`
+        ].join('\n')).join('\n\n');
+        return [`===*${status}*===`,daftar].join('\n');
+      });
+
+      const bulan = formatBulanLaporan(getBulanLayananInput());
+const pos = document.getElementById('filterPosyandu')?.value || 'SEMUA';
+const total = data.length;
+
+const header = [
+  '*DAFTAR SASARAN BELUM/BATAL IMUNISASI*',
+  `Periode: ${bulan}`,
+  `Posyandu: ${pos}`,
+  `Total: ${total}`,
+  ''
+].join('\n');
+
+const footer = [
+  '\n\n',
+  '_Sipakainge (Saling Mengingatkan)_',
+  '*Tim Imunisasi Puskesmas Lawawoi*'
+].join('\n');
+
+      return header + '\n' +
+       (blok.join('\n\n') || 'Tidak ada sasaran belum/batal pada filter ini.') +
+       footer;
+    }
+    function kirimWABelumBatal(){
+      const pesan=buatPesanWABelumBatal();
+      window.open('https://wa.me/?text='+encodeURIComponent(pesan),'_blank');
+    }
+    function renderInputList(){resetAnalisaCache();renderInputCounters();updatePendingInfo();const list=inputDataByFilter();document.getElementById('inputList').innerHTML=renderRingkasanKebutuhanBelum(list)+`<div class="section-small">DAFTAR ${inputFilter} (${list.length} ANAK)</div>`+list.map(a=>renderAnakCard(a,{onclick:`onclick="openInput('${a.APP_ID}',event)"`})).join('');simpanStateUI()}
+    function updateJudulModalInput(anak){
+      const aHariIni=getAnakUntukTanggalHariIni(anak);
+      document.getElementById('formModalTitle').innerHTML=`${properCase(anak.NAMA||'-')} • ${properCase(anak.ORTU||'-')}<div style="font-size:11px;font-weight:700;color:#475569;margin-top:3px">${formatTanggalIndonesia(anak.TGL_LAHIR)} (${aHariIni.UMUR_BULAN} bln) • ${anak.POSYANDU||'-'}</div>`;
+    }
+    function openInput(id,e){if(e&&e.target&&e.target.closest('.form-area'))return;const anak=anakData.find(a=>a.APP_ID===id);if(!anak)return;openInputId=id;inputMode='';riwayatInputTerbuka='';updateJudulModalInput(anak);document.getElementById('formModalBody').innerHTML=renderInputForm(anak);document.getElementById('formModal').classList.add('show')} function closeFormModal(){document.getElementById('formModal').classList.remove('show');openInputId='';inputMode='';riwayatInputTerbuka='';renderInputList()}
+    function setInputMode(e,mode){e.stopPropagation();inputMode=mode;const anak=anakData.find(a=>a.APP_ID===openInputId);if(anak&&document.getElementById('formModal')?.classList.contains('show')){document.getElementById('formModalBody').innerHTML=renderInputForm(anak)}renderInputList()}
+    function safeKey(id){return String(id||'').replace(/[^a-zA-Z0-9_-]/g,'_')}
+    function toggleRiwayatInput(appId){
+      riwayatInputTerbuka=riwayatInputTerbuka===appId?'':appId;
+      const anak=anakData.find(a=>a.APP_ID===appId);
+      if(anak&&document.getElementById('formModal')?.classList.contains('show')){
+        document.getElementById('formModalBody').innerHTML=renderInputForm(anak);
+      }
+      renderInputList();
+    }
+    function ubahTanggalKeISO(tgl){if(!tgl)return'';if(String(tgl).includes('-'))return tgl;const p=String(tgl).split('/');if(p.length!==3)return'';return `${p[2]}-${p[1].padStart(2,'0')}-${p[0].padStart(2,'0')}`}
+    function ubahISOkeTanggal(tgl){if(!tgl)return'';const p=String(tgl).split('-');if(p.length!==3)return tgl;return `${p[2]}/${p[1]}/${p[0]}`}
+    function bersihAntigenRiwayat(v){return normalizeAntigen(String(v||'').replace(/\(.*?\)/g,'').trim())}
+    function pecahRiwayatAntigen(a){
+      const hasil=[];
+      (a.RIWAYAT||[]).forEach((r,idx)=>{
+        const tgl=ubahTanggalKeISO(r[0]);
+        String(r[1]||'').split(',').map(x=>x.trim()).filter(Boolean).forEach(v=>{
+          const antigen=bersihAntigenRiwayat(v);
+          if(tgl&&antigen)hasil.push({id:'r'+idx+'_'+antigen+'_'+tgl,TANGGAL:tgl,ANTIGEN:antigen,TIPE:'IMUNISASI'});
+        });
+      });
+      return hasil.sort((x,y)=>new Date(x.TANGGAL)-new Date(y.TANGGAL)||x.ANTIGEN.localeCompare(y.ANTIGEN));
+    }
+    function getRiwayatGabungan(a){const riwayatVaksin=pecahRiwayatAntigen(a).map(r=>({TANGGAL:r.TANGGAL,ISI:r.ANTIGEN,TIPE:'IMUNISASI'}));const riwayatBatal=normalisasiRiwayatBatal(a.RIWAYAT_BATAL||[]).map(r=>({TANGGAL:r.TANGGAL,ISI:r.ALASAN,TIPE:'BATAL'}));return[...riwayatVaksin,...riwayatBatal].filter(r=>r.TANGGAL).sort((x,y)=>new Date(x.TANGGAL)-new Date(y.TANGGAL))}
+    function daftarAntigenRiwayat(){return ['HB0','BCG','OPV1','OPV2','OPV3','OPV4','DPT1','DPT2','DPT3','DPT4','PCV1','PCV2','PCV3','IPV1','IPV2','MR1','MR2','ROTA1','ROTA2','ROTA3']}
+    function kelompokRiwayatPerTanggal(a){
+      const map={};
+      pecahRiwayatAntigen(a).forEach(r=>{
+        if(!map[r.TANGGAL])map[r.TANGGAL]=[];
+        if(!map[r.TANGGAL].includes(r.ANTIGEN))map[r.TANGGAL].push(r.ANTIGEN);
+      });
+      return Object.keys(map).sort((x,y)=>new Date(x)-new Date(y)).map(tgl=>({TANGGAL:tgl,VAKSIN:map[tgl].sort()}));
+    }
+    function kelompokRiwayatTampilPerTanggal(a){
+      const map={};
+      pecahRiwayatAntigen(a).forEach(r=>{
+        if(!map[r.TANGGAL])map[r.TANGGAL]={VAKSIN:[],BATAL:[]};
+        if(!map[r.TANGGAL].VAKSIN.includes(r.ANTIGEN))map[r.TANGGAL].VAKSIN.push(r.ANTIGEN);
+      });
+      normalisasiRiwayatBatal(a.RIWAYAT_BATAL||[]).forEach(r=>{
+        const tgl=String(r.TANGGAL||'').slice(0,10);
+        const alasan=properCase(r.ALASAN||'Batal');
+        if(!tgl)return;
+        if(!map[tgl])map[tgl]={VAKSIN:[],BATAL:[]};
+        if(alasan&&!map[tgl].BATAL.includes(alasan))map[tgl].BATAL.push(alasan);
+      });
+      const bulan=getBulanLayananInput?.()||'';
+      if(bulan&&bulanSudahLewat(bulan)){
+        const adaLayananBulan=(a.RIWAYAT||[]).some(r=>String(ubahTanggalKeISO(r[0])).slice(0,7)===bulan)||(a.RIWAYAT_BATAL||[]).some(r=>String(r.TANGGAL||'').slice(0,7)===bulan);
+        if(!adaLayananBulan){
+          const tglMangkir=akhirBulanISO(bulan);
+          if(!map[tglMangkir])map[tglMangkir]={VAKSIN:[],BATAL:[]};
+          if(!map[tglMangkir].BATAL.includes('Mangkir'))map[tglMangkir].BATAL.push('Mangkir');
+        }
+      }
+      return Object.keys(map).sort((x,y)=>new Date(x)-new Date(y)).map(tgl=>({TANGGAL:tgl,VAKSIN:map[tgl].VAKSIN.sort(),BATAL:map[tgl].BATAL}));
+    }
+    function formatTanggalRiwayatTampil(tgl){
+      if(!tgl)return'-';
+      const p=String(tgl).split('-');
+      return p.length===3?`${p[2]}-${p[1]}-${p[0]}`:tgl;
+    }
+    function renderRiwayatEditor(a,key,terbuka){
+      const groups=kelompokRiwayatTampilPerTanggal(a);
+      const tampil=terbuka?groups:groups.slice(-1);
+      if(!tampil.length)return '<div class="history-empty-note">Belum ada riwayat.</div>';
+      return tampil.map(g=>{
+        const vaksin=g.VAKSIN.map(v=>labelVaksinRiwayatHTML(getAnakUntukTanggalLayanan(a,g.TANGGAL),v));
+        const batal=(g.BATAL||[]).map(x=>`<span class="label-batal-riwayat">${x}</span>`);
+        return `<div class="history-date-group"><div class="history-date-label">${formatTanggalRiwayatTampil(g.TANGGAL)} :</div><div class="history-vaksin-text">${[...vaksin,...batal].join(', ')||'-'}</div></div>`;
+      }).join('');
+    }
+    function renderRiwayatRingkas(a){const list=pecahRiwayatAntigen(a),terbuka=riwayatInputTerbuka===a.APP_ID,key=safeKey(a.APP_ID);return`<div class="section-small" style="display:flex;align-items:center;justify-content:space-between;gap:8px"><span>⏱ RIWAYAT (${list.length})</span><span style="display:flex;gap:5px"><button class="small-btn" title="Edit Riwayat" onclick="event.stopPropagation();openRiwayatModal('${a.APP_ID}')">✎</button><button class="small-btn" onclick="event.stopPropagation();toggleRiwayatInput('${a.APP_ID}')">${terbuka?'▲':'▼'}</button></span></div><div class="history-table">${renderRiwayatEditor(a,key,terbuka)}</div>`}
+    function riwayatSebelumTanggal(a,tgl){
+      const batas=new Date(tgl);
+      return (a.RIWAYAT||[]).filter(r=>{
+        const d=new Date(ubahTanggalKeISO(r[0]));
+        return !isNaN(d)&&d<batas;
+      });
+    }
+    function anakAcuanRiwayatTanggal(a,tgl){
+      return getAnakUntukTanggalLayanan({...a,RIWAYAT:riwayatSebelumTanggal(a,tgl)},tgl||getTanggalFormLayanan(a));
+    }
+    function riwayatSebelumTanggalDariModal(appId,tgl){
+      const key=safeKey(appId),batas=new Date(tgl),rows=[...document.querySelectorAll('[data-tambah-riwayat-row="1"]')];
+      const hasil=[];
+      rows.forEach(row=>{
+        const t=row.querySelector('.tanggalRiwayatTambah_'+key)?.value||'';
+        const d=new Date(t);
+        if(!t||isNaN(d)||!(d<batas))return;
+        const vaksin=[...row.querySelectorAll('.vaksinRiwayatTambah_'+key+':checked')].map(x=>x.value).filter(Boolean);
+        if(vaksin.length)hasil.push([ubahISOkeTanggal(t),vaksin.join(', ')]);
+      });
+      return hasil;
+    }
+    function anakAcuanRiwayatTanggalModal(appId,tgl){
+      const anak=anakData.find(a=>a.APP_ID===appId);if(!anak)return null;
+      const adaModal=document.getElementById('riwayatModal')?.classList.contains('show')&&document.querySelector('[data-tambah-riwayat-row="1"]');
+      const riwayat=adaModal?riwayatSebelumTanggalDariModal(appId,tgl):riwayatSebelumTanggal(anak,tgl);
+      return getAnakUntukTanggalLayanan({...anak,RIWAYAT:riwayat},tgl||getTanggalFormLayanan(anak));
+    }
+    function renderPilihanVaksinTanggal(appId,tgl,terpilih=[]){
+      const anak=anakData.find(a=>a.APP_ID===appId);if(!anak)return'';
+      const tanggal=tgl||getTanggalFormLayanan(anak);
+      const aAcuan=anakAcuanRiwayatTanggalModal(appId,tanggal)||anakAcuanRiwayatTanggal(anak,tanggal);
+      const tambahan=kandidatRiwayatTanggal(aAcuan);
+      const list=[...new Set([...(terpilih||[]),...tambahan])].filter(Boolean);
+      return list.map(v=>`<label class="riwayat-pilih-item"><input class="vaksinRiwayatTambah_${safeKey(appId)}" type="checkbox" value="${v}" ${terpilih.includes(v)?'checked':''} onchange="refreshSemuaPilihanRiwayat('${appId}')"> ${labelVaksin(aAcuan,v)}</label>`).join('')||'<div class="history-empty-note">Tidak ada vaksin tertinggal pada tanggal ini.</div>';
+    }
+    function renderBarisTambahRiwayat(appId,tgl,vaksinTerpilih=[]){
+      const key=safeKey(appId);
+      return `<div class="riwayat-date-row" data-tambah-riwayat-row="1"><div class="riwayat-date-row-head"><input class="tanggalRiwayatTambah_${key}" type="date" value="${tgl}" onchange="refreshPilihanRiwayatTanggal(this,'${appId}')"><button type="button" class="riwayat-date-remove" onclick="hapusTanggalTambahRiwayat(this)">×</button></div><div class="riwayat-pilih-list">${renderPilihanVaksinTanggal(appId,tgl,vaksinTerpilih)}</div></div>`;
+    }
+    function openRiwayatModal(appId){
+      const anak=anakData.find(a=>a.APP_ID===appId);
+      if(!anak)return;
+
+      simpanTanggalFormSementara(appId);
+
+      const groups=kelompokRiwayatPerTanggal(anak);
+      const tgl=getTanggalFormLayanan(anak);
+      let rows='';
+
+      if(groups.length){
+        rows=groups.map(g=>renderBarisTambahRiwayat(appId,g.TANGGAL,g.VAKSIN||[])).join('');
+      }else{
+        rows=renderBarisTambahRiwayat(appId,tgl,[]);
+      }
+
+      const html=`
+        <div class="muted-note" style="margin-bottom:8px">
+          Edit tanggal atau centang/hapus vaksin pada tanggal tersebut.
+          Pilihan tambahan otomatis mengikuti usia dan interval dosis pada tanggal masing-masing.
+        </div>
+        <div id="daftarTanggalRiwayatTambah">${rows}</div>
+        <button type="button" class="cancel-btn" style="margin-top:4px" onclick="tambahTanggalRiwayatModal('${appId}')">+ Tambah Tanggal</button>
+        <div class="action-form-row">
+          <button class="cancel-btn" onclick="closeRiwayatModal()">↩ BATAL</button>
+          <button class="save-btn" onclick="simpanRiwayatModal('${appId}')">✓ SIMPAN RIWAYAT</button>
+        </div>
+      `;
+
+      document.getElementById('riwayatModalTitle').textContent='Edit Riwayat';
+      document.getElementById('riwayatModalBody').innerHTML=html;
+      document.getElementById('riwayatModal').classList.add('show');
+    }
+    function closeRiwayatModal(){document.getElementById('riwayatModal').classList.remove('show');document.getElementById('riwayatModalBody').innerHTML=''}
+    function tambahTanggalRiwayatModal(appId){
+      const anak=anakData.find(a=>a.APP_ID===appId);if(!anak)return;
+      const box=document.getElementById('daftarTanggalRiwayatTambah');
+      box?.insertAdjacentHTML('beforeend',renderBarisTambahRiwayat(appId,getTanggalFormLayanan(anak)));
+    }
+    function hapusTanggalTambahRiwayat(btn){const row=btn.closest('[data-tambah-riwayat-row="1"]');if(row)row.remove()}
+    function refreshPilihanRiwayatTanggal(input,appId){refreshSemuaPilihanRiwayat(appId)}
+    function refreshSemuaPilihanRiwayat(appId){
+      const key=safeKey(appId);
+      const rows=[...document.querySelectorAll('[data-tambah-riwayat-row="1"]')];
+      rows.forEach(row=>{
+        const tgl=row.querySelector('.tanggalRiwayatTambah_'+key)?.value||getTanggalLayananInput();
+        const terpilih=[...row.querySelectorAll('.vaksinRiwayatTambah_'+key+':checked')].map(x=>x.value);
+        const list=row.querySelector('.riwayat-pilih-list');
+        if(list)list.innerHTML=renderPilihanVaksinTanggal(appId,tgl,terpilih);
+      });
+    }
+    function simpanRiwayatModal(appId){
+      const anak=anakData.find(a=>a.APP_ID===appId);if(!anak)return;
+      const key=safeKey(appId);
+      const rows=[...document.querySelectorAll('[data-tambah-riwayat-row="1"]')];
+      const baru=[];
+      rows.forEach(row=>{
+        const tgl=row.querySelector('.tanggalRiwayatTambah_'+key)?.value||'';
+        const vaksin=[...row.querySelectorAll('.vaksinRiwayatTambah_'+key+':checked')].map(x=>x.value);
+        if(tgl&&vaksin.length)baru.push([ubahISOkeTanggal(tgl),vaksin.join(', ')]);
+      });
+      anak.RIWAYAT=baru.sort((a,b)=>new Date(ubahTanggalKeISO(a[0]))-new Date(ubahTanggalKeISO(b[0])));perbaruiStatusIDL_IBL(anak);
+      closeRiwayatModal();
+      document.getElementById('formModalBody').innerHTML=renderInputForm(anak);
+    }
+    function formatUmurBulanHari(tglLahir,tanggalAcuan){
+      const lahir=new Date(tglLahir),acuan=new Date(tanggalAcuan);
+      if(isNaN(lahir)||isNaN(acuan))return'-';
+      let bulan=(acuan.getFullYear()-lahir.getFullYear())*12+(acuan.getMonth()-lahir.getMonth());
+      let patokan=new Date(lahir);
+      patokan.setMonth(patokan.getMonth()+bulan);
+      if(patokan>acuan){
+        bulan--;
+        patokan=new Date(lahir);
+        patokan.setMonth(patokan.getMonth()+bulan);
+      }
+      const hari=Math.max(0,Math.floor((acuan-patokan)/86400000));
+      return `${Math.max(0,bulan)} bln ${hari} hr`;
+    }
+    function renderInputForm(a){const key=safeKey(a.APP_ID),tglHariIni=getTanggalFormLayanan(a),aForm=getAnakUntukTanggalLayanan(a,tglHariIni),hasilAnalisa=analisaAnak(aForm,tglHariIni),rekomendasi=hasilAnalisa.rekomendasi,umurLayanan=formatUmurBulanHari(a.TGL_LAHIR,tglHariIni);return`<div class="form-area" onclick="event.stopPropagation()"><div class="form-grid"><div><div class="section-small">🏃 INPUT PELAYANAN</div><div style="font-size:11px;font-weight:900;color:#075985;margin:2px 0 8px">💉 ${rekomendasi.length?rekomendasi.map(v=>labelVaksin(aForm,v)).join(', '):'Tidak ada rekomendasi'}</div><div class="label">Tanggal Pelayanan</div><input id="tglPelayanan_${key}" type="date" value="${tglHariIni}" onclick="event.stopPropagation()" oninput="event.stopPropagation()" onchange="event.stopPropagation();refreshFormTanggalLayanan('${a.APP_ID}')"><div style="font-size:11px;font-weight:800;color:#475569;margin:5px 0 8px">Umur saat pelayanan: ${umurLayanan}</div><div class="label">Diberikan Imunisasi?</div><div class="choice-row"><div class="choice ${inputMode==='YA'?'active':''}" onclick="setInputMode(event,'YA')">⊙ YA</div><div class="choice ${inputMode==='TIDAK'?'active':''}" onclick="setInputMode(event,'TIDAK')">⊙ TIDAK</div></div>${inputMode==='YA'?`<div class="label">Imunisasi Hari Ini</div><div class="vax-list">${rekomendasi.map(v=>`<label class="vax-check"><input class="vaksinHariIni_${key}" type="checkbox" value="${v}" checked> ${labelVaksin(aForm,v)}</label>`).join('')||'<div class="muted-note">Tidak ada rekomendasi pemberian.</div>'}</div><div class="muted-note">✓ Rekomendasi utama memakai kebutuhan imunisasi terdekat. Tambah riwayat tersedia di bagian Riwayat.</div>`:''}${inputMode==='TIDAK'?`<div class="label">Alasan Tidak Imunisasi</div><select id="alasanBatal_${key}" class="reason-select"><option>-- Pilih Alasan --</option><option>Sakit</option><option>Tunda</option><option>Pindah</option><option>Menolak</option></select>`:''}</div><div>${renderRiwayatRingkas(a)}<div class="section-small">📋 DATA ANAK</div><div class="label">No. Buku</div><input id="noBuku_${key}" maxlength="4" inputmode="numeric" value="${a.No_Buku||''}"><div class="label">No. HP (WA)</div><input id="noHp_${key}" value="${a.NO_HP||''}" placeholder="Nomor HP/WA"></div></div><div class="label">Catatan Tambahan (Opsional)</div><input id="catatan_${key}" class="note-input" placeholder="Contoh: demam, buku terisi, imunisasi luar..."><div class="action-form-row"><button class="cancel-btn" onclick="closeFormModal()">↩ BATAL</button><button class="save-btn" onclick="simpanLayanan('${a.APP_ID}')">💾 SIMPAN DATA</button></div></div>`}
+    function getTanggalFormLayanan(a){const key=safeKey(a.APP_ID);return a.__TGL_FORM||document.getElementById('tglPelayanan_'+key)?.value||a.TGL_PELAYANAN||getTanggalLayananInput()}
+    function simpanTanggalFormSementara(appId){
+      const anak=anakData.find(a=>a.APP_ID===appId);
+      if(!anak)return;
+      const key=safeKey(appId);
+      anak.__TGL_FORM=document.getElementById('tglPelayanan_'+key)?.value||getTanggalLayananInput();
+    }
+    function refreshFormTanggalLayanan(appId){
+      const anak=anakData.find(a=>a.APP_ID===appId);
+      if(!anak)return;
+      simpanTanggalFormSementara(appId);
+      const lamaInputMode=inputMode;
+      const lamaRiwayat=riwayatInputTerbuka;
+      openInputId=appId;
+      inputMode=lamaInputMode;
+      riwayatInputTerbuka=lamaRiwayat;
+      if(document.getElementById('formModal')?.classList.contains('show')){
+        updateJudulModalInput(anak);
+        document.getElementById('formModalBody').innerHTML=renderInputForm(anak);
+      }else{
+        renderInputList();
+      }
+      setTimeout(()=>{
+        const key=safeKey(appId);
+        const el=document.getElementById('tglPelayanan_'+key);
+        if(el)el.focus({preventScroll:true});
+      },0);
+    }
+    async function simpanLayanan(appId){
+      const anak=anakData.find(a=>a.APP_ID===appId);
+      if(!anak){alert('Data anak tidak ditemukan');return}
+      const key=safeKey(appId);
+      const tanggal=document.getElementById('tglPelayanan_'+key)?.value||'';
+      const catatan=document.getElementById('catatan_'+key)?.value||'';
+      const noBukuBaru=String(document.getElementById('noBuku_'+key)?.value||'').trim();
+      const noHpBaru=String(document.getElementById('noHp_'+key)?.value||'').trim();
+
+      if(!isNoBukuValid(noBukuBaru)){alert('No. Buku wajib tepat 4 digit angka, contoh 2424.');return}
+
+      anak.No_Buku=noBukuBaru;
+      anak.NO_HP=noHpBaru;
+      anak.CATATAN=catatan;
+      if(tanggal)anak.__TGL_FORM=tanggal;
+
+      if(inputMode==='YA'){
+        if(!tanggal){alert('Tanggal pelayanan wajib diisi untuk input imunisasi hari ini.');return}
+        const vaksinHariIni=[...document.querySelectorAll('.vaksinHariIni_'+key+':checked')].map(x=>x.value);
+        if(!vaksinHariIni.length){alert('Pilih minimal 1 imunisasi hari ini');return}
+
+        anak.INPUT_BULAN='SUNTIK';
+        anak.TGL_PELAYANAN=tanggal;
+        delete anak.__TGL_FORM;
+        anak.VAKSIN_BULAN_INI=vaksinHariIni.join(', ');
+        anak.ALASAN_BATAL='';
+        anak.RIWAYAT=anak.RIWAYAT||[];
+        anak.RIWAYAT.push([ubahISOkeTanggal(tanggal),vaksinHariIni.join(', ')]);
+        tambahVaksinBelumASIK(anak,vaksinHariIni);
+        perbaruiStatusIDL_IBL(anak);
+
+        if(anak.STATUS_KHUSUS){
+          anak.STATUS_KHUSUS.AKTIF=false;
+          anak.STATUS_KHUSUS.BERAKHIR_BULAN=String(tanggal).slice(0,7);
+          anak.STATUS_KHUSUS.BERAKHIR_TANGGAL=tanggal;
+        }
+      }
+      else if(inputMode==='TIDAK'){
+        if(!tanggal){alert('Tanggal pelayanan wajib diisi untuk input batal/tidak imunisasi.');return}
+        const alasan=document.getElementById('alasanBatal_'+key)?.value||'';
+        if(!alasan||alasan==='-- Pilih Alasan --'){alert('Pilih alasan tidak imunisasi');return}
+
+        anak.INPUT_BULAN='BATAL';
+        anak.TGL_PELAYANAN=tanggal;
+        delete anak.__TGL_FORM;
+        anak.ALASAN_BATAL=normalisasiAlasanBatal(alasan);
+        tambahRiwayatBatalRingan(anak,tanggal,alasan,catatan);
+
+        if(normalisasiAlasanBatal(alasan)==='Pindah'||normalisasiAlasanBatal(alasan)==='Menolak'){
+          anak.STATUS_KHUSUS={AKTIF:true,JENIS:normalisasiAlasanBatal(alasan).toUpperCase(),MULAI_BULAN:String(tanggal).slice(0,7),MULAI_TANGGAL:tanggal,CATATAN:catatan};
+        }
+      }
+      else{
+        delete anak.__TGL_FORM;
+      }
+
+      await simpanAman(anak);
+      openInputId='';
+      inputMode='';
+      riwayatInputTerbuka='';
+      closeFormModal();
+      renderInputList();
+      renderDashboard();
+    }
+    function bukaFormTambah(){document.getElementById('panelTitle').textContent='Tambah Sasaran Baru';document.getElementById('panelSubtitle').textContent='Hanya identitas anak. HB0 muncul di rekomendasi setelah sasaran tersimpan.';document.getElementById('panelBody').innerHTML=`<div class="card"><div class="label">Nama Anak</div><input id="baruNama"><div class="label">Tanggal Lahir</div><input id="baruLahir" type="date"><div class="label">Jenis Kelamin</div><select id="baruJK"><option value="♂">Laki-laki</option><option value="♀">Perempuan</option></select><div class="label">Orang Tua</div><input id="baruOrtu"><div class="label">Desa</div><select id="baruDesa" onchange="isiPosBaru()">${desaList.map(d=>`<option>${d}</option>`).join('')}</select><div class="label">Posyandu</div><select id="baruPos"></select><div class="label">No. Buku</div><input id="baruNoBuku" maxlength="4" inputmode="numeric" placeholder="4 digit, contoh 2424"><div class="muted-note">Sasaran hanya tampil/dihitung jika No. Buku tepat 4 digit angka.</div><button class="save-btn" onclick="simpanSasaranBaru()">SIMPAN SASARAN</button></div>`;document.getElementById('overlay').classList.add('show');isiPosBaru()}
+    function isiPosBaru(){const d=document.getElementById('baruDesa')?.value||desaList[0];document.getElementById('baruPos').innerHTML=(posMap[d]||[]).map(p=>`<option>${p}</option>`).join('')}
+    async function simpanSasaranBaru(){const noBuku=String(document.getElementById('baruNoBuku').value||'').trim();if(!isNoBukuValid(noBuku)){alert('No. Buku wajib tepat 4 digit angka, contoh 2424.');return}const lahir=document.getElementById('baruLahir').value,data={APP_ID:'APP-'+Date.now(),NAMA:document.getElementById('baruNama').value||'SASARAN BARU',TGL_LAHIR:lahir,JK:document.getElementById('baruJK').value,ORTU:document.getElementById('baruOrtu').value||'-',DESA:document.getElementById('baruDesa').value,POSYANDU:document.getElementById('baruPos').value,No_Buku:noBuku,UMUR_BULAN:hitungUmurBulanTanggal(lahir,new Date()),RIWAYAT:[],Vaksin_Belum_ASIK:[],Status_ASIK:'YA',Tanggal_Cek_ASIK:''};perbaruiStatusIDL_IBL(data);anakData.unshift(data);await simpanAman(data);closePanel();renderDashboard();renderInputList()}
+
+    function isiDropdownDesaLaporan(){const select=document.getElementById('pilihDesaLaporan');if(!select)return;const lama=select.value;const jenis=document.getElementById('jenisLaporan')?.value||'HASIL_PUSKESMAS';const mesin=buildMesinRekap(dataLaporanAktif(false));const daftar=daftarDesaAktif(mesin);const opsi=(jenis==='KEJAR'||jenis==='IDL_IBL'||jenis==='ASIK')?['SEMUA',...(daftar.length?daftar:desaList)]:(daftar.length?daftar:desaList);select.innerHTML=opsi.map(d=>`<option value="${d}">${d==='SEMUA'?'Semua Desa/Kelurahan':d}</option>`).join('');if(lama&&[...select.options].some(o=>o.value===lama))select.value=lama}
+    function isiDropdownPosyanduLaporan(){const desa=document.getElementById('pilihDesaLaporan')?.value||desaList[0];const select=document.getElementById('pilihPosyanduLaporan');if(!select)return;const lama=select.value;const mesin=buildMesinRekap(dataLaporanAktif(false));let list=[];if(desa==='SEMUA'){list=Object.keys(mesin.posyandu||{}).length?Object.keys(mesin.posyandu):[...new Set(Object.values(posMap).flat())]}else{list=Object.keys(mesin.desa[desa]?.posyandu||{}).length?Object.keys(mesin.desa[desa].posyandu):(posMap[desa]||[])}list=list.sort((a,b)=>String(a).localeCompare(String(b),'id',{numeric:true,sensitivity:'base'}));select.innerHTML='<option value="SEMUA">Semua Posyandu</option>'+list.map(p=>`<option value="${p}">${p}</option>`).join('');select.value=list.includes(lama)?lama:'SEMUA'}
+    function onDesaLaporanChange(){isiDropdownPosyanduLaporan();renderLaporan()}
+    function pilihLaporanDesa(desa){setPage('Laporan');isiDropdownDesaLaporan();document.getElementById('jenisLaporan').value='DESA';document.getElementById('pilihDesaLaporan').value=desa;isiDropdownPosyanduLaporan();document.getElementById('pilihPosyanduLaporan').value='SEMUA';renderLaporan()}
+    function formatPct(n){return Number(n||0).toFixed(2).replace('.',',')+'%'}
+    function formatTanggalCetak(){const d=new Date();const nama=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];return`${String(d.getDate()).padStart(2,'0')} ${nama[d.getMonth()]} ${d.getFullYear()} ${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`}
+    function formatTanggalIndonesia(tgl){if(!tgl)return'-';const d=new Date(tgl);if(isNaN(d))return tgl;return`${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}/${d.getFullYear()}`}
+    function jkText(jk){return jk==='♀'?'P':'L'}
+    function hitungLayananBulan(data,bulan=getBulanLaporan()){const r={TOTAL:(data||[]).length,LENGKAP:0,BELUM:0,SUNTIK:0,BATAL:0};(data||[]).forEach(a=>{r[getStatusLayananBulan(a,bulan)]++});return r}
+    function alasanBatal(a){const terbaru=normalisasiRiwayatBatal(a.RIWAYAT_BATAL||[]).sort((x,y)=>new Date(y.TANGGAL)-new Date(x.TANGGAL))[0];return alasanStatusKhusus(a)||normalisasiAlasanBatal(a.ALASAN_BATAL)||terbaru?.ALASAN||normalisasiAlasanBatal(a.ALASAN)||normalisasiAlasanBatal(a.KETERANGAN)||'Batal'}
+    function properCase(t){return String(t||'').toLowerCase().replace(/\b\w/g,c=>c.toUpperCase())}
+    function pemberianBulanIni(a){return String(a.VAKSIN_BULAN_INI||a.PEMBERIAN_BULAN_INI||a.VAKSIN_DIBERIKAN||a.REKOM||analisaAnak(a,a.__TGL_FORM||getTanggalLayananInput()).rekomendasi.join(', ')).toUpperCase()}
+    function labelDaftarVaksinHTML(a,teks,tanggal){
+      const base=tanggal?getAnakUntukTanggalLayanan(a,tanggal):a;
+      const list=String(teks||'').split(',').map(x=>normalizeAntigen(x)).filter(Boolean);
+      return list.length?list.map(v=>labelVaksin(base,v)).join(', '):'-';
+    }
+    function isiKolomPemberian(a){const bulan=a.__BULAN_LAPORAN||getBulanLaporan();const st=getStatusLayananBulan(a,bulan);if(st==='SUNTIK'){const tgl=(riwayatImunisasiBulan(a,bulan)[0]?.[0]&&ubahTanggalKeISO(riwayatImunisasiBulan(a,bulan)[0][0]))||akhirBulanISO(bulan);return`<span class="layanan-blue">${labelDaftarVaksinHTML(a,pemberianPadaBulan(a,bulan)||'-',tgl)}</span>`}if(st==='BATAL')return`<span class="layanan-orange">${properCase(alasanBatalPadaBulan(a,bulan)||alasanBatal(a))}</span>`;if(st==='BELUM')return'<span class="layanan-red">Mangkir</span>';return''}
+    function ketAnak(a){return properCase(getStatus(a))}
+    function kopHTML(){return`<div class="kop-report-wrap"><img class="kop-logo" src="https://upload.wikimedia.org/wikipedia/commons/b/b7/Official_Logo_of_Sidenreng_Rappang_Regency.png" onerror="this.style.display='none'"><div class="kop-report"><div>PEMERINTAH KABUPATEN SIDENRENG RAPPANG</div><div>DINAS KESEHATAN</div><div class="unit">UPT PUSKESMAS LAWAWOI</div><div class="addr">Jl. Jend. Sudirman Kelurahan Uluale, Kec. Watang Pulu</div></div></div><div class="kop-line"></div>`}
+    function reportActions(){return`<div class="report-actions"><button class="print-btn" onclick="window.print()">🖨 Print Laporan</button></div>`}
+    function layananCountRow(c){return`<tr class="total-row"><td><b>TOTAL DESA</b></td><td>${c.TOTAL}</td><td>${c.LENGKAP}</td><td>${c.BELUM}</td><td>${c.SUNTIK}</td><td>${c.BATAL}</td></tr>`}
+    function renderTabelAnak(list,jenis='SUNTIK'){const judulKolom=jenis==='SUNTIK'?'Imunisasi':'Alasan Batal';return`<table class="report-table"><thead><tr><th style="width:28px">No</th><th style="width:24%">Nama Anak</th><th style="width:34px">L/P</th><th style="width:24%">Nama Orang Tua</th><th style="width:100px">Tgl Lahir (Umur)</th><th style="width:24%">${judulKolom}</th><th style="width:72px">Status</th></tr></thead><tbody>${(list||[]).map((a,i)=>`<tr><td style="text-align:center;vertical-align:middle">${i+1}</td><td style="white-space:nowrap;vertical-align:middle"><b>${properCase(a.NAMA)}</b></td><td style="text-align:center;vertical-align:middle;font-weight:900">${jkText(a.JK)}</td><td style="white-space:nowrap;vertical-align:middle">${properCase(a.ORTU||'-')}</td><td style="text-align:center;vertical-align:middle">${formatTanggalIndonesia(a.TGL_LAHIR)} (${a.UMUR_BULAN})</td><td style="text-align:center;vertical-align:middle">${isiKolomPemberian(a)}</td><td style="text-align:center;vertical-align:middle"><span class="status-warna ${getStatus(a)}">${ketAnak(a)}</span></td></tr>`).join('')}</tbody></table>`}
+    function renderTandaTangan(){return`<div class="ttd-row"><div>Mengetahui,<br>Kepala Puskesmas<div class="ttd-name">Muhammad Ali, S.ST, Ns.</div><div>NIP. 19721111 200502 1 003</div></div><div>Petugas Imunisasi<div class="ttd-name">Baharuddin, S.Kep., Ns.</div><div>NIP. 19800201 200502 1 003</div></div></div>`}
+    function renderLaporanDesaHTML(){const bulan=getBulanLaporan();const bulanText=formatBulanLaporan(bulan);const desa=document.getElementById('pilihDesaLaporan')?.value||desaList[0];const posFilter=getPosyanduLaporan();const labelPos=posFilter==='SEMUA'?'Semua Posyandu':posFilter;const lap=buildLaporanDesa(desa);if(!lap)return'<div class="placeholder">Data desa/posyandu tidak ditemukan. Tekan ↻ Sync jika data bulan ini belum masuk ke IndexedDB lokal.</div>';const posRows=Object.values(lap.posyandu).sort((a,b)=>String(a.nama).localeCompare(String(b.nama),'id',{numeric:true,sensitivity:'base'})).map(p=>`<tr><td>${p.nama}</td><td>${p.layanan.TOTAL}</td><td>${p.layanan.LENGKAP}</td><td>${p.layanan.BELUM}</td><td>${p.layanan.SUNTIK}</td><td>${p.layanan.BATAL}</td></tr>`).join('')+layananCountRow(lap.layanan);const rincian=Object.values(lap.posyandu).sort((a,b)=>String(a.nama).localeCompare(String(b.nama),'id',{numeric:true,sensitivity:'base'})).map(p=>{const suntik=[],batalBelum=[];p.anak.forEach(a=>{const st=getStatusLayananBulan(a,bulan);if(st==='SUNTIK')suntik.push(a);if(st==='BATAL'||st==='BELUM')batalBelum.push(a)});suntik.sort(urutNoBuku);batalBelum.sort(urutNoBuku);return`<div class="pos-report"><div class="pos-report-head"><span>Posyandu ${p.nama}</span><span>Total: ${p.total} Anak</span></div>${suntik.length?`<div><span class="status-label SUNTIK">IMUNISASI YA (${suntik.length} anak)</span>${renderTabelAnak(suntik,'SUNTIK')}</div>`:''}${batalBelum.length?`<div><span class="status-label BATAL">IMUNISASI TIDAK / BELUM MANGKIR (${batalBelum.length} anak)</span>${renderTabelAnak(batalBelum,'BATAL')}</div>`:''}${(!suntik.length&&!batalBelum.length)?'<div class="child-card">Tidak ada sasaran suntik, batal, atau mangkir pada periode ini.</div>':''}</div>`}).join('');return`${reportActions()}<div class="report-paper" id="areaCetakLaporan">${kopHTML()}<div class="report-meta-top">Tanggal Cetak : ${formatTanggalCetak()}</div><div class="report-title">LAPORAN HASIL IMUNISASI DESA</div><div class="report-subtitle"><b>Desa:</b> ${lap.desa} &nbsp; • &nbsp; <b>Posyandu:</b> ${labelPos} &nbsp; • &nbsp; <b>Bulan Layanan:</b> ${bulanText}</div><div class="report-top"><div class="report-stat total"><small>Total Sasaran</small><div class="num">${lap.layanan.TOTAL}</div></div><div class="report-stat lengkap"><small>Lengkap</small><div class="num">${lap.layanan.LENGKAP}</div></div><div class="report-stat belum"><small>Belum/Mangkir</small><div class="num">${lap.layanan.BELUM}</div></div><div class="report-stat suntik"><small>Imunisasi Ya</small><div class="num">${lap.layanan.SUNTIK}</div></div><div class="report-stat batal"><small>Imunisasi Tidak</small><div class="num">${lap.layanan.BATAL}</div></div></div><div class="report-section">I. REKAPITULASI LAYANAN PER POSYANDU</div><table class="report-table"><thead><tr><th>Posyandu</th><th>Total Sasaran</th><th>Lengkap</th><th>Belum/Mangkir</th><th>Imunisasi Ya</th><th>Imunisasi Tidak</th></tr></thead><tbody>${posRows}</tbody></table><div class="report-section">II. RINCIAN NAMA SASARAN PER POSYANDU</div>${rincian}${renderTandaTangan()}</div>`}
+    function puskesmasRows(items){return Object.values(items||{}).sort((a,b)=>String(a.nama).localeCompare(String(b.nama),'id',{numeric:true,sensitivity:'base'})).map(d=>{d.status=safeCounter(d.status);const posRows=Object.values(d.posyandu||{}).sort((a,b)=>String(a.nama).localeCompare(String(b.nama),'id',{numeric:true,sensitivity:'base'})).map(p=>{p.status=safeCounter(p.status);return`<tr><td>- ${p.nama}</td><td style="text-align:center">${p.status.HIJAU}</td><td style="text-align:center">${p.status.KUNING}</td><td style="text-align:center">${p.status.MERAH}</td><td style="text-align:center">${p.status.HITAM}</td><td style="text-align:center">${p.total}</td><td style="text-align:center">${formatPct(p.pidl)}</td><td style="text-align:center"><span class="status-warna ${p.kategori}">${p.kategori}</span></td></tr>`}).join('');return`<tr class="total-row"><td>${d.nama}</td><td style="text-align:center">${d.status.HIJAU}</td><td style="text-align:center">${d.status.KUNING}</td><td style="text-align:center">${d.status.MERAH}</td><td style="text-align:center">${d.status.HITAM}</td><td style="text-align:center">${d.total}</td><td style="text-align:center">${formatPct(d.pidl)}</td><td style="text-align:center"><span class="status-warna ${d.kategori}">${d.kategori}</span></td></tr>${posRows}`}).join('')}
+    function warnaEWS(nilai){if(nilai>=90)return'#10b981';if(nilai>=70)return'#f59e0b';if(nilai>=50)return'#ef4444';return'#16213a'}
+    function renderGrafikEWS(desa){const urut=Object.values(desa||{}).sort((a,b)=>b.pidl-a.pidl);return`<div class="ews-chart"><div class="ews-chart-title">GRAFIK API PER DESA</div>${urut.map(d=>`<div class="ews-bar-row"><div class="ews-bar-label">${d.nama}</div><div class="ews-bar-track"><div class="ews-bar-fill" style="width:${Math.max(d.pidl,3)}%;background:${warnaEWS(d.pidl)}">${formatPct(d.pidl)}</div></div><div class="ews-bar-value" style="color:${warnaEWS(d.pidl)}">${d.kategori}</div></div>`).join('')}</div>`}
+    function renderLaporanPuskesmasHTML(){const bulanText=formatBulanLaporan(getBulanLaporan());const kelompok=getKelompokUmurLaporan();const judulKelompok=namaKelompokUmurLaporan(kelompok);const lap=buildLaporanPuskesmas(true);lap.status=safeCounter(lap.status);const totalRow=`<tr class="total-row"><td>TOTAL UPT PUSKESMAS LAWAWOI</td><td style="text-align:center">${lap.status.HIJAU}</td><td style="text-align:center">${lap.status.KUNING}</td><td style="text-align:center">${lap.status.MERAH}</td><td style="text-align:center">${lap.status.HITAM}</td><td style="text-align:center">${lap.total}</td><td style="text-align:center">${formatPct(lap.pidl)}</td><td style="text-align:center"><span class="status-warna ${lap.kategori}">${lap.kategori}</span></td></tr>`;return`${reportActions()}<div class="report-paper" id="areaCetakLaporan">${kopHTML()}<div class="report-meta-top">Tanggal Cetak : ${formatTanggalCetak()}</div><div class="report-title">REKAPITULASI EWS PUSKESMAS</div><div class="report-subtitle"><b>Bulan-Tahun Laporan:</b> ${bulanText} &nbsp; • &nbsp; <b>Kelompok:</b> ${judulKelompok}<br><span style="font-size:10px">Status wilayah dihitung dari warna risiko sasaran pada akhir bulan laporan.</span></div>${renderGrafikEWS(lap.desa)}<table class="report-table"><thead><tr><th rowspan="2">WILAYAH KERJA (DESA/POSYANDU)</th><th colspan="4">STATUS RISIKO SASARAN</th><th rowspan="2">TOTAL</th><th rowspan="2">API/P-IDL (%)</th><th rowspan="2">STATUS WILAYAH</th></tr><tr><th>HIJAU</th><th>KUNING</th><th>MERAH</th><th>HITAM</th></tr></thead><tbody>${puskesmasRows(lap.desa)}${totalRow}</tbody></table>${renderTandaTangan()}</div>`}
+    function hasilPuskesmasRows(items){return Object.values(items||{}).sort((a,b)=>String(a.nama).localeCompare(String(b.nama),'id',{numeric:true,sensitivity:'base'})).map(d=>`<tr class="total-row"><td>${d.nama}</td><td style="text-align:center">${d.layanan.TOTAL}</td><td style="text-align:center">${d.layanan.LENGKAP}</td><td style="text-align:center;color:#2563eb;font-weight:900">${d.layanan.SUNTIK}</td><td style="text-align:center;color:#dc2626">${d.layanan.MANGKIR}</td><td style="text-align:center">${d.layanan.SAKIT}</td><td style="text-align:center">${d.layanan.TUNDA}</td><td style="text-align:center">${d.layanan.PINDAH}</td><td style="text-align:center">${d.layanan.MENOLAK}</td><td style="text-align:center;font-weight:900;color:#059669">${formatPct(d.layanan.API)}</td></tr>${Object.values(d.posyandu||{}).sort((a,b)=>String(a.nama).localeCompare(String(b.nama),'id',{numeric:true,sensitivity:'base'})).map(p=>`<tr><td>- ${p.nama}</td><td style="text-align:center">${p.layanan.TOTAL}</td><td style="text-align:center">${p.layanan.LENGKAP}</td><td style="text-align:center;color:#2563eb;font-weight:900">${p.layanan.SUNTIK}</td><td style="text-align:center;color:#dc2626">${p.layanan.MANGKIR}</td><td style="text-align:center">${p.layanan.SAKIT}</td><td style="text-align:center">${p.layanan.TUNDA}</td><td style="text-align:center">${p.layanan.PINDAH}</td><td style="text-align:center">${p.layanan.MENOLAK}</td><td style="text-align:center;font-weight:900;color:#059669">${formatPct(p.layanan.API)}</td></tr>`).join('')}`).join('')}
+    const kolomVaksin=['BCG','OPV','DPT','PCV','ROTA','IPV','MR'];
+    function counterVaksinKosong(){return{HB0:0,BCG:0,OPV:0,DPT:0,PCV:0,ROTA:0,IPV:0,MR:0}}
+    function tambahHitungDosisVaksin(r,v){v=normalizeAntigen(v);if(v.startsWith('HB0'))r.HB0++;else if(v.startsWith('BCG'))r.BCG++;else if(v.startsWith('OPV'))r.OPV++;else if(v.startsWith('DPT'))r.DPT++;else if(v.startsWith('PCV'))r.PCV++;else if(v.startsWith('ROTA'))r.ROTA++;else if(v.startsWith('IPV'))r.IPV++;else if(v.startsWith('MR'))r.MR++}
+    function hitungPemakaianVaksin(data,bulan=getBulanLaporan()){const r=counterVaksinKosong();(data||[]).forEach(a=>{const dosis=riwayatImunisasiBulan(a,bulan).flatMap(row=>String(row[1]||'').split(',').map(x=>x.trim()).filter(Boolean));dosis.forEach(v=>tambahHitungDosisVaksin(r,v));if(!dosis.length&&String(a.TGL_PELAYANAN||'').slice(0,7)===bulan&&a.INPUT_BULAN==='SUNTIK'){String(a.VAKSIN_BULAN_INI||'').split(',').map(x=>x.trim()).filter(Boolean).forEach(v=>tambahHitungDosisVaksin(r,v))}});return r}
+    function buildLaporanPemakaianVaksin(){const bulan=getBulanLaporan();const data=dataLaporanAktif(false);const mesin=buildMesinRekap(data);const hasil={desa:{},total:hitungPemakaianVaksin(data,bulan)};Object.entries(mesin.desa).forEach(([nama,d])=>{hasil.desa[nama]={...d,vaksin:hitungPemakaianVaksin(d.anak,bulan)};Object.entries(d.posyandu).forEach(([pnama,p])=>{hasil.desa[nama].posyandu[pnama]={...p,vaksin:hitungPemakaianVaksin(p.anak,bulan)}})});return hasil}
+    function renderRingkasanVaksin(v){return`<div class="vaksin-summary">${kolomVaksin.map(k=>`<div class="vaksin-card"><small>${k}</small><div class="num">${v[k]}</div></div>`).join('')}</div>`}
+    function vaksinCells(v){return kolomVaksin.map(k=>`<td style="text-align:center">${v[k]}</td>`).join('')}
+    function vaksinRows(items){return Object.values(items||{}).sort((a,b)=>String(a.nama).localeCompare(String(b.nama),'id',{numeric:true,sensitivity:'base'})).map(d=>`<tr class="total-row"><td>${d.nama}</td>${vaksinCells(d.vaksin)}</tr>${Object.values(d.posyandu||{}).sort((a,b)=>String(a.nama).localeCompare(String(b.nama),'id',{numeric:true,sensitivity:'base'})).map(p=>`<tr><td>- ${p.nama}</td>${vaksinCells(p.vaksin)}</tr>`).join('')}`).join('')}
+    function renderLaporanPemakaianVaksinHTML(){const bulanText=formatBulanLaporan(getBulanLaporan());const lap=buildLaporanPemakaianVaksin();return`${reportActions()}<div class="report-paper" id="areaCetakLaporan">${kopHTML()}<div class="report-meta-top">Tanggal Cetak : ${formatTanggalCetak()}</div><div class="report-title">LAPORAN PEMAKAIAN VAKSIN</div><div class="report-subtitle"><b>Bulan Pelayanan:</b> ${bulanText}<br><span style="font-size:10px">Jumlah dihitung per dosis dari riwayat imunisasi pada bulan laporan.</span></div><div class="report-section">REKAPAN JUMLAH PEMAKAIAN VAKSIN</div>${renderRingkasanVaksin(lap.total)}<table class="report-table"><thead><tr><th>WILAYAH KERJA (DESA/POSYANDU)</th>${kolomVaksin.map(k=>`<th>${k}</th>`).join('')}</tr></thead><tbody>${vaksinRows(lap.desa)}<tr class="total-row"><td>TOTAL PUSKESMAS LAWAWOI</td>${vaksinCells(lap.total)}</tr></tbody></table>${renderTandaTangan()}</div>`}
+    function kolomKejarAktif(total){return daftarAntigenRiwayat().filter(k=>Number(total?.[k]||0)>0)}
+    function counterKejarKosong(){const r={};daftarAntigenRiwayat().forEach(k=>r[k]=0);return r}
+    function tambahKejar(counter,v){v=normalizeAntigen(v);if(counter[v]!==undefined)counter[v]++}
+    function isRiwayatKejar(a,tanggal,v){return klasifikasiPemberian(getAnakUntukTanggalLayanan(a,tanggal),normalizeAntigen(v)).isKejar}
+    function dataKejarBulan(){const bulan=getBulanLaporan(),desa=document.getElementById('pilihDesaLaporan')?.value||'SEMUA',pos=getPosyanduLaporan();return dataLaporanAktif(false).filter(a=>desa==='SEMUA'||a.DESA===desa).filter(a=>pos==='SEMUA'||a.POSYANDU===pos).flatMap(a=>riwayatImunisasiBulan(a,bulan).flatMap(r=>{const tgl=ubahTanggalKeISO(r[0]);return String(r[1]||'').split(',').map(x=>x.trim()).filter(Boolean).map(v=>normalizeAntigen(v)).filter(v=>isRiwayatKejar(a,tgl,v)).map(v=>({anak:a,tanggal:tgl,vaksin:v}))}))}
+    function buildLaporanKejar(){const data=dataKejarBulan();const hasil={total:counterKejarKosong(),desa:{},data};data.forEach(x=>{const desa=x.anak.DESA||'TANPA DESA',pos=x.anak.POSYANDU||'TANPA POSYANDU';tambahKejar(hasil.total,x.vaksin);if(!hasil.desa[desa])hasil.desa[desa]={nama:desa,vaksin:counterKejarKosong(),posyandu:{},data:[]};tambahKejar(hasil.desa[desa].vaksin,x.vaksin);hasil.desa[desa].data.push(x);if(!hasil.desa[desa].posyandu[pos])hasil.desa[desa].posyandu[pos]={nama:pos,vaksin:counterKejarKosong(),data:[]};tambahKejar(hasil.desa[desa].posyandu[pos].vaksin,x.vaksin);hasil.desa[desa].posyandu[pos].data.push(x)});return hasil}
+    function kejarCells(v,kolom){return kolom.map(k=>`<td style="text-align:center">${v[k]||0}</td>`).join('')}
+    function kejarRows(items,kolom){return Object.values(items||{}).sort((a,b)=>String(a.nama).localeCompare(String(b.nama),'id',{numeric:true,sensitivity:'base'})).map(d=>`<tr class="total-row"><td>${d.nama}</td>${kejarCells(d.vaksin,kolom)}</tr>${Object.values(d.posyandu||{}).sort((a,b)=>String(a.nama).localeCompare(String(b.nama),'id',{numeric:true,sensitivity:'base'})).map(p=>`<tr><td>- ${p.nama}</td>${kejarCells(p.vaksin,kolom)}</tr>`).join('')}`).join('')}
+    function renderRingkasanKejar(v,kolom){return`<div class="vaksin-summary">${kolom.map(k=>`<div class="vaksin-card"><small>${k}</small><div class="num">${v[k]||0}</div></div>`).join('')}</div>`}
+    function renderDaftarAnakKejar(list){const data=[...(list||[])].sort((a,b)=>String(a.anak.POSYANDU).localeCompare(String(b.anak.POSYANDU),'id',{numeric:true,sensitivity:'base'})||urutNoBuku(a.anak,b.anak));return`<table class="report-table"><thead><tr><th>No</th><th>Posyandu</th><th>Nama Anak</th><th>L/P</th><th>Tgl Lahir (Umur)</th><th>Orang Tua</th><th>Tanggal</th><th>Antigen Kejar</th></tr></thead><tbody>${data.map((x,i)=>`<tr><td style="text-align:center">${i+1}</td><td>${x.anak.POSYANDU||'-'}</td><td><b>${properCase(x.anak.NAMA)}</b></td><td style="text-align:center">${jkText(x.anak.JK)}</td><td style="text-align:center;white-space:nowrap">${formatTanggalIndonesia(x.anak.TGL_LAHIR)}<br><small>${hitungUmurBulanTanggal(x.anak.TGL_LAHIR,x.tanggal)} bln</small></td><td>${properCase(x.anak.ORTU||'-')}</td><td style="text-align:center">${formatTanggalIndonesia(x.tanggal)}</td><td style="text-align:center;font-weight:900;color:#dc2626">${x.vaksin}</td></tr>`).join('')||'<tr><td colspan="8" style="text-align:center">Tidak ada imunisasi kejar pada filter ini.</td></tr>'}</tbody></table>`}
+    function renderLaporanKejarHTML(){const bulanText=formatBulanLaporan(getBulanLaporan());const desa=document.getElementById('pilihDesaLaporan')?.value||'SEMUA';const pos=getPosyanduLaporan();const lap=buildLaporanKejar();const kolom=kolomKejarAktif(lap.total);const labelDesa=desa==='SEMUA'?'Semua Desa/Kelurahan':desa;const labelPos=pos==='SEMUA'?'Semua Posyandu':pos;if(!kolom.length)return`${reportActions()}<div class="report-paper" id="areaCetakLaporan">${kopHTML()}<div class="report-meta-top">Tanggal Cetak : ${formatTanggalCetak()}</div><div class="report-title">LAPORAN IMUNISASI KEJAR</div><div class="report-subtitle"><b>Bulan Pelayanan:</b> ${bulanText} &nbsp; • &nbsp; <b>Desa:</b> ${labelDesa} &nbsp; • &nbsp; <b>Posyandu:</b> ${labelPos}</div><div class="placeholder">Tidak ada imunisasi kejar pada filter ini.</div>${renderTandaTangan()}</div>`;return`${reportActions()}<div class="report-paper" id="areaCetakLaporan">${kopHTML()}<div class="report-meta-top">Tanggal Cetak : ${formatTanggalCetak()}</div><div class="report-title">LAPORAN IMUNISASI KEJAR</div><div class="report-subtitle"><b>Bulan Pelayanan:</b> ${bulanText} &nbsp; • &nbsp; <b>Desa:</b> ${labelDesa} &nbsp; • &nbsp; <b>Posyandu:</b> ${labelPos}<br><span style="font-size:10px">Kolom antigen hanya ditampilkan jika ada dosis kejar pada bulan laporan.</span></div><div class="report-section">REKAPAN JUMLAH IMUNISASI KEJAR</div>${renderRingkasanKejar(lap.total,kolom)}<table class="report-table"><thead><tr><th>WILAYAH KERJA (DESA/POSYANDU)</th>${kolom.map(k=>`<th>${k}</th>`).join('')}</tr></thead><tbody>${kejarRows(lap.desa,kolom)}<tr class="total-row"><td>TOTAL PUSKESMAS LAWAWOI</td>${kejarCells(lap.total,kolom)}</tr></tbody></table><div class="report-section">DAFTAR NAMA ANAK IMUNISASI KEJAR</div>${renderDaftarAnakKejar(lap.data)}${renderTandaTangan()}</div>`}
+    function kategoriEWS(nilai){if(nilai>=90)return'HIJAU';if(nilai>=70)return'KUNING';if(nilai>=50)return'MERAH';return'HITAM'}
+    function renderGrafikHasilPuskesmas(desa){const urut=Object.values(desa||{}).sort((a,b)=>b.layanan.API-a.layanan.API);return`<div class="ews-chart"><div class="ews-chart-title">GRAFIK CAPAIAN IMUNISASI PER DESA</div>${urut.map(d=>{const kategori=kategoriEWS(d.layanan.API);return`<div class="ews-bar-row"><div class="ews-bar-label">${d.nama}</div><div class="ews-bar-track"><div class="ews-bar-fill" style="width:${Math.max(d.layanan.API,3)}%;background:${warnaEWS(d.layanan.API)}">${formatPct(d.layanan.API)}</div></div><div class="ews-bar-value" style="color:${warnaEWS(d.layanan.API)}">${kategori}</div></div>`}).join('')}</div>`}
+    function renderLaporanHasilPuskesmasHTML(){const bulanText=formatBulanLaporan(getBulanLaporan());const lap=buildLaporanPuskesmas(false);const t=lap.totalLayanan||hitungCapaianLayanan(lap.anak||[]);return`${reportActions()}<div class="report-paper" id="areaCetakLaporan">${kopHTML()}<div class="report-meta-top">Tanggal Cetak : ${formatTanggalCetak()}</div><div class="report-title">REKAPITULASI HASIL IMUNISASI PUSKESMAS</div><div class="report-subtitle">Bulan Pelayanan: ${bulanText}</div>${renderGrafikHasilPuskesmas(lap.desa)}<table class="report-table"><thead><tr><th rowspan="2">WILAYAH KERJA (DESA/POSYANDU)</th><th rowspan="2">TOTAL SASARAN</th><th colspan="7">HASIL PELAYANAN / STATUS</th><th rowspan="2">% CAPAIAN<br>(Lengkap+Suntik)</th></tr><tr><th>Lengkap</th><th>Disuntik</th><th>Mangkir</th><th>Sakit</th><th>Tunda</th><th>Pindah</th><th>Menolak</th></tr></thead><tbody>${hasilPuskesmasRows(lap.desa)}<tr class="total-row"><td>TOTAL PUSKESMAS LAWAWOI</td><td style="text-align:center">${t.TOTAL}</td><td style="text-align:center">${t.LENGKAP}</td><td style="text-align:center;color:#2563eb;font-weight:900">${t.SUNTIK}</td><td style="text-align:center;color:#dc2626">${t.MANGKIR}</td><td style="text-align:center">${t.SAKIT}</td><td style="text-align:center">${t.TUNDA}</td><td style="text-align:center">${t.PINDAH}</td><td style="text-align:center">${t.MENOLAK}</td><td style="text-align:center;font-weight:900;color:#059669">${formatPct(t.API)}</td></tr></tbody></table>${renderTandaTangan()}</div>`}
+    function bulanAkhirLaporan(){return document.getElementById('bulanSampaiLaporan')?.value||getBulanLaporan()}
+    function awalBulanISO(bulan){const [y,m]=String(bulan||getBulanBerjalan()).split('-').map(Number);return `${y}-${String(m).padStart(2,'0')}-01`}
+    function bulanDalamPeriode(tanggal,mulai=getBulanLaporan(),sampai=bulanAkhirLaporan()){const b=String(tanggal||'').slice(0,7);return b>=mulai&&b<=sampai}
+    function persenIDLIBL(x,y){return x?y/x*100:0}
+    function warnaCakupan(p){if(p>=90)return'HIJAU';if(p>=75)return'KUNING';if(p>=60)return'MERAH';return'HITAM'}
+    function anakDalamUmurPeriode(a,min,max,mulai=getBulanLaporan(),sampai=bulanAkhirLaporan()){const start=awalBulanISO(mulai),end=akhirBulanISO(sampai);const u1=hitungUmurBulanTanggal(a.TGL_LAHIR,start),u2=hitungUmurBulanTanggal(a.TGL_LAHIR,end);return u2>=min&&u1<max}
+    function tanggalSampaiAkhirPeriode(tanggal,sampai=bulanAkhirLaporan()){return !!tanggal&&String(tanggal).slice(0,10)<=akhirBulanISO(sampai)}
+    function dataIDLIBLFilter(){const desa=document.getElementById('pilihDesaLaporan')?.value||'SEMUA',pos=getPosyanduLaporan();return anakData.filter(a=>isNoBukuValid(a.No_Buku)).filter(a=>desa==='SEMUA'||a.DESA===desa).filter(a=>pos==='SEMUA'||a.POSYANDU===pos)}
+    function rekapIDLIBL(data){const mulai=getBulanLaporan(),sampai=bulanAkhirLaporan();const r={sasaranIDL:0,idl:0,pIDL:0,sasaranIBL:0,ibl:0,pIBL:0,warnaIDL:'HITAM',warnaIBL:'HITAM'};(data||[]).forEach(a=>{perbaruiStatusIDL_IBL(a);const masukIDL=anakDalamUmurPeriode(a,9,12,mulai,sampai);const masukIBL=anakDalamUmurPeriode(a,19,24,mulai,sampai);if(masukIDL){r.sasaranIDL++;if(a.Tanggal_IDL)r.idl++}if(masukIBL){r.sasaranIBL++;if(a.Tanggal_IBL)r.ibl++}});r.pIDL=persenIDLIBL(r.sasaranIDL,r.idl);r.pIBL=persenIDLIBL(r.sasaranIBL,r.ibl);r.warnaIDL=warnaCakupan(r.pIDL);r.warnaIBL=warnaCakupan(r.pIBL);return r}
+    function buildLaporanIDLIBL(){const data=dataIDLIBLFilter();const hasil={total:rekapIDLIBL(data),desa:{},data};data.forEach(a=>{const desa=a.DESA||'TANPA DESA',pos=a.POSYANDU||'TANPA POSYANDU';if(!hasil.desa[desa])hasil.desa[desa]={nama:desa,data:[],posyandu:{}};hasil.desa[desa].data.push(a);if(!hasil.desa[desa].posyandu[pos])hasil.desa[desa].posyandu[pos]={nama:pos,data:[]};hasil.desa[desa].posyandu[pos].data.push(a)});Object.values(hasil.desa).forEach(d=>{d.rekap=rekapIDLIBL(d.data);Object.values(d.posyandu).forEach(p=>p.rekap=rekapIDLIBL(p.data))});return hasil}
+    function rowIDLIBL(label,r,cls=''){return`<tr class="${cls}"><td>${label}</td><td style="text-align:center">${r.sasaranIDL}</td><td style="text-align:center">${r.idl}</td><td style="text-align:center"><span class="status-warna ${r.warnaIDL}">${formatPct(r.pIDL)}</span></td><td style="text-align:center">${r.sasaranIBL}</td><td style="text-align:center">${r.ibl}</td><td style="text-align:center"><span class="status-warna ${r.warnaIBL}">${formatPct(r.pIBL)}</span></td></tr>`}
+    function renderGrafikIDLIBL(lap){const rows=Object.values(lap.desa||{}).sort((a,b)=>b.rekap.pIDL-a.rekap.pIDL);return`<div class="ews-chart"><div class="ews-chart-title">GRAFIK CAKUPAN IDL PER DESA</div>${rows.map(d=>`<div class="ews-bar-row"><div class="ews-bar-label">${d.nama}</div><div class="ews-bar-track"><div class="ews-bar-fill" style="width:${Math.max(d.rekap.pIDL,3)}%;background:${warnaEWS(d.rekap.pIDL)}">${formatPct(d.rekap.pIDL)}</div></div><div class="ews-bar-value" style="color:${warnaEWS(d.rekap.pIDL)}">IBL ${formatPct(d.rekap.pIBL)}</div></div>`).join('')}</div>`}
+    function tabelIDLIBL(lap){const desa=document.getElementById('pilihDesaLaporan')?.value||'SEMUA';if(desa==='SEMUA'){const rows=Object.values(lap.desa).sort((a,b)=>String(a.nama).localeCompare(String(b.nama),'id',{numeric:true,sensitivity:'base'})).map(d=>{const posRows=Object.values(d.posyandu||{}).sort((a,b)=>String(a.nama).localeCompare(String(b.nama),'id',{numeric:true,sensitivity:'base'})).map(p=>rowIDLIBL('- '+p.nama,p.rekap)).join('');return rowIDLIBL(d.nama,d.rekap,'total-row')+posRows}).join('');return rows+rowIDLIBL('TOTAL PUSKESMAS LAWAWOI',lap.total,'total-row')}const d=lap.desa[desa];if(!d)return rowIDLIBL('TOTAL',lap.total,'total-row');const rows=Object.values(d.posyandu).sort((a,b)=>String(a.nama).localeCompare(String(b.nama),'id',{numeric:true,sensitivity:'base'})).map(p=>rowIDLIBL(p.nama,p.rekap)).join('');return rows+rowIDLIBL('TOTAL '+desa,d.rekap,'total-row')}
+    function vaksinKurangIDL(a){return ['BCG','DPT1','DPT2','DPT3','PCV1','PCV2','IPV1','MR1'].filter(v=>!sudah(a,v))}
+    function vaksinKurangIBL(a){return ['PCV3','DPT4','MR2'].filter(v=>!sudah(a,v))}
+    function daftarBelumIDLIBL(lap){const mulai=getBulanLaporan(),sampai=bulanAkhirLaporan();const rows=[];(lap.data||[]).forEach(a=>{perbaruiStatusIDL_IBL(a);if(anakDalamUmurPeriode(a,9,12,mulai,sampai)&&!a.Tanggal_IDL)rows.push({jenis:'Belum IDL',a,kurang:vaksinKurangIDL(a)});if(anakDalamUmurPeriode(a,19,24,mulai,sampai)&&!a.Tanggal_IBL)rows.push({jenis:'Belum IBL',a,kurang:vaksinKurangIBL(a)})});return rows.sort((x,y)=>String(x.a.POSYANDU).localeCompare(String(y.a.POSYANDU),'id',{numeric:true,sensitivity:'base'})||urutNoBuku(x.a,y.a))}
+    function renderTabelBelumIDLIBL(list){return`<table class="report-table"><thead><tr><th>No</th><th>Posyandu</th><th>Nama Anak</th><th>L/P</th><th>Tgl Lahir (Umur)</th><th>Orang Tua</th><th>Vaksin Kurang</th></tr></thead><tbody>${list.map((x,i)=>`<tr><td style="text-align:center">${i+1}</td><td>${x.a.POSYANDU||'-'}</td><td><b>${properCase(x.a.NAMA)}</b></td><td style="text-align:center">${jkText(x.a.JK)}</td><td style="text-align:center">${formatTanggalIndonesia(x.a.TGL_LAHIR)}<br><small>${hitungUmurBulanTanggal(x.a.TGL_LAHIR,akhirBulanISO(bulanAkhirLaporan()))} bln</small></td><td>${properCase(x.a.ORTU||'-')}</td><td>${x.kurang.join(', ')||'-'}</td></tr>`).join('')||'<tr><td colspan="7" style="text-align:center">Tidak ada sasaran pada bagian ini.</td></tr>'}</tbody></table>`}
+    function renderDaftarBelumIDLIBL(lap){const data=daftarBelumIDLIBL(lap);const belumIDL=data.filter(x=>x.jenis==='Belum IDL');const belumIBL=data.filter(x=>x.jenis==='Belum IBL');return`<div class="report-section">A. SASARAN BELUM IDL (${belumIDL.length} anak)</div>${renderTabelBelumIDLIBL(belumIDL)}<div class="report-section">B. SASARAN BELUM IBL (${belumIBL.length} anak)</div>${renderTabelBelumIDLIBL(belumIBL)}`}
+    function renderAksiMigrasiIDLIBL(){return`<div class="report-actions" style="justify-content:space-between;gap:8px;align-items:center"><button class="cancel-btn" style="width:auto;padding:10px 12px" onclick="migrasiTanggalIDLIBL()">↻ Isi Tanggal IDL/IBL Data Lama</button><button class="print-btn" onclick="window.print()">🖨 Print Laporan</button></div>`}
+    function renderLaporanIDLIBLHTML(){const mulai=formatBulanLaporan(getBulanLaporan()),sampai=formatBulanLaporan(bulanAkhirLaporan());const desa=document.getElementById('pilihDesaLaporan')?.value||'SEMUA',pos=getPosyanduLaporan();const lap=buildLaporanIDLIBL();const labelDesa=desa==='SEMUA'?'Semua Desa/Kelurahan':desa,labelPos=pos==='SEMUA'?'Semua Posyandu':pos;return`${renderAksiMigrasiIDLIBL()}<div class="report-paper" id="areaCetakLaporan">${kopHTML()}<div class="report-meta-top">Tanggal Cetak : ${formatTanggalCetak()}</div><div class="report-title">LAPORAN IDL DAN IBL</div><div class="report-subtitle"><b>Periode:</b> ${mulai} s/d ${sampai} &nbsp; • &nbsp; <b>Desa:</b> ${labelDesa} &nbsp; • &nbsp; <b>Posyandu:</b> ${labelPos}<br><span style="font-size:10px">Sasaran IDL: anak usia 9-&lt;12 bulan dalam periode. Cakupan IDL: sasaran yang sudah memiliki Tanggal_IDL. Sasaran IBL: anak usia 19-&lt;24 bulan dalam periode. Cakupan IBL: sasaran yang sudah memiliki Tanggal_IBL.</span></div><div class="report-top"><div class="report-stat total"><small>Sasaran IDL</small><div class="num">${lap.total.sasaranIDL}</div></div><div class="report-stat suntik"><small>Lengkap IDL</small><div class="num">${lap.total.idl}</div></div><div class="report-stat lengkap"><small>% IDL</small><div class="num">${formatPct(lap.total.pIDL)}</div></div><div class="report-stat total"><small>Sasaran IBL</small><div class="num">${lap.total.sasaranIBL}</div></div><div class="report-stat suntik"><small>Lengkap IBL</small><div class="num">${lap.total.ibl}</div></div></div>${desa==='SEMUA'?renderGrafikIDLIBL(lap):''}<div class="report-section">REKAPITULASI IDL DAN IBL</div><table class="report-table"><thead><tr><th>Desa/Posyandu</th><th>Sasaran 9-&lt;12 bln</th><th>Cakupan IDL</th><th>% IDL</th><th>Sasaran 19-&lt;24 bln</th><th>Cakupan IBL</th><th>% IBL</th></tr></thead><tbody>${tabelIDLIBL(lap)}</tbody></table>${desa!=='SEMUA'||pos!=='SEMUA'?`<div class="report-section">DAFTAR NAMA SASARAN BELUM LENGKAP</div>${renderDaftarBelumIDLIBL(lap)}`:''}${renderTandaTangan()}</div>`}
+    function dataBelumASIK(){const bulan=getBulanLaporan(),desa=document.getElementById('pilihDesaLaporan')?.value||'SEMUA',pos=getPosyanduLaporan();return anakData.filter(a=>isNoBukuValid(a.No_Buku)).filter(a=>desa==='SEMUA'||a.DESA===desa).filter(a=>pos==='SEMUA'||a.POSYANDU===pos).map(a=>{const belum=normalisasiVaksinBelumASIK(a.Vaksin_Belum_ASIK||[]);const riwayat=riwayatImunisasiBulan(a,bulan);const vaksinBulan=[...new Set(riwayat.flatMap(r=>String(r[1]||'').split(',').map(x=>normalizeAntigen(x)).filter(Boolean)))];const belumBulan=belum.filter(v=>vaksinBulan.includes(v));const tanggal=riwayat.map(r=>ubahTanggalKeISO(r[0])).filter(Boolean).sort()[0]||a.TGL_PELAYANAN||'';return{a,belum,belumBulan,tanggal}}).filter(x=>x.belum.length).filter(x=>!bulan||x.belumBulan.length||!riwayatImunisasiBulan(x.a,bulan).length).sort((x,y)=>String(x.a.POSYANDU).localeCompare(String(y.a.POSYANDU),'id',{numeric:true,sensitivity:'base'})||urutNoBuku(x.a,y.a))}
+    function renderLaporanBelumASIKHTML(){const bulanText=formatBulanLaporan(getBulanLaporan());const desa=document.getElementById('pilihDesaLaporan')?.value||'SEMUA',pos=getPosyanduLaporan();const labelDesa=desa==='SEMUA'?'Semua Desa/Kelurahan':desa,labelPos=pos==='SEMUA'?'Semua Posyandu':pos;const data=dataBelumASIK();return`${reportActions()}<div class="report-paper" id="areaCetakLaporan"><div class="report-title" style="text-decoration:none">LAPORAN BELUM INPUT ASIK</div><div class="report-subtitle"><b>Bulan Pelayanan:</b> ${bulanText} &nbsp; • &nbsp; <b>Desa:</b> ${labelDesa} &nbsp; • &nbsp; <b>Posyandu:</b> ${labelPos}<br><span style="font-size:10px">Daftar kerja operator untuk memasukkan imunisasi dari SIPAKAINGE yang belum tercatat di ASIK.</span></div><table class="report-table"><thead><tr><th>No</th><th>Tanggal Pelayanan</th><th>ID ASIK</th><th>Posyandu</th><th>No Buku</th><th>Nama Anak</th><th>Orang Tua</th><th>Tgl Lahir</th><th>Tgl BCG</th><th>Vaksin Belum ASIK</th></tr></thead><tbody>${data.map((x,i)=>`<tr><td style="text-align:center">${i+1}</td><td style="text-align:center;white-space:nowrap">${formatTanggalIndonesia(x.tanggal)}</td><td style="text-align:center">${fieldBackup(x.a,['ID_ASIK','Id_Asik','id_asik'])||'-'}</td><td>${x.a.POSYANDU||'-'}</td><td style="text-align:center">${x.a.No_Buku||'-'}</td><td><b>${properCase(x.a.NAMA)}</b></td><td>${properCase(x.a.ORTU||'-')}</td><td style="text-align:center;white-space:nowrap">${formatTanggalIndonesia(x.a.TGL_LAHIR)}</td><td style="text-align:center;white-space:nowrap">${formatTanggalIndonesia(getTanggalAntigen(x.a,'BCG'))}</td><td style="font-weight:900;color:#dc2626">${(x.belumBulan.length?x.belumBulan:x.belum).join(', ')}</td></tr>`).join('')||'<tr><td colspan="10" style="text-align:center">Tidak ada data belum input ASIK pada filter ini.</td></tr>'}</tbody></table></div>`}
+    function renderLaporan(){resetAnalisaCache();isiDropdownDesaLaporan();isiDropdownPosyanduLaporan();const bulanBox=document.getElementById('bulanLaporan');if(bulanBox&&!bulanBox.value)bulanBox.value=getBulanBerjalan();const sampaiBox=document.getElementById('bulanSampaiLaporan');if(sampaiBox&&!sampaiBox.value)sampaiBox.value=bulanBox?.value||getBulanBerjalan();const jenis=document.getElementById('jenisLaporan')?.value||'HASIL_PUSKESMAS';const boxSampai=document.getElementById('boxBulanSampaiLaporan');const boxDesa=document.getElementById('boxDesaLaporan');const boxPos=document.getElementById('boxPosyanduLaporan');const boxKelompok=document.getElementById('boxKelompokUmurLaporan');if(boxSampai)boxSampai.style.display=(jenis==='IDL_IBL')?'block':'none';if(boxDesa)boxDesa.style.display=(jenis==='DESA'||jenis==='KEJAR'||jenis==='IDL_IBL'||jenis==='ASIK')?'block':'none';if(boxPos)boxPos.style.display=(jenis==='DESA'||jenis==='KEJAR'||jenis==='IDL_IBL'||jenis==='ASIK')?'block':'none';if(boxKelompok)boxKelompok.style.display=(jenis==='PUSKESMAS')?'block':'none';const target=document.getElementById('laporanPreview');if(!target)return;if(jenis==='HASIL_PUSKESMAS')target.innerHTML=renderLaporanHasilPuskesmasHTML();else if(jenis==='DESA')target.innerHTML=renderLaporanDesaHTML();else if(jenis==='PUSKESMAS')target.innerHTML=renderLaporanPuskesmasHTML();else if(jenis==='VAKSIN')target.innerHTML=renderLaporanPemakaianVaksinHTML();else if(jenis==='KEJAR')target.innerHTML=renderLaporanKejarHTML();else if(jenis==='IDL_IBL')target.innerHTML=renderLaporanIDLIBLHTML();else if(jenis==='ASIK')target.innerHTML=renderLaporanBelumASIKHTML();simpanStateUI()}
+
+    const UI_STATE_KEY='SIPAKAINGE_UI_STATE_V1';
+    let uiStateDipulihkan=false;
+    let sedangPulihkanState=false;
+    let stateUISiap=false;
+    function simpanStateUI(){
+      if(sedangPulihkanState||!stateUISiap)return;
+      try{
+        const aktif=document.querySelector('.view.active')?.id?.replace('view','')||'Dashboard';
+        const state={
+          halaman:aktif,
+          kategori:kategoriAktif,
+          openDesa:openDesa,
+          searchText:searchText,
+          inputFilter:inputFilter,
+          openInputId:openInputId,
+          posyandu:document.getElementById('filterPosyandu')?.value||'SEMUA',
+          bulanLayanan:document.getElementById('bulanLayananInput')?.value||getBulanBerjalan(),
+          cariInput:document.getElementById('cariInput')?.value||'',
+          bulanLaporan:document.getElementById('bulanLaporan')?.value||getBulanBerjalan(),
+          jenisLaporan:document.getElementById('jenisLaporan')?.value||'DESA',
+          desaLaporan:document.getElementById('pilihDesaLaporan')?.value||'',
+          posLaporan:document.getElementById('pilihPosyanduLaporan')?.value||'SEMUA',
+          kelompokLaporan:document.getElementById('kelompokUmurLaporan')?.value||'TOTAL',
+          scrollY:window.scrollY||0,
+          waktu:new Date().toISOString()
+        };
+        localStorage.setItem(UI_STATE_KEY,JSON.stringify(state));
+      }catch(e){console.warn('Gagal simpan state UI',e)}
+    }
+    function bacaStateUI(){
+      try{return JSON.parse(localStorage.getItem(UI_STATE_KEY)||'{}')||{}}
+      catch(e){return{}}
+    }
+    function pilihNavHalaman(halaman){
+      const map={Dashboard:0,Input:1,Cari:2,Laporan:3};
+      return document.querySelectorAll('.nav')[map[halaman]??0]||null;
+    }
+    function pulihkanStateUI(){
+      if(uiStateDipulihkan)return;
+      const s=bacaStateUI();
+      uiStateDipulihkan=true;
+      sedangPulihkanState=true;
+      stateUISiap=false;
+      if(!s||!Object.keys(s).length){
+        sedangPulihkanState=false;
+        stateUISiap=true;
+        return;
+      }
+
+      kategoriAktif=s.kategori||kategoriAktif||'SEMUA';
+      openDesa=s.openDesa||'';
+      searchText=s.searchText||'';
+      inputFilter=s.inputFilter||inputFilter||'BELUM';
+      openInputId=s.openInputId||'';
+
+      const searchEl=document.getElementById('searchInput');
+      if(searchEl)searchEl.value=searchText;
+      const bulanEl=document.getElementById('bulanLayananInput');
+      if(bulanEl&&s.bulanLayanan)bulanEl.value=s.bulanLayanan;
+      const cariEl=document.getElementById('cariInput');
+      if(cariEl)cariEl.value=s.cariInput||'';
+      const posEl=document.getElementById('filterPosyandu');
+      if(posEl&&s.posyandu&&[...posEl.options].some(o=>o.value===s.posyandu))posEl.value=s.posyandu;
+
+      const bl=document.getElementById('bulanLaporan');
+      if(bl&&s.bulanLaporan)bl.value=s.bulanLaporan;
+      const jl=document.getElementById('jenisLaporan');
+      if(jl&&s.jenisLaporan)jl.value=s.jenisLaporan;
+      const kl=document.getElementById('kelompokUmurLaporan');
+      if(kl&&s.kelompokLaporan)kl.value=s.kelompokLaporan;
+
+      document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
+      const tabIndex=kategoriAktif==='SEMUA'?0:kategoriAktif==='BAYI'?1:kategoriAktif==='BADUTA'?2:3;
+      document.querySelectorAll('.tab')[tabIndex]?.classList.add('active');
+
+      renderDashboard();
+      renderInputList();
+      const halaman=s.halaman||'Dashboard';
+      setPage(halaman,pilihNavHalaman(halaman),true);
+
+      if(halaman==='Laporan'){
+        isiDropdownDesaLaporan();
+        if(s.desaLaporan){const dl=document.getElementById('pilihDesaLaporan');if(dl&&[...dl.options].some(o=>o.value===s.desaLaporan))dl.value=s.desaLaporan}
+        isiDropdownPosyanduLaporan();
+        if(s.posLaporan){const pl=document.getElementById('pilihPosyanduLaporan');if(pl&&[...pl.options].some(o=>o.value===s.posLaporan))pl.value=s.posLaporan}
+        renderLaporan();
+      }
+
+      setTimeout(()=>{
+        window.scrollTo(0,Number(s.scrollY||0));
+        sedangPulihkanState=false;
+        stateUISiap=true;
+        simpanStateUI();
+      },120);
+    }
+    window.addEventListener('beforeunload',simpanStateUI);
+    window.addEventListener('pagehide',simpanStateUI);
+    window.addEventListener('scroll',()=>{clearTimeout(window.__saveUiScroll);window.__saveUiScroll=setTimeout(simpanStateUI,250)},{passive:true});
+
+    function isiFilterPosyandu(){const select=document.getElementById('filterPosyandu');if(!select)return;const lama=select.value;const dariData=[...new Set(anakData.map(a=>a.POSYANDU).filter(Boolean))];const dariMap=[...new Set(Object.values(posMap).flat())];const list=(dariData.length?dariData:dariMap).sort((a,b)=>String(a).localeCompare(String(b),'id',{numeric:true,sensitivity:'base'}));select.innerHTML='<option value="SEMUA">Semua Posyandu</option>'+list.map(p=>`<option value="${p}">${p}</option>`).join('');if(lama&&[...select.options].some(o=>o.value===lama))select.value=lama;isiFilterCari()}
+    function isiFilterCari(){const desaEl=document.getElementById('filterCariDesa');if(!desaEl)return;const lamaDesa=desaEl.value;const desaData=[...new Set(anakData.map(a=>a.DESA).filter(Boolean))];const desa=(desaData.length?desaData:desaList).sort((a,b)=>String(a).localeCompare(String(b),'id',{numeric:true,sensitivity:'base'}));desaEl.innerHTML='<option value="SEMUA">Semua Desa/Kelurahan</option>'+desa.map(d=>`<option value="${d}">${d}</option>`).join('');if(lamaDesa&&[...desaEl.options].some(o=>o.value===lamaDesa))desaEl.value=lamaDesa;isiPosCari()}
+    function isiPosCari(){const posEl=document.getElementById('filterCariPosyandu');if(!posEl)return;const lama=posEl.value,desa=document.getElementById('filterCariDesa')?.value||'SEMUA';let list=[];if(desa==='SEMUA')list=[...new Set(anakData.map(a=>a.POSYANDU).filter(Boolean))];else list=[...new Set(anakData.filter(a=>a.DESA===desa).map(a=>a.POSYANDU).filter(Boolean))];if(!list.length)list=desa==='SEMUA'?[...new Set(Object.values(posMap).flat())]:(posMap[desa]||[]);list=list.sort((a,b)=>String(a).localeCompare(String(b),'id',{numeric:true,sensitivity:'base'}));posEl.innerHTML='<option value="SEMUA">Semua Posyandu</option>'+list.map(p=>`<option value="${p}">${p}</option>`).join('');if(lama&&[...posEl.options].some(o=>o.value===lama))posEl.value=lama}
+    function getBulanCari(){return document.getElementById('bulanCariInput')?.value||getBulanBerjalan()}
+    function nilaiMultiSelect(id){const el=document.getElementById(id);if(!el)return[];return [...el.querySelectorAll('input[type="checkbox"]:checked')].map(o=>o.value).filter(Boolean)}
+    function labelMultiCari(id,semuaLabel){const arr=nilaiMultiSelect(id);return arr.length?arr.map(properCase).join(', '):semuaLabel}
+    function dataCariCepat(){const bulan=getBulanCari(),q=String(document.getElementById('cariCepatText')?.value||'').toUpperCase().trim(),desa=document.getElementById('filterCariDesa')?.value||'SEMUA',pos=document.getElementById('filterCariPosyandu')?.value||'SEMUA',warnaList=nilaiMultiSelect('filterCariWarna'),statusList=nilaiMultiSelect('filterCariStatus');return anakData.filter(a=>isNoBukuValid(a.No_Buku)).map(a=>getAnakUntukTanggalLayanan(a,akhirBulanISO(bulan))).filter(a=>!q||[a.NAMA,a.ORTU,a.No_Buku,a.NIK_Anak,a.NIK_ANAK,a.ID_ASIK].some(v=>String(v||'').toUpperCase().includes(q))).filter(a=>desa==='SEMUA'||a.DESA===desa).filter(a=>pos==='SEMUA'||a.POSYANDU===pos).filter(a=>!warnaList.length||warnaList.includes(getStatus(a))).filter(a=>!statusList.length||statusList.includes(getStatusLayananBulan(a,bulan))).sort(urutAnakPrioritas)}
+    function labelFilterCari(){const bulan=formatBulanLaporan(getBulanCari()),q=String(document.getElementById('cariCepatText')?.value||'').trim(),desa=document.getElementById('filterCariDesa')?.value||'SEMUA',pos=document.getElementById('filterCariPosyandu')?.value||'SEMUA',warnaList=nilaiMultiSelect('filterCariWarna'),statusList=nilaiMultiSelect('filterCariStatus');const arr=[`Periode: ${bulan}`];if(q)arr.push(`Kata kunci: ${q}`);if(desa!=='SEMUA')arr.push(`Desa: ${desa}`);if(pos!=='SEMUA')arr.push(`Posyandu: ${pos}`);if(warnaList.length)arr.push(`Warna: ${warnaList.map(properCase).join(', ')}`);if(statusList.length)arr.push(`Status: ${statusList.map(properCase).join(', ')}`);return arr}
+    function statusLayananLabelCari(a){const st=getStatusLayananBulan(a,getBulanCari());if(st==='SUNTIK')return 'Suntik: '+(pemberianPadaBulan(a,getBulanCari())||'-').replace(/<[^>]*>/g,'');if(st==='BATAL')return 'Batal: '+properCase(alasanBatalPadaBulan(a,getBulanCari())||alasanBatal(a));if(st==='BELUM')return 'Belum/Mangkir';return 'Lengkap sesuai usia'}
+    function buatPesanWACariFilter(){
+      const data=dataCariCepat();
+      const filter=labelFilterCari();
+      const enter=String.fromCharCode(10);
+      const header=['*DAFTAR SASARAN HASIL FILTER SIPAKAINGE*',...filter,`Total: ${data.length}`,''].join(enter);
+      const grup={};
+
+      data.forEach(a=>{
+        const key=a.POSYANDU||'TANPA POSYANDU';
+        if(!grup[key])grup[key]=[];
+        grup[key].push(a);
+      });
+
+      const isi=Object.entries(grup).map(([pos,items])=>{
+        const daftar=items.map((a,i)=>[
+          `${i+1}. *${properCase(a.NAMA)}* (${a.UMUR_BULAN} bln)`,
+          `   Ortu: ${properCase(a.ORTU||'-')}`,
+          `   Risiko: ${properCase(getStatus(a))} • ${statusLayananLabelCari(a)}`,
+          `   Rekomendasi: ${teksRekomWA(a)}`
+        ].join(enter)).join(enter+enter);
+        return `*📍 ${pos}*${enter}${daftar}`;
+      }).join(enter+enter);
+
+      const footer=[enter+enter,'_Sipakainge (Saling Mengingatkan)_','*Tim Imunisasi Puskesmas Lawawoi*'].join(enter);
+      return header+(isi||'Tidak ada sasaran sesuai filter ini.')+footer;
+    }
+    function kirimWACariFilter(){const pesan=buatPesanWACariFilter();window.open('https://wa.me/?text='+encodeURIComponent(pesan),'_blank')}
+    function renderCariList(){resetAnalisaCache();const bulanEl=document.getElementById('bulanCariInput');if(bulanEl&&!bulanEl.value)bulanEl.value=getBulanBerjalan();isiFilterCari();const list=dataCariCepat();const counts={HIJAU:0,KUNING:0,MERAH:0,HITAM:0,LENGKAP:0,BELUM:0,SUNTIK:0,BATAL:0};list.forEach(a=>{counts[getStatus(a)]++;counts[getStatusLayananBulan(a,getBulanCari())]++});const totalBadge=document.getElementById('cariTotalBadge');if(totalBadge)totalBadge.innerHTML=`<b>${list.length}</b>Hasil`;const sum=document.getElementById('cariSummary');if(sum)sum.innerHTML=`Risiko: Hijau ${counts.HIJAU}, Kuning ${counts.KUNING}, Merah ${counts.MERAH}, Hitam ${counts.HITAM}<br>Status ${formatBulanLaporan(getBulanCari())}: Lengkap ${counts.LENGKAP}, Belum ${counts.BELUM}, Suntik ${counts.SUNTIK}, Batal ${counts.BATAL}`;const box=document.getElementById('cariList');if(box)box.innerHTML=list.map(a=>renderAnakCard(a,{onclick:`onclick="openDetailAnak('${a.APP_ID}',event)"`})).join('')||'<div class="placeholder">Tidak ada anak sesuai filter.</div>'}
+    function resetCariFilter(){['filterCariWarna','filterCariStatus'].forEach(id=>{const el=document.getElementById(id);if(el)[...el.querySelectorAll('input[type="checkbox"]')].forEach(o=>o.checked=false)});['filterCariDesa','filterCariPosyandu'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='SEMUA'});const q=document.getElementById('cariCepatText');if(q)q.value='';const b=document.getElementById('bulanCariInput');if(b)b.value=getBulanBerjalan();isiFilterCari();renderCariList()}
+    function hashPinInput(pin){let h=2166136261;String(pin+'|SIPAKAINGE').split('').forEach(ch=>{h^=ch.charCodeAt(0);h=Math.imul(h,16777619)>>>0});return h}
+    function inputTerbuka(){try{return Number(localStorage.getItem(INPUT_PIN_KEY)||0)>Date.now()}catch(e){return false}}
+    function simpanAksesInput(){try{localStorage.setItem(INPUT_PIN_KEY,String(Date.now()+INPUT_PIN_TTL))}catch(e){}}
+    function mintaAksesInput(){if(inputTerbuka())return true;const pin=prompt('Masukkan PIN Pengelola Imunisasi untuk membuka halaman Input:');if(pin===null)return false;if(hashPinInput(pin)===INPUT_PIN_HASH){simpanAksesInput();toast('Akses Input aktif 24 jam di perangkat ini.');return true}toast('PIN salah. Halaman Input tetap terkunci.');return false}
+    function setPage(p,btn,skipSave=false){if(p==='Input'&&!mintaAksesInput()){p='Dashboard';btn=pilihNavHalaman('Dashboard')}document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));document.getElementById('view'+p).classList.add('active');document.querySelectorAll('.nav').forEach(n=>n.classList.remove('active'));(btn||pilihNavHalaman(p))?.classList.add('active');if(p==='Input')renderInputList();if(p==='Cari')renderCariList();if(p==='Laporan')renderLaporan();if(!skipSave)simpanStateUI()}
+    function setKategori(k){kategoriAktif=k;openDesa='';document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));document.querySelectorAll('.tab')[k==='SEMUA'?0:k==='BAYI'?1:k==='BADUTA'?2:3].classList.add('active');renderDashboard();simpanStateUI()}
+    function toggleDesa(d){openDesa=openDesa===d?'':d;renderDashboard();simpanStateUI()}
+    function closePanel(){document.getElementById('overlay').classList.remove('show')}
+    function runTests(){
+      try{
+        assertTest('safeCounter menerima undefined',safeCounter(undefined).HIJAU===0);
+        assertTest('statusDots menerima undefined',statusDots(undefined).includes('0'));
+        const dummy={UMUR_BULAN:14,RIWAYAT:[]};
+        assertTest('hitungRisikoAnak punya warna',!!hitungRisikoAnak(dummy).warna);
+
+        assertTest('risiko <12 memakai selisih monitoring dasar',(()=>{
+          const a={UMUR_BULAN:10,RIWAYAT:[['01/01/2026','OPV1, IPV1, ROTA1']]};
+          const r=hitungRisikoAnak(a);
+          return r.jenis==='MONITORING DASAR'&&r.kebutuhan.includes('BCG')&&!r.kebutuhan.includes('OPV1')&&!r.kebutuhan.includes('IPV1')&&!r.kebutuhan.includes('ROTA1');
+        })());
+
+        assertTest('risiko 12-23 mengambil warna terberat monitoring/evaluasi',(()=>{
+          const a={UMUR_BULAN:13,RIWAYAT:[['01/01/2026','PCV3, DPT4, MR2']]};
+          const r=hitungRisikoAnak(a);
+          return r.jenis==='EVALUASI DASAR'&&r.warna==='HITAM';
+        })());
+        assertTest('anak 12-23 lengkap lanjutan dan dasar harus hijau',(()=>{
+          const a={UMUR_BULAN:22,RIWAYAT:[['24/06/2024','HB0, OPV1'],['08/07/2024','BCG'],['23/08/2024','DPT1, OPV2, PCV1, ROTA1'],['22/09/2024','DPT2, OPV3, ROTA2'],['07/01/2025','PCV2'],['07/02/2025','DPT3, OPV4'],['08/04/2025','MR1'],['07/07/2025','PCV3'],['07/01/2026','DPT4'],['07/02/2026','MR2']]};
+          const r=hitungRisikoAnak(a);
+          return r.warna==='HIJAU'&&r.kebutuhan.length===0;
+        })());
+
+        assertTest('risiko >=24 memakai evaluasi final 10 indikator',(()=>{
+          const a={UMUR_BULAN:25,RIWAYAT:[['01/01/2026','OPV1, IPV1, ROTA1']]};
+          const r=hitungRisikoAnak(a);
+          return r.jenis==='EVALUASI FINAL'&&r.kebutuhan.length===10;
+        })());
+
+        const rekap=buildMesinRekap([]);
+        assertTest('rekap kosong punya status HIJAU',rekap.total.status.HIJAU===0);
+        assertTest('validasi No Buku 4 digit aktif',isNoBukuValid('1234')===true&&isNoBukuValid('123')===false&&isNoBukuValid('12A4')===false);
+        assertTest('filter input memakai bulan layanan',!!document.getElementById('bulanLayananInput')&&!document.getElementById('tanggalLayananInput'));
+        assertTest('umur input tetap memakai tanggal pelayanan',hitungUmurBulanTanggal('2025-01-31','2025-02-01')===0);
+        assertTest('tanggal form sementara dipakai untuk hitung umur',(()=>{const a={APP_ID:'TEST',TGL_LAHIR:'2025-01-01',__TGL_FORM:'2025-03-01'};return getTanggalFormLayanan(a)==='2025-03-01'})());
+        assertTest('tidak ada label kejar sebelum 12 bulan',klasifikasiPemberian({UMUR_BULAN:3},'DPT1').isKejar===false);
+        assertTest('kejar dasar aktif mulai 12 bulan',klasifikasiPemberian({UMUR_BULAN:12},'MR1').isKejar===true&&labelVaksin({UMUR_BULAN:12},'MR1').includes('label-kejar'));
+        assertTest('klasifikasi rutin lanjutan aktif',klasifikasiPemberian({UMUR_BULAN:12},'PCV3').status==='RUTIN LANJUTAN');
+        assertTest('kejar lanjutan aktif mulai 24 bulan',klasifikasiPemberian({UMUR_BULAN:23},'DPT4').isKejar===false&&klasifikasiPemberian({UMUR_BULAN:24},'DPT4').isKejar===true);
+        assertTest('BCG HB0 ROTA tidak diberi label kejar',klasifikasiPemberian({UMUR_BULAN:12},'BCG').isKejar===false&&klasifikasiPemberian({UMUR_BULAN:8},'ROTA1').isKejar===false);
+        assertTest('interval DPT1 ke DPT2 minimal 28 hari',(()=>{const a={APP_ID:'T1',TGL_LAHIR:'2025-01-01',__TGL_FORM:'2025-04-20',UMUR_BULAN:3,RIWAYAT:[['01/04/2025','DPT1']]};return !getRekomendasiPemberian(a).includes('DPT2')})());
+        assertTest('DPT2 muncul jika interval 28 hari cukup',(()=>{const a={APP_ID:'T2',TGL_LAHIR:'2025-01-01',__TGL_FORM:'2025-04-30',UMUR_BULAN:3,RIWAYAT:[['01/04/2025','DPT1']]};return getRekomendasiPemberian(a).includes('DPT2')})());
+        assertTest('rekomendasi berubah mengikuti tanggal form',(()=>{const a={APP_ID:'T3',TGL_LAHIR:'2024-05-13',RIWAYAT:[]};const april=getAnakUntukTanggalLayanan(a,'2025-04-13');const mei=getAnakUntukTanggalLayanan(a,'2025-05-13');return april.UMUR_BULAN===11&&mei.UMUR_BULAN===12&&labelVaksin(april,'MR1')==='MR1'&&labelVaksin(mei,'MR1').includes('label-kejar')})());
+        assertTest('openInput aman untuk event dari form',(()=>{const el=document.createElement('div');el.className='form-area';const child=document.createElement('input');el.appendChild(child);return child.closest('.form-area')===el})());
+        assertTest('fungsi simpan tanggal sementara tersedia',typeof simpanTanggalFormSementara==='function');
+        assertTest('mesin terpadu analisaAnak tersedia',(()=>{const a={TGL_LAHIR:'2025-01-01',RIWAYAT:[],Vaksin_Belum_ASIK:['DPT1']};const m=analisaAnak(a,'2025-10-01');return m.umurBulan===9&&Array.isArray(m.rekomendasi)&&m.statusASIK==='BELUM'&&m.vaksinBelumASIK.includes('DPT1')})());
+        assertTest('cache analisaAnak tersedia dan bisa direset',(()=>{const a={APP_ID:'CACHE',TGL_LAHIR:'2025-01-01',RIWAYAT:[]};resetAnalisaCache();const x=analisaAnak(a,'2025-03-01');const y=analisaAnak(a,'2025-03-01');const sama=x===y;resetAnalisaCache();return sama&&analisaAnak(a,'2025-03-01')!==x})());
+        assertTest('fungsi refresh tanggal layanan tersedia',typeof refreshFormTanggalLayanan==='function');
+        assertTest('judul modal input dinamis tersedia',typeof updateJudulModalInput==='function');
+        assertTest('modal detail anak dashboard tersedia',typeof openDetailAnak==='function');
+        assertTest('vaksin tertinggal detail memakai usia',(()=>{const a={APP_ID:'VT',TGL_LAHIR:'2025-01-01',__TGL_FORM:'2025-04-15',UMUR_BULAN:3,RIWAYAT:[['01/01/2025','HB0'],['01/02/2025','BCG'],['01/02/2025','OPV1']]};const t=vaksinTertinggalSesuaiUsia(a);return t.includes('DPT1')&&t.includes('DPT2')&&t.includes('OPV2')&&t.includes('OPV3')&&t.includes('PCV1')&&t.includes('PCV2')&&t.includes('ROTA1')&&t.includes('ROTA2')})());
+        assertTest('umur kartu/list memakai tanggal hari ini',(()=>{const a={TGL_LAHIR:'2025-01-01',TGL_PELAYANAN:'2025-03-01'};return denganUmurLayanan(a).UMUR_BULAN===hitungUmurBulanTanggal('2025-01-01',new Date())})());
+        assertTest('simpan edit tanpa YA/TIDAK didukung',typeof simpanLayanan==='function');
+        assertTest('modal tambah riwayat tersedia',typeof openRiwayatModal==='function'&&typeof vaksinTertinggalRiwayat==='function'&&typeof tambahTanggalRiwayatModal==='function');
+        assertTest('form input membaca rekomendasi dari analisaAnak',(()=>{const a={APP_ID:'FORM',TGL_LAHIR:'2025-01-01',__TGL_FORM:'2025-03-01',RIWAYAT:[]};return Array.isArray(analisaAnak(a,'2025-03-01').rekomendasi)})());
+        assertTest('tanggal IDL terisi jika lengkap sebelum 12 bulan',(()=>{const a={TGL_LAHIR:'2025-08-11',RIWAYAT:[['08/09/2025','BCG'],['07/11/2025','DPT1, PCV1'],['07/01/2026','DPT2'],['07/04/2026','DPT3, PCV2'],['07/05/2026','IPV1'],['14/05/2026','MR1']]};return hitungTanggalIDL(a)==='2026-05-14'})());
+        assertTest('tanggal IDL kosong jika vaksin terakhir lewat 12 bulan',(()=>{const a={TGL_LAHIR:'2025-01-01',RIWAYAT:[['01/02/2025','BCG'],['01/03/2025','DPT1, PCV1'],['01/04/2025','DPT2, PCV2'],['01/05/2025','DPT3, IPV1'],['02/01/2026','MR1']]};return hitungTanggalIDL(a)===''})());
+        assertTest('tanggal IBL terisi jika lengkap sebelum 24 bulan',(()=>{const a={TGL_LAHIR:'2024-01-01',RIWAYAT:[['01/02/2025','PCV3'],['01/06/2025','DPT4'],['01/11/2025','MR2']]};return hitungTanggalIBL(a)==='2025-11-01'})());
+        assertTest('imunisasi YA mengalahkan Batal pada bulan yang sama jika masih ada rekomendasi',(()=>{const a={TGL_LAHIR:'2025-01-01',UMUR_BULAN:5,INPUT_BULAN:'BATAL',TGL_PELAYANAN:getBulanBerjalan()+'-01',ALASAN_BATAL:'Sakit',RIWAYAT:[[ubahISOkeTanggal(getBulanBerjalan()+'-02'),'DPT1']]};return getInputStatus(a)==='SUNTIK'})());
+        assertTest('menu input tetap Lengkap jika rekomendasi kosong walau ada riwayat bulan ini',(()=>{const a={TGL_LAHIR:'2024-01-01',RIWAYAT:[[ubahISOkeTanggal(getBulanBerjalan()+'-02'),'BCG, OPV1, OPV2, OPV3, OPV4, DPT1, DPT2, DPT3, PCV1, PCV2, MR1, PCV3, DPT4, MR2, IPV1, IPV2']]};return getInputStatus(a)==='LENGKAP'})());
+        assertTest('PCV3 tidak membuat SUNTIK sebelum ulang bulan ke-12',(()=>{const a={TGL_LAHIR:'2025-05-29',__TGL_FORM:'2026-05-16',RIWAYAT:[['29/05/2025','HB0'],['21/07/2025','BCG, OPV1'],['20/08/2025','DPT1, OPV2'],['20/09/2025','DPT2, OPV3, ROTA1'],['20/10/2025','DPT3, IPV1, OPV4'],['20/12/2025','PCV1, ROTA2'],['20/01/2026','PCV2'],['20/03/2026','IPV2, MR1']]};return analisaAnak(a,'2026-05-16').rekomendasi.length===0&&analisaAnak(a,'2026-05-29').rekomendasi.includes('PCV3')})());
+        assertTest('status khusus berlaku ke depan sampai bulan sebelum imunisasi YA',(()=>{const a={STATUS_KHUSUS:{AKTIF:true,JENIS:'MENOLAK',MULAI_TANGGAL:'2026-04-01',MULAI_BULAN:'2026-04'},RIWAYAT:[['02/06/2026','DPT2']]};return statusKhususAktifPadaBulan(a,'2026-03')===false&&statusKhususAktifPadaBulan(a,'2026-04')===true&&statusKhususAktifPadaBulan(a,'2026-05')===true&&statusKhususAktifPadaBulan(a,'2026-06')===false&&statusKhususAktifPadaBulan(a,'2026-07')===false})());
+        assertTest('filter bulan layanan tidak menghilangkan anak karena TGL_PELAYANAN lama',(()=>{const a={No_Buku:'1234',TGL_PELAYANAN:'2026-01-01'};return cocokBulanLayanan(a)===true})());
+        assertTest('pending dihitung per APP_ID unik',(()=>{const list=[{id:1,data:{APP_ID:'A'},waktu:'1'},{id:2,data:{APP_ID:'A'},waktu:'2'},{id:3,data:{APP_ID:'B'},waktu:'1'}];return pendingTerbaruPerAPPID(list).length===2&&pendingTerbaruPerAPPID(list).some(x=>x.id===2)})());
+        assertTest('pilihan riwayat memakai riwayat sebelum tanggal',(()=>{const a={APP_ID:'UJI',TGL_LAHIR:'2025-01-01',RIWAYAT:[['01/02/2025','ROTA1'],['19/08/2025','ROTA2']]};const ac=anakAcuanRiwayatTanggal(a,'2025-06-10');return !sudah(ac,'ROTA2')&&getTertinggal(ac).includes('ROTA2')})());
+        assertTest('IPV2 tersedia jika usia 9 bulan dan interval IPV1 cukup',(()=>{const a={APP_ID:'UJI2',TGL_LAHIR:'2025-01-01',RIWAYAT:[['01/05/2025','IPV1']]};const ac=anakAcuanRiwayatTanggal(a,'2025-10-01');return kandidatRiwayatTanggal(ac).includes('IPV2')&&kandidatRiwayatTanggal(ac).includes('MR1')})());
+        assertTest('riwayat dipecah per antigen dan diurutkan',(()=>{const a={RIWAYAT:[['02/01/2025','DPT1, PCV1'],['01/01/2025','BCG']]};const r=pecahRiwayatAntigen(a);return r.length===3&&r[0].ANTIGEN==='BCG'&&r[1].ANTIGEN==='DPT1'&&r[2].ANTIGEN==='PCV1'})());
+        assertTest('riwayat bisa dikelompokkan per tanggal',(()=>{const a={RIWAYAT:[['02/01/2025','DPT1, PCV1'],['01/01/2025','BCG']]};const g=kelompokRiwayatPerTanggal(a);return g.length===2&&g[1].VAKSIN.length===2})());
+        assertTest('RIWAYAT dikirim ke Firestore tanpa nested array',(()=>{const r=riwayatUntukFirestore([['02/01/2025','DPT1, PCV1']]);return Array.isArray(r)&&!Array.isArray(r[0])&&r[0].TANGGAL==='2025-01-02'&&r[0].VAKSIN==='DPT1, PCV1'})());
+        assertTest('vaksin input aplikasi masuk daftar belum ASIK',(()=>{const a={Vaksin_Belum_ASIK:['DPT1']};tambahVaksinBelumASIK(a,['DPT1','PCV1']);return a.Status_ASIK==='BELUM'&&a.Vaksin_Belum_ASIK.length===2&&a.Vaksin_Belum_ASIK.includes('PCV1')})());
+        const lap=buildLaporanPuskesmas();
+        assertTest('laporan puskesmas punya status',lap.status.HIJAU!==undefined);
+        console.log('✅ Semua smoke test SIPAKAINGE lolos');
+      }catch(e){
+        console.error(e);
+        toast(e.message);
+      }
+    }
+    function init(){setupPWA();document.getElementById('bulanLayananInput').value=getBulanBerjalan();const bc=document.getElementById('bulanCariInput');if(bc)bc.value=getBulanBerjalan();isiFilterPosyandu();isiFilterCari();renderDashboard();renderInputList();renderCariList();muatAwalHematQuota()}
+    init();
+  </script>
+</body>
+</html>
+
+
