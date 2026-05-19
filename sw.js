@@ -1,35 +1,16 @@
-const CACHE_NAME = "sipakainge-v2";
+const CACHE_NAME = "sipakainge-v3";
 
 const urlsToCache = [
   "./",
   "./index.html",
-  "./manifest.json",
-  "./assets/icons/icon-192.png",
-  "./assets/icons/icon-512.png"
+  "./manifest.json"
 ];
 
 self.addEventListener("install", event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => cache.addAll(urlsToCache))
-  );
-});
-
-self.addEventListener("fetch", event => {
-
-  // Jangan cache Firestore/API
-  if (
-    event.request.url.includes("firestore") ||
-    event.request.url.includes("googleapis")
-  ) {
-    return;
-  }
-
-  event.respondWith(
-    caches.match(event.request)
-      .then(response => {
-        return response || fetch(event.request);
-      })
+      .then(() => self.skipWaiting())
   );
 });
 
@@ -41,6 +22,26 @@ self.addEventListener("activate", event => {
           .filter(key => key !== CACHE_NAME)
           .map(key => caches.delete(key))
       );
-    })
+    }).then(() => self.clients.claim())
+  );
+});
+
+self.addEventListener("fetch", event => {
+  if (event.request.method !== "GET") return;
+
+  if (
+    event.request.url.includes("firestore") ||
+    event.request.url.includes("googleapis") ||
+    event.request.url.includes("gstatic")
+  ) {
+    return;
+  }
+
+  event.respondWith(
+    caches.match(event.request)
+      .then(response => {
+        return response || fetch(event.request)
+          .catch(() => caches.match("./index.html"));
+      })
   );
 });
