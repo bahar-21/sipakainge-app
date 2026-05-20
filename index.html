@@ -144,7 +144,7 @@
     function hapusDBLama(){return new Promise(resolve=>{const r=indexedDB.deleteDatabase(DB_NAME);r.onsuccess=()=>resolve();r.onerror=()=>resolve();r.onblocked=()=>resolve()})}
     function bukaDBDasar(){return new Promise((resolve,reject)=>{const req=indexedDB.open(DB_NAME,DB_VERSION);req.onupgradeneeded=e=>{const db=e.target.result;if(!db.objectStoreNames.contains(STORE_DATA))db.createObjectStore(STORE_DATA,{keyPath:'APP_ID'});if(!db.objectStoreNames.contains(STORE_PENDING))db.createObjectStore(STORE_PENDING,{keyPath:'id',autoIncrement:true})};req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error)})}
     async function bukaDB(){let db=await bukaDBDasar();if(!db.objectStoreNames.contains(STORE_DATA)||!db.objectStoreNames.contains(STORE_PENDING)){db.close();await hapusDBLama();db=await bukaDBDasar()}return db}
-    async function simpanLokal(item){resetAnalisaCache();perbaruiStatusIDL_IBL(item);const db=await bukaDB();const tx=db.transaction(STORE_DATA,'readwrite');tx.objectStore(STORE_DATA).put(item);return new Promise((res,rej)=>{tx.oncomplete=res;tx.onerror=()=>rej(tx.error)})}
+    async function simpanLokal(item){resetAnalisaCache();sinkronkanFieldBantuLayanan(item);perbaruiStatusIDL_IBL(item);const db=await bukaDB();const tx=db.transaction(STORE_DATA,'readwrite');tx.objectStore(STORE_DATA).put(item);return new Promise((res,rej)=>{tx.oncomplete=res;tx.onerror=()=>rej(tx.error)})}
     async function simpanBanyakLokal(list){resetAnalisaCache();(list||[]).forEach(perbaruiStatusIDL_IBL);const db=await bukaDB();const tx=db.transaction(STORE_DATA,'readwrite');const store=tx.objectStore(STORE_DATA);list.forEach(x=>store.put(x));return new Promise((res,rej)=>{tx.oncomplete=res;tx.onerror=()=>rej(tx.error)})}
     async function bacaLokal(){const db=await bukaDB();const tx=db.transaction(STORE_DATA,'readonly');const req=tx.objectStore(STORE_DATA).getAll();return new Promise((res,rej)=>{req.onsuccess=()=>res(req.result||[]);req.onerror=()=>rej(req.error)})}
     async function hapusPendingByAPPID(appId){
@@ -251,8 +251,36 @@
       if(v instanceof Date)return v.toISOString();
       return String(v);
     }
+    function sinkronkanFieldBantuLayanan(item){
+      if(!item)return item;
+      const bulan=String(item.TGL_PELAYANAN||'').slice(0,7);
+      const riwayatBulan=bulan?riwayatImunisasiBulan(item,bulan):[];
+      const vaksinRiwayat=[...new Set(riwayatBulan.flatMap(r=>String(r[1]||'').split(',').map(x=>normalizeAntigen(x)).filter(Boolean)))];
+      const vaksinBantu=String(item.VAKSIN_BULAN_INI||'').split(',').map(x=>normalizeAntigen(x)).filter(Boolean);
+
+      if(item.INPUT_BULAN==='SUNTIK'){
+        if(vaksinRiwayat.length){
+          item.VAKSIN_BULAN_INI=vaksinRiwayat.join(', ');
+        }else{
+          // Jangan biarkan field bantu membuat data seolah sudah suntik jika RIWAYAT utama kosong.
+          item.VAKSIN_BULAN_INI='';
+          item.INPUT_BULAN='';
+          item.TGL_PELAYANAN='';
+        }
+      }
+
+      if(Array.isArray(item.Vaksin_Belum_ASIK)&&vaksinBantu.length&&!vaksinRiwayat.length){
+        const hapus=new Set(vaksinBantu);
+        item.Vaksin_Belum_ASIK=normalisasiVaksinBelumASIK(item.Vaksin_Belum_ASIK).filter(v=>!hapus.has(v));
+        item.Status_ASIK=statusASIKDariList(item.Vaksin_Belum_ASIK);
+      }
+      return item;
+    }
     function sentuhUpdatedAt(item){
-      if(item)item.Updated_At=nowISO();
+      if(item){
+        sinkronkanFieldBantuLayanan(item);
+        item.Updated_At=nowISO();
+      }
       return item;
     }
     function bersihkanUntukFirestore(value){
@@ -278,7 +306,7 @@
       return value;
     }
     function pesanErrorFirestore(e){return (e?.code?e.code+' - ':'')+(e?.message||String(e||'Error'))}
-    async function kirimFirestore(item){perbaruiStatusIDL_IBL(item);if(!navigator.onLine)throw new Error('offline');if(!initFirebase())throw new Error('firebase-config-belum-diisi');if(!item.APP_ID)throw new Error('APP_ID kosong');if(!item.Updated_At)sentuhUpdatedAt(item);const dataKirim=bersihkanUntukFirestore(item);dataKirim.RIWAYAT=riwayatUntukFirestore(item.RIWAYAT||[]);dataKirim.Updated_At=item.Updated_At;await dbFirestore.collection(FIRESTORE_COLLECTION).doc(String(item.APP_ID)).set(dataKirim,{merge:true})}
+    async function kirimFirestore(item){sinkronkanFieldBantuLayanan(item);perbaruiStatusIDL_IBL(item);if(!navigator.onLine)throw new Error('offline');if(!initFirebase())throw new Error('firebase-config-belum-diisi');if(!item.APP_ID)throw new Error('APP_ID kosong');if(!item.Updated_At)sentuhUpdatedAt(item);const dataKirim=bersihkanUntukFirestore(item);dataKirim.RIWAYAT=riwayatUntukFirestore(item.RIWAYAT||[]);dataKirim.Updated_At=item.Updated_At;await dbFirestore.collection(FIRESTORE_COLLECTION).doc(String(item.APP_ID)).set(dataKirim,{merge:true})}
     async function simpanAman(item){sentuhUpdatedAt(item);await simpanLokal(item);try{await kirimFirestore(item);await simpanLokal(item);notif('Data tersimpan lokal dan terkirim ke Firestore.')}catch(e){console.error('Kirim Firestore gagal:',e);await simpanPending(item);notif('Data tersimpan lokal, tetapi Firestore gagal: '+pesanErrorFirestore(e)+'. Masuk pending sync.')}}
     function pendingTerbaruPerAPPID(list){
       const map=new Map();
@@ -312,7 +340,7 @@
     function fieldBackup(a,names){return nilaiField(a,names)}
     function risikoBackup(a){const analisa=analisaAnak(a,new Date().toISOString().slice(0,10));const kebutuhan=analisa.risiko.kebutuhan||analisa.tertinggal||[];return{warna:analisa.warnaRisiko,jumlah:kebutuhan.length,vaksin:kebutuhan.join(', ')}}
     function tanggalAntigenBackup(a,v){return getTanggalAntigen(a,v)||''}
-    function rowBackupYA(a){perbaruiStatusIDL_IBL(a);const r=risikoBackup(a);return{
+    function rowBackupYA(a){sinkronkanFieldBantuLayanan(a);perbaruiStatusIDL_IBL(a);const r=risikoBackup(a);return{
       'APP_ID':a.APP_ID||'',
       'ID_ASIK':fieldBackup(a,['ID_ASIK','Id_Asik','id_asik'])||'',
       'NIK Anak':fieldBackup(a,['NIK_Anak','NIK Anak','NIK_ANAK'])||'',
@@ -857,6 +885,22 @@
       if(!urut.length)return'<div class="card" style="font-size:12px;font-weight:900;color:#64748b">Kebutuhan vaksin dari rekomendasi: tidak ada</div>';
       return `<div class="card"><div class="section-small" style="margin-top:0">💉 KEBUTUHAN VAKSIN DARI MENU BELUM</div><div class="detail-chip-wrap">${urut.map(v=>`<span class="detail-chip">${v} ${hitung[v]}</span>`).join('')}</div></div>`;
     }
+    function hitungRekapSuntikPerDosis(list){
+      const urut=['HB0','BCG','OPV1','OPV2','OPV3','OPV4','DPT1','DPT2','DPT3','DPT4','ROTA1','ROTA2','ROTA3','PCV1','PCV2','PCV3','IPV1','IPV2','MR1','MR2'];
+      const hasil={};
+      const bulan=getBulanLayananInput();
+      (list||[]).forEach(a=>{
+        const dosis=riwayatImunisasiBulan(a,bulan).flatMap(r=>String(r[1]||'').split(',').map(x=>normalizeAntigen(x)).filter(Boolean));
+        const sumber=dosis.length?dosis:String(a.VAKSIN_BULAN_INI||'').split(',').map(x=>normalizeAntigen(x)).filter(Boolean);
+        sumber.forEach(v=>{if(urut.includes(v))hasil[v]=(hasil[v]||0)+1});
+      });
+      return urut.filter(v=>hasil[v]).map(v=>`${v}: ${hasil[v]}`).join(' | ');
+    }
+    function renderRingkasanSuntikPerDosis(list){
+      if(inputFilter!=='SUNTIK')return'';
+      const teks=hitungRekapSuntikPerDosis(list);
+      return `<div class="card" style="font-size:13px;font-weight:900;color:#1d4ed8;line-height:1.45">💉 Rekap vaksin: ${teks||'belum ada dosis pada bulan ini'}</div>`;
+    }
     function teksRekomWA(a){const r=analisaAnak(a,a.__TGL_FORM||getTanggalLayananInput()).rekomendasi;return r.length?r.map(v=>String(v).replace(/<[^>]*>/g,'')).join(', '):'-'}
     function dataBelumBatalUntukWA(){
       const pos=document.getElementById('filterPosyandu')?.value||'SEMUA';
@@ -911,7 +955,7 @@ const footer = [
       const pesan=buatPesanWABelumBatal();
       window.open('https://wa.me/?text='+encodeURIComponent(pesan),'_blank');
     }
-    function renderInputList(){resetAnalisaCache();renderInputCounters();updatePendingInfo();const list=inputDataByFilter();document.getElementById('inputList').innerHTML=renderRingkasanKebutuhanBelum(list)+`<div class="section-small">DAFTAR ${inputFilter} (${list.length} ANAK)</div>`+list.map(a=>renderAnakCard(a,{onclick:`onclick="openInput('${a.APP_ID}',event)"`})).join('');simpanStateUI()}
+    function renderInputList(){resetAnalisaCache();renderInputCounters();updatePendingInfo();const list=inputDataByFilter();document.getElementById('inputList').innerHTML=renderRingkasanKebutuhanBelum(list)+renderRingkasanSuntikPerDosis(list)+`<div class="section-small">DAFTAR ${inputFilter} (${list.length} ANAK)</div>`+list.map(a=>renderAnakCard(a,{onclick:`onclick="openInput('${a.APP_ID}',event)"`})).join('');simpanStateUI()}
     function updateJudulModalInput(anak){
   const titleEl=document.getElementById('formModalTitle');
   if(!titleEl){
