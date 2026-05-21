@@ -1462,11 +1462,11 @@ function bukaEditIdentitas(appId){
       </select>
       <div class="muted-note" id="editPreviewDesa_${key}">Desa otomatis: ${desaDariPosyandu(anak.POSYANDU)||anak.DESA||'-'}</div>
     </div>
-    <div class="action-form-row">
-      <button class="cancel-btn" onclick="closeEditIdentitasModal()">↩ BATAL</button>
-      <button class="save-btn" onclick="simpanEditIdentitas('${appId}')">💾 SIMPAN IDENTITAS</button>
-    </div>
-    <button class="danger-btn" onclick="hapusSasaranPermanen('${appId}')">🗑 HAPUS PERMANEN DUPLIKAT</button>
+<div class="action-form-row" style="display:grid;grid-template-columns:78px 78px 1fr;gap:8px">
+  <button class="danger-btn" style="margin-top:0;padding:11px" onclick="hapusSasaranPermanen('${appId}')">🗑 HAPUS</button>
+  <button class="cancel-btn" onclick="closeEditIdentitasModal()">↩ BATAL</button>
+  <button class="save-btn" onclick="simpanEditIdentitas('${appId}')">💾 SIMPAN</button>
+</div>
   `;
   document.getElementById('editIdentitasModal').classList.add('show');
 }
