@@ -72,6 +72,10 @@
   <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
   <script>
     let kategoriAktif='SEMUA',openDesa='',searchText='',openInputId='',inputMode='',inputFilter='BELUM',riwayatInputTerbuka='';
+let hasilCariASIKCache = [];
+let riwayatASIKTerpilihTambah = [];
+let sumberASIKTerpilihTambah = '';
+let idAsikTerpilihTambah = '';
     const INPUT_PIN_HASH=967239064;
     const INPUT_PIN_TTL=24*60*60*1000;
     const INPUT_PIN_KEY='SIPAKAINGE_INPUT_AKSES_V1';
@@ -1350,16 +1354,203 @@ const footer = [
       renderInputList();
       renderDashboard();
     }
+
+    function jsonpRequest(url) {
+  return new Promise((resolve, reject) => {
+    const callback = 'cb_asik_' + Date.now() + '_' + Math.floor(Math.random() * 10000);
+
+    window[callback] = data => {
+      delete window[callback];
+      script.remove();
+      resolve(data);
+    };
+
+    const script = document.createElement('script');
+    script.src = url + '&callback=' + callback;
+    script.onerror = () => {
+      delete window[callback];
+      script.remove();
+      reject(new Error('Gagal menghubungi server ASIK/HB0'));
+    };
+
+    document.body.appendChild(script);
+  });
+}
+
+async function cariASIKDariFormTambah() {
+  try {
+    const nama = encodeURIComponent(document.getElementById('cariAsikNama')?.value || '');
+    const ortu = encodeURIComponent(document.getElementById('cariAsikOrtu')?.value || '');
+    const desa = encodeURIComponent(document.getElementById('cariAsikDesa')?.value || '');
+    const tanggalLahir = encodeURIComponent(document.getElementById('cariAsikLahir')?.value || '');
+
+    if (!nama && !ortu && !desa && !tanggalLahir) {
+      alert('Isi minimal satu pencarian.');
+      return;
+    }
+
+    const box = document.getElementById('hasilCariASIKTambah');
+    box.innerHTML = `<div class="placeholder">Mencari data ASIK/HB0...</div>`;
+
+    const url =
+      BACKUP_WEBAPP_URL +
+      `?aksi=CARI_ASIK_SASARAN&nama=${nama}&ortu=${ortu}&desa=${desa}&tanggalLahir=${tanggalLahir}`;
+
+    const res = await jsonpRequest(url);
+
+    if (!res.ok) throw new Error(res.message || 'Pencarian gagal');
+
+    hasilCariASIKCache = res.hasil || [];
+    renderHasilCariASIKTambah();
+
+  } catch (e) {
+    document.getElementById('hasilCariASIKTambah').innerHTML =
+      `<div class="placeholder">Gagal mencari data: ${e.message || e}</div>`;
+  }
+}
+
+function renderHasilCariASIKTambah() {
+  const box = document.getElementById('hasilCariASIKTambah');
+  const list = hasilCariASIKCache || [];
+
+  if (!list.length) {
+    box.innerHTML = `<div class="placeholder">Data tidak ditemukan. Silakan isi manual.</div>`;
+    return;
+  }
+
+  box.innerHTML = list.map((a, i) => {
+    const riwayat = Array.isArray(a.RIWAYAT)
+      ? a.RIWAYAT.map(r => r.VAKSIN || r[1]).filter(Boolean).join(', ')
+      : '';
+
+    return `
+      <div class="child-card">
+        <div class="child-name">${a.Nama_Anak || '-'}</div>
+        <div class="child-meta">
+          Ortu: <b>${a.Nama_Orang_Tua || '-'}</b><br>
+          Tgl Lahir: <b>${a.Tanggal_Lahir_Anak || '-'}</b><br>
+          Desa: <b>${a.Kelurahan_atau_Desa || '-'}</b><br>
+          Posyandu: <b>${a.Pos_Imunisasi_BCG_1 || '-'}</b><br>
+          Sumber: <b>${a.SUMBER_ASIK || '-'}</b><br>
+          ID ASIK: <b>${a.ID_ASIK || '-'}</b><br>
+          Riwayat: <b>${riwayat || '-'}</b>
+        </div>
+        <button class="save-btn" type="button" onclick="gunakanDataASIKUntukTambah(${i})" style="margin-top:8px">
+          GUNAKAN DATA INI
+        </button>
+      </div>
+    `;
+  }).join('');
+}
+
+function gunakanDataASIKUntukTambah(index) {
+  const a = hasilCariASIKCache[index];
+  if (!a) return;
+
+  setValueJikaAda_('baruNama', a.Nama_Anak || '');
+  setValueJikaAda_('baruLahir', String(a.Tanggal_Lahir_Anak || '').slice(0, 10));
+  setValueJikaAda_('baruOrtu', a.Nama_Orang_Tua || '');
+  setValueJikaAda_('baruNoBuku', String(a.No_Buku || '').replace(/\D/g, '').slice(0, 4));
+  setValueJikaAda_('baruHP', a.No__HP || '');
+
+  setSelectJikaAda_('baruJK', normalisasiJKUntukForm_(a.Jenis_Kelamin_Anak || ''));
+  setSelectJikaAda_('baruPos', a.Pos_Imunisasi_BCG_1 || '');
+
+  riwayatASIKTerpilihTambah = Array.isArray(a.RIWAYAT) ? a.RIWAYAT : [];
+  sumberASIKTerpilihTambah = a.SUMBER_ASIK || '';
+  idAsikTerpilihTambah = a.ID_ASIK || '';
+
+  const ringkas = riwayatASIKTerpilihTambah
+    .map(r => r.VAKSIN || r[1])
+    .filter(Boolean)
+    .join(', ');
+
+  const info = document.getElementById('infoRiwayatASIKTambah');
+  if (info) {
+    info.innerHTML = `
+      <div class="muted-note" style="color:#059669">
+        Data dipilih dari <b>${sumberASIKTerpilihTambah || '-'}</b><br>
+        ID ASIK dipakai: <b>${idAsikTerpilihTambah || 'Tidak ada, akan dibuat ID sementara'}</b><br>
+        Riwayat ikut disimpan: <b>${ringkas || 'HB0 sesuai tanggal lahir'}</b>
+      </div>
+    `;
+  }
+
+  notif('Data ASIK/HB0 masuk ke form. Silakan periksa sebelum simpan.');
+}
+
+function setValueJikaAda_(id, value) {
+  const el = document.getElementById(id);
+  if (el) el.value = value || '';
+}
+
+function setSelectJikaAda_(id, value) {
+  const el = document.getElementById(id);
+  if (!el) return;
+
+  const v = String(value || '').trim().toUpperCase();
+
+  for (const opt of el.options) {
+    if (
+      String(opt.value || '').trim().toUpperCase() === v ||
+      String(opt.textContent || '').trim().toUpperCase() === v
+    ) {
+      el.value = opt.value;
+      el.dispatchEvent(new Event('change'));
+      return;
+    }
+  }
+}
+
+function normalisasiJKUntukForm_(v) {
+  const s = String(v || '').trim().toUpperCase();
+  if (s === 'LAKI-LAKI' || s === 'L' || s === 'LK' || s === '♂') return '♂';
+  if (s === 'PEREMPUAN' || s === 'P' || s === 'PR' || s === '♀') return '♀';
+  return v || '';
+}
+
+function normalisasiRiwayatASIKUntukTambah(list, tanggalDefaultHB0) {
+  const out = [];
+
+  (list || []).forEach(r => {
+    const tgl = r.TANGGAL || r.tanggal || r[0] || '';
+    const vaksin = r.VAKSIN || r.vaksin || r[1] || '';
+
+    if (tgl && vaksin) {
+      out.push([
+        String(tgl).includes('-')
+          ? ubahISOkeTanggal(String(tgl).slice(0, 10))
+          : String(tgl),
+        String(vaksin)
+      ]);
+    }
+  });
+
+  if (!out.length && tanggalDefaultHB0) {
+    out.push([tanggalDefaultHB0, 'HB0']);
+  }
+
+  const unik = {};
+  out.forEach(r => {
+    unik[r[0] + '|' + r[1]] = r;
+  });
+
+  return Object.values(unik);
+}
+
     function bukaFormTambah(){
+  hasilCariASIKCache = [];
+  riwayatASIKTerpilihTambah = [];
+  sumberASIKTerpilihTambah = '';
+  idAsikTerpilihTambah = '';
+
   const filterSelect = document.getElementById('filterPosyandu');
   const filterPos = filterSelect?.value || 'SEMUA';
 
-  // Ambil daftar posyandu dari dropdown filter halaman Input
   const semuaPosyandu = Array.from(filterSelect?.options || [])
     .map(opt => opt.value)
     .filter(v => v && v !== 'SEMUA');
 
-  // Default mengikuti filter halaman Input
   const defaultPos = filterPos !== 'SEMUA'
     ? filterPos
     : (semuaPosyandu[0] || '');
@@ -1367,10 +1558,43 @@ const footer = [
   document.getElementById('panelTitle').textContent = 'Tambah Sasaran Baru';
 
   document.getElementById('panelSubtitle').textContent =
-    'Identitas anak baru. HB0 otomatis ditambahkan sesuai tanggal lahir.';
+    'Isi manual atau cari dari ASIK/HB0. Data bisa diperbaiki sebelum disimpan.';
 
   document.getElementById('panelBody').innerHTML = `
+    <div class="card" style="border-left:4px solid #2563eb">
+      <div class="section-small">Cari dari ASIK / HB0</div>
+
+      <div class="form-grid">
+        <div>
+          <div class="label">Nama Anak</div>
+          <input id="cariAsikNama" placeholder="Nama anak">
+        </div>
+
+        <div>
+          <div class="label">Nama Orang Tua</div>
+          <input id="cariAsikOrtu" placeholder="Nama orang tua">
+        </div>
+
+        <div>
+          <div class="label">Desa</div>
+          <input id="cariAsikDesa" placeholder="Contoh: BUAE">
+        </div>
+
+        <div>
+          <div class="label">Tanggal Lahir</div>
+          <input id="cariAsikLahir" type="date">
+        </div>
+      </div>
+
+      <button class="save-btn" type="button" onclick="cariASIKDariFormTambah()" style="margin-top:8px">
+        CARI ASIK / HB0
+      </button>
+
+      <div id="hasilCariASIKTambah" style="margin-top:8px"></div>
+    </div>
+
     <div class="card">
+      <div class="section-small">Identitas Sasaran</div>
 
       <div class="label">Nama Anak</div>
       <input id="baruNama" placeholder="Nama lengkap anak">
@@ -1410,15 +1634,17 @@ const footer = [
         inputmode="tel"
         placeholder="08xxxxxxxxxx">
 
-      <div class="muted-note">
-        Desa otomatis diambil dari nama Posyandu. HB0 otomatis dibuat dengan tanggal lahir.
-        ID ASIK sementara dibuat otomatis.
+      <div id="infoRiwayatASIKTambah">
+        <div class="muted-note">
+          Jika tidak mencari ASIK/HB0, HB0 otomatis dibuat sesuai tanggal lahir.
+          Jika data berasal dari ASIK, ID ASIK asli akan dipakai.
+          Jika data berasal dari HB0/manual, ID sementara dibuat otomatis.
+        </div>
       </div>
 
       <button class="save-btn" onclick="simpanSasaranBaru()">
         SIMPAN SASARAN
       </button>
-
     </div>
   `;
 
@@ -1638,19 +1864,14 @@ async function hapusSasaranPermanen(appId){
   }
 }
     async function simpanSasaranBaru(){
-  const nama = String(document.getElementById('baruNama')?.value || '').trim();
-  const lahir = String(document.getElementById('baruLahir')?.value || '').trim();
-  const jk = String(document.getElementById('baruJK')?.value || '♂').trim();
-  const ortu = String(document.getElementById('baruOrtu')?.value || '').trim();
-  const pos = String(document.getElementById('baruPos')?.value || '').trim();
-
-const desa = normalisasiDesa(
-  String(pos).includes('-')
-    ? String(pos).split('-').pop().trim()
-    : ''
-);
-  const noBuku = String(document.getElementById('baruNoBuku')?.value || '').trim();
-  const hp = String(document.getElementById('baruHP')?.value || '').trim();
+  const nama = document.getElementById('baruNama')?.value.trim().toUpperCase();
+  const lahir = document.getElementById('baruLahir')?.value || '';
+  const jk = document.getElementById('baruJK')?.value || '♂';
+  const ortu = document.getElementById('baruOrtu')?.value.trim() || '';
+  const pos = document.getElementById('baruPos')?.value || '';
+  const noBuku = String(document.getElementById('baruNoBuku')?.value || '').replace(/\D/g,'').slice(0,4);
+  const hp = document.getElementById('baruHP')?.value.trim() || '';
+  const desa = desaDariPosyandu(pos);
 
   if(!nama){
     alert('Nama anak wajib diisi.');
@@ -1668,6 +1889,7 @@ const desa = normalisasiDesa(
   }
 
   const now = new Date();
+
   const appId = 'APP-' +
     now.getFullYear() +
     String(now.getMonth() + 1).padStart(2,'0') +
@@ -1676,13 +1898,26 @@ const desa = normalisasiDesa(
     String(Date.now()).slice(-6);
 
   const idTemp = 'TEMP-' + appId;
+  const idAsikFinal = idAsikTerpilihTambah || idTemp;
 
   const jkText = jk === '♀' ? 'Perempuan' : 'Laki-laki';
   const tanggalTampil = ubahISOkeTanggal(lahir) || lahir;
 
+  const riwayatAwal = normalisasiRiwayatASIKUntukTambah(
+    riwayatASIKTerpilihTambah,
+    tanggalTampil
+  );
+
+  const vaksinBelumASIK = [...new Set(
+    riwayatAwal
+      .map(r => String(r[1] || '').split(',').map(x => x.trim()))
+      .flat()
+      .filter(Boolean)
+  )];
+
   const data = {
     APP_ID: appId,
-    ID_ASIK: idTemp,
+    ID_ASIK: idAsikFinal,
 
     NIK_Anak: '',
     Nama_Anak: nama,
@@ -1703,10 +1938,12 @@ const desa = normalisasiDesa(
     NO_HP: hp,
 
     Tanggal_Imunisasi_HB0: lahir,
-    RIWAYAT: [[tanggalTampil, 'HB0']],
+    RIWAYAT: riwayatAwal,
 
     STATUS_DATA: 'SEMENTARA',
-    RIWAYAT_LENGKAP: false,
+    RIWAYAT_LENGKAP: !!riwayatASIKTerpilihTambah.length,
+    SUMBER_DATA_AWAL: sumberASIKTerpilihTambah || 'MANUAL',
+
     INPUT_BULAN: '',
     TGL_PELAYANAN: getTanggalLayananInput(),
     VAKSIN_BULAN_INI: '',
@@ -1716,8 +1953,8 @@ const desa = normalisasiDesa(
     Keterangan: '',
     KETERANGAN: '',
 
-    Vaksin_Belum_ASIK: ['HB0'],
-    Status_ASIK: 'BELUM',
+    Vaksin_Belum_ASIK: vaksinBelumASIK,
+    Status_ASIK: vaksinBelumASIK.length ? 'BELUM' : 'YA',
     Tanggal_Cek_ASIK: '',
 
     UMUR_BULAN: hitungUmurBulanTanggal(lahir, new Date()),
@@ -1730,12 +1967,17 @@ const desa = normalisasiDesa(
 
   await simpanAman(data);
 
+  riwayatASIKTerpilihTambah = [];
+  hasilCariASIKCache = [];
+  sumberASIKTerpilihTambah = '';
+  idAsikTerpilihTambah = '';
+
   closePanel();
   renderDashboard();
   renderInputList();
   renderCariList();
 
-  notif('Sasaran sementara tersimpan. HB0 otomatis ditambahkan sesuai tanggal lahir.');
+  notif('Sasaran tersimpan. ID ASIK asli dipakai jika berasal dari ASIK; HB0/manual memakai ID sementara.');
 }
     function isiDropdownDesaLaporan(){const select=document.getElementById('pilihDesaLaporan');if(!select)return;const lama=select.value;const jenis=document.getElementById('jenisLaporan')?.value||'HASIL_PUSKESMAS';const mesin=buildMesinRekap(dataLaporanAktif(false));const daftar=daftarDesaAktif(mesin);const opsi=(jenis==='KEJAR'||jenis==='IDL_IBL'||jenis==='ASIK')?['SEMUA',...(daftar.length?daftar:desaList)]:(daftar.length?daftar:desaList);select.innerHTML=opsi.map(d=>`<option value="${d}">${d==='SEMUA'?'Semua Desa/Kelurahan':d}</option>`).join('');if(lama&&[...select.options].some(o=>o.value===lama))select.value=lama}
     function isiDropdownPosyanduLaporan(){const desa=document.getElementById('pilihDesaLaporan')?.value||desaList[0];const select=document.getElementById('pilihPosyanduLaporan');if(!select)return;const lama=select.value;const mesin=buildMesinRekap(dataLaporanAktif(false));let list=[];if(desa==='SEMUA'){list=Object.keys(mesin.posyandu||{}).length?Object.keys(mesin.posyandu):[...new Set(Object.values(posMap).flat())]}else{list=Object.keys(mesin.desa[desa]?.posyandu||{}).length?Object.keys(mesin.desa[desa].posyandu):(posMap[desa]||[])}list=list.sort((a,b)=>String(a).localeCompare(String(b),'id',{numeric:true,sensitivity:'base'}));select.innerHTML='<option value="SEMUA">Semua Posyandu</option>'+list.map(p=>`<option value="${p}">${p}</option>`).join('');select.value=list.includes(lama)?lama:'SEMUA'}
