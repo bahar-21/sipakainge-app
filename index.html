@@ -1253,7 +1253,7 @@ const footer = [
         </div>
       </div>`
     }
-    function getTanggalFormLayanan(a){const key=safeKey(a.APP_ID);return a.__TGL_FORM||document.getElementById('tglPelayanan_'+key)?.value||a.TGL_PELAYANAN||getTanggalLayananInput()}
+    function getTanggalFormLayanan(a){const key=safeKey(a.APP_ID);return a.__TGL_FORM||document.getElementById('tglPelayanan_'+key)?.value||getTanggalLayananInput()}
     function simpanTanggalFormSementara(appId){
       const anak=anakData.find(a=>a.APP_ID===appId);
       if(!anak)return;
@@ -2114,7 +2114,7 @@ async function hapusSasaranPermanen(appId){
       const searchEl=document.getElementById('searchInput');
       if(searchEl)searchEl.value=searchText;
       const bulanEl=document.getElementById('bulanLayananInput');
-      if(bulanEl&&s.bulanLayanan)bulanEl.value=s.bulanLayanan;
+      if(bulanEl) bulanEl.value = getBulanBerjalan();
       const cariEl=document.getElementById('cariInput');
       if(cariEl)cariEl.value=s.cariInput||'';
       const posEl=document.getElementById('filterPosyandu');
