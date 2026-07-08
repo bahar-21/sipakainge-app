@@ -1,4 +1,4 @@
-const CACHE_NAME = "sipakainge-v7.9";
+const CACHE_NAME = "sipakainge-v8.0";
 
 const urlsToCache = [
   "./",
