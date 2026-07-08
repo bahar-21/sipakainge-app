@@ -180,12 +180,15 @@ let idAsikTerpilihTambah = '';
       return new Promise((res,rej)=>{tx.oncomplete=res;tx.onerror=()=>rej(tx.error)});
     }
     async function simpanPending(item,aksi='UPSERT'){
-      const appId=String(item?.APP_ID||'');
+      const appId=String(item?.APP_ID||item?.data?.APP_ID||'');
       if(appId)await hapusPendingByAPPID(appId);
       const db=await bukaDB();
       const tx=db.transaction(STORE_PENDING,'readwrite');
       tx.objectStore(STORE_PENDING).add({aksi,data:item,waktu:new Date().toISOString(),APP_ID:appId});
-      return new Promise((res,rej)=>{tx.oncomplete=async()=>{await updatePendingInfo();res()};tx.onerror=()=>rej(tx.error)})
+      return new Promise((res,rej)=>{
+        tx.oncomplete=async()=>{await updatePendingInfo();res()};
+        tx.onerror=()=>rej(tx.error)
+      })
     }
     async function bacaPending(){const db=await bukaDB();const tx=db.transaction(STORE_PENDING,'readonly');const req=tx.objectStore(STORE_PENDING).getAll();return new Promise((res,rej)=>{req.onsuccess=()=>res(req.result||[]);req.onerror=()=>rej(req.error)})}
     async function hapusPending(id){const db=await bukaDB();const tx=db.transaction(STORE_PENDING,'readwrite');tx.objectStore(STORE_PENDING).delete(id);return new Promise((res,rej)=>{tx.oncomplete=res;tx.onerror=()=>rej(tx.error)})}
@@ -318,7 +321,25 @@ let idAsikTerpilihTambah = '';
     }
     function pesanErrorFirestore(e){return (e?.code?e.code+' - ':'')+(e?.message||String(e||'Error'))}
     async function kirimFirestore(item){sinkronkanFieldBantuLayanan(item);perbaruiStatusIDL_IBL(item);if(!navigator.onLine)throw new Error('offline');if(!initFirebase())throw new Error('firebase-config-belum-diisi');if(!item.APP_ID)throw new Error('APP_ID kosong');if(!item.Updated_At)sentuhUpdatedAt(item);const dataKirim=bersihkanUntukFirestore(item);dataKirim.RIWAYAT=riwayatUntukFirestore(item.RIWAYAT||[]);dataKirim.Updated_At=item.Updated_At;await dbFirestore.collection(FIRESTORE_COLLECTION).doc(String(item.APP_ID)).set(dataKirim,{merge:true})}
-    async function simpanAman(item){sentuhUpdatedAt(item);await simpanLokal(item);try{await kirimFirestore(item);await simpanLokal(item);notif('Data tersimpan lokal dan terkirim ke Firestore.')}catch(e){console.error('Kirim Firestore gagal:',e);await simpanPending(item);notif('Data tersimpan lokal, tetapi Firestore gagal: '+pesanErrorFirestore(e)+'. Masuk pending sync.')}}
+    async function simpanAman(item){
+      sentuhUpdatedAt(item);
+      await simpanLokal(item);
+      if(!navigator.onLine || !initFirebase()){
+        console.warn('Simpan aman: offline atau Firebase belum siap, simpan ke pending.');
+        await simpanPending(item,'UPSERT');
+        notif('Data tersimpan lokal, tetapi belum bisa dikirim ke Firestore. Masuk pending sync.');
+        return;
+      }
+      try{
+        await kirimFirestore(item);
+        await simpanLokal(item);
+        notif('Data tersimpan lokal dan terkirim ke Firestore.');
+      }catch(e){
+        console.error('Kirim Firestore gagal:',e);
+        await simpanPending(item,'UPSERT');
+        notif('Data tersimpan lokal, tetapi Firestore gagal: '+pesanErrorFirestore(e)+'. Masuk pending sync.');
+      }
+    }
     function pendingTerbaruPerAPPID(list){
       const map=new Map();
       (list||[]).forEach(p=>{
