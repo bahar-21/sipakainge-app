@@ -16,7 +16,8 @@
     -webkit-print-color-adjust: exact !important; 
     print-color-adjust: exact !important; 
     color-adjust: exact !important; 
-  }@page{size:A4 portrait;margin:10mm}.report-table{font-size:9px}.report-table th,.report-table td{padding:4px}.report-title{font-size:14px}.pos-report{border:0;padding:0;margin-bottom:8px}.report-top{gap:6px}.report-stat .num{font-size:18px}}@media(max-width:520px){main{padding-left:8px;padding-right:8px}.form-modal{padding:8px}.form-modal-box{padding:12px;max-height:94vh}.form-grid{grid-template-columns:1fr;gap:8px}.report-table{font-size:10px}.vax-list{grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}.vax-check{padding:5px 6px;font-size:13px;min-height:31px}.vax-check input{width:18px;height:18px;min-width:18px}.history-date-group{display:flex;flex-wrap:nowrap}.history-date-label{display:inline;margin-bottom:0}.history-vaksin-text{display:block;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.data-anak-row{grid-template-columns:72px minmax(0,1fr)}}
+  }
+  /* --------------------------------------- */@page{size:A4 portrait;margin:10mm}.report-table{font-size:9px}.report-table th,.report-table td{padding:4px}.report-title{font-size:14px}.pos-report{border:0;padding:0;margin-bottom:8px}.report-top{gap:6px}.report-stat .num{font-size:18px}}@media(max-width:520px){main{padding-left:8px;padding-right:8px}.form-modal{padding:8px}.form-modal-box{padding:12px;max-height:94vh}.form-grid{grid-template-columns:1fr;gap:8px}.report-table{font-size:10px}.vax-list{grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}.vax-check{padding:5px 6px;font-size:13px;min-height:31px}.vax-check input{width:18px;height:18px;min-width:18px}.history-date-group{display:flex;flex-wrap:nowrap}.history-date-label{display:inline;margin-bottom:0}.history-vaksin-text{display:block;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.data-anak-row{grid-template-columns:72px minmax(0,1fr)}}
   </style>
 </head>
 <body>
@@ -2419,6 +2420,105 @@ async function hapusSasaranPermanen(appId){
     }
     function init(){setupPWA();document.getElementById('bulanLayananInput').value=getBulanBerjalan();const bc=document.getElementById('bulanCariInput');if(bc)bc.value=getBulanBerjalan();isiFilterPosyandu();isiFilterCari();renderDashboard();renderInputList();renderCariList();muatAwalHematQuota()}
     init();
+    
+    /* ==========================================================================
+   FITUR TAMBAHAN: CHECKBOX ASIK TERINTEGRASI (FIXED CLICK BUG)
+   ========================================================================== */
+
+// 1. Fungsi Logika Sinkronisasi Vaksin Bulan Ini dengan Kolom Vaksin_Belum_ASIK
+async function toggleAsikSuntik(appId) {
+    const anak = anakData.find(a => a.APP_ID === appId);
+    if (!anak) return;
+
+    const bulanAktif = getBulanLayananInput();
+    const vaksinBulanIni = pemberianPadaBulan(anak, bulanAktif).split(',').map(v => normalizeAntigen(v)).filter(Boolean);
+    
+    if (vaksinBulanIni.length === 0) {
+        toast("Tidak ada data vaksin bulan ini untuk diupdate.");
+        return;
+    }
+
+    let currentBelumAsik = normalisasiVaksinBelumASIK(anak.Vaksin_Belum_ASIK || []);
+
+    // Logika: Jika saat ini tercentang (Selesai), maka kita hapus dari daftar "Belum"
+    // Kita cek apakah vaksin bulan ini sudah tidak ada di daftar "Belum"
+    const isAlreadyDone = vaksinBulanIni.every(v => !currentBelumAsik.includes(v));
+
+    if (isAlreadyDone) {
+        // AKSI: Menghapus Centang (Kirim kembali ke daftar Belum)
+        currentBelumAsik = [...new Set([...currentBelumAsik, ...vaksinBulanIni])];
+    } else {
+        // AKSI: Mencentang (Hapus dari daftar Belum)
+        currentBelumAsik = currentBelumAsik.filter(v => !vaksinBulanIni.includes(v));
+    }
+
+    anak.Vaksin_Belum_ASIK = currentBelumAsik;
+    anak.Status_ASIK = currentBelumAsik.length ? 'BELUM' : 'YA';
+
+    try {
+        await simpanAman(anak);
+        toast(`Status ASIK ${anak.NAMA} diperbarui`);
+        renderInputList();
+    } catch (e) {
+        console.error(e);
+        toast('Gagal menyimpan status');
+    }
+}
+
+// 2. Override renderAnakCard untuk menyisipkan checkbox dengan StopPropagation
+const originalRenderAnakCard = renderAnakCard;
+renderAnakCard = function(a, opsi = {}) {
+    let html = originalRenderAnakCard(a, opsi);
+    
+    if (opsi.showAsikCheck) {
+        const statusBulanIni = getInputStatus(a);
+        
+        if (statusBulanIni === 'SUNTIK') {
+            const vaksinBulanIni = pemberianPadaBulan(a, getBulanLayananInput()).split(',').map(v => normalizeAntigen(v)).filter(Boolean);
+            const belumAsik = normalisasiVaksinBelumASIK(a.Vaksin_Belum_ASIK || []);
+            
+            // Tercentang jika SEMUA vaksin bulan ini sudah tidak ada di daftar Belum_ASIK
+            const isDone = vaksinBulanIni.length > 0 && vaksinBulanIni.every(v => !belumAsik.includes(v));
+            const checkedAttr = isDone ? 'checked' : '';
+
+            // PENTING: Menambahkan onclick="event.stopPropagation();" untuk mengunci klik agar tidak membuka modal
+            const checkboxHtml = `
+                <input type="checkbox" 
+                       style="width:16px; height:16px; margin-right:8px; vertical-align:middle; cursor:pointer; accent-color:var(--hijau); position:relative; z-index:10;" 
+                       ${checkedAttr} 
+                       onclick="event.stopPropagation();" 
+                       onchange="toggleAsikSuntik('${a.APP_ID}')">`;
+            
+            html = html.replace('<div class="layanan-strip SUNTIK">', `<div class="layanan-strip SUNTIK">${checkboxHtml}`);
+        }
+    }
+    
+    return html;
+};
+
+// 3. Override renderInputList untuk mengaktifkan fitur checkbox
+const originalRenderInputList = renderInputList;
+renderInputList = function() {
+    resetAnalisaCache();
+    renderInputCounters();
+    updatePendingInfo();
+    
+    const list = inputDataByFilter();
+    const ringkasanBelum = renderRingkasanKebutuhanBelum(list);
+    const ringkasanSuntik = renderRingkasanSuntikPerDosis(list);
+    
+    document.getElementById('inputList').innerHTML = 
+        ringkasanBelum + 
+        ringkasanSuntik + 
+        `<div class="section-small">DAFTAR ${inputFilter} (${list.length} ANAK)</div>` + 
+        list.map(a => renderAnakCard(a, {
+            onclick: `onclick="openInput('${a.APP_ID}',event)"`,
+            showAsikCheck: true 
+        })).join('');
+    
+    simpanStateUI();
+};
+
   </script>
 </body>
 </html>
