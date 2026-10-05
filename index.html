@@ -28,7 +28,7 @@
     </section>
     <section id="viewInput" class="view"><main><div class="input-filter"><div class="filter-grid"><div><div class="label">Bulan Layanan</div><input id="bulanLayananInput" type="month" onchange="renderInputList()"></div><div><div class="label">Posyandu</div><select id="filterPosyandu" onchange="renderInputList()"><option value="SEMUA">Semua Posyandu</option></select></div></div></div><div class="search-action"><input id="cariInput" placeholder="🔍 Cari nama anak atau no. buku" oninput="renderInputList()"/><button class="input-action-btn plus" onclick="bukaFormTambah()" title="Tambah sasaran baru">+<span>Tambah</span></button><button class="input-action-btn" onclick="kirimWABelumBatal()" title="Kirim daftar Belum/Batal via WhatsApp">WA<span>Kirim</span></button><button class="input-action-btn" onclick="syncManual()" title="Sinkronkan data ke Firestore">↻<span>Sync</span></button><details class="input-more"><summary class="input-action-btn" title="Menu lainnya">⋯<span>Lainnya</span></summary><div class="input-more-menu"><button onclick="backupKeGoogleSheet();this.closest('details').open=false">☁ Backup ke Google Sheet</button><button onclick="previewBackupSheet();this.closest('details').open=false">👁 Preview Backup</button><button onclick="resetDataLokalImunisasiYA();this.closest('details').open=false">🧹 Reset Data Lokal</button><button onclick="hapusLastBackupKey();this.closest('details').open=false">↺ Backup Full Ulang</button></div></details><div id="pendingSyncInfo" class="pending-badge zero" title="Data pending sync"><b>0</b>Pending</div></div><div class="counter-grid" id="inputCounters"></div><section id="inputList"></section></main></section>
     <section id="viewCari" class="view"><main><div class="input-filter"><div class="filter-grid"><div><div class="label">Cari Anak / Orang Tua / No Buku / NIK / ID ASIK</div><input id="cariCepatText" placeholder="Ketik kata kunci..." oninput="renderCariList()"></div><div><div class="label">Bulan Pelayanan</div><input id="bulanCariInput" type="month" onchange="renderCariList()"></div><div><div class="label">Desa/Kelurahan</div><select id="filterCariDesa" onchange="isiPosCari();renderCariList()"><option value="SEMUA">Semua Desa/Kelurahan</option></select></div><div><div class="label">Posyandu</div><select id="filterCariPosyandu" onchange="renderCariList()"><option value="SEMUA">Semua Posyandu</option></select></div><div><div class="label">Warna Risiko <small style="color:#64748b">(boleh gabung)</small></div><div id="filterCariWarna" class="chip-filter"><label><input type="checkbox" value="HIJAU" onchange="renderCariList()">Hijau</label><label><input type="checkbox" value="KUNING" onchange="renderCariList()">Kuning</label><label><input type="checkbox" value="MERAH" onchange="renderCariList()">Merah</label><label><input type="checkbox" value="HITAM" onchange="renderCariList()">Hitam</label></div></div><div><div class="label">Status Pelayanan <small style="color:#64748b">(boleh gabung)</small></div><div id="filterCariStatus" class="chip-filter"><label><input type="checkbox" value="LENGKAP" onchange="renderCariList()">Lengkap</label><label><input type="checkbox" value="BELUM" onchange="renderCariList()">Belum</label><label><input type="checkbox" value="SUNTIK" onchange="renderCariList()">Suntik</label><label><input type="checkbox" value="BATAL" onchange="renderCariList()">Batal</label></div></div></div><div style="display:grid;grid-template-columns:1fr auto auto auto;gap:7px;margin-top:10px"><button class="cancel-btn" onclick="resetCariFilter()" style="padding:9px">Reset Filter</button><button class="icon-btn" onclick="kirimWACariFilter()" title="Kirim daftar hasil filter via WhatsApp">WA</button><button class="icon-btn" onclick="updateDataPublik()" title="Update data terbaru">↻</button><div id="cariTotalBadge" class="hasil-filter-badge" title="Total hasil filter"><b>0</b>Hasil</div></div></div><div id="cariSummary" class="card" style="font-size:12px;font-weight:900;color:#475569"></div><section id="cariList"></section></main></section>
-    <section id="viewLaporan" class="view"><main><div class="input-filter"><div class="filter-grid"><div><div class="label">Bulan Mulai</div><input id="bulanLaporan" type="month" onchange="renderLaporan()"></div><div id="boxBulanSampaiLaporan" style="display:none"><div class="label">Sampai Bulan</div><input id="bulanSampaiLaporan" type="month" onchange="renderLaporan()"></div><div><div class="label">Jenis Laporan</div><select id="jenisLaporan" onchange="renderLaporan()"><option value="HASIL_PUSKESMAS">Rekapitulasi Hasil Imunisasi Puskesmas</option><option value="DESA">Laporan Hasil Imunisasi Desa</option><option value="PUSKESMAS">Rekapitulasi EWS Puskesmas</option><option value="VAKSIN">Laporan Pemakaian Vaksin</option><option value="KEJAR">Laporan Imunisasi Kejar</option><option value="IDL_IBL">Laporan IDL dan IBL</option><option value="ASIK">Laporan Belum Input ASIK</option></select></div><div id="boxDesaLaporan"><div class="label">Pilih Desa/Kelurahan</div><select id="pilihDesaLaporan" onchange="onDesaLaporanChange()"></select></div><div id="boxPosyanduLaporan"><div class="label">Pilih Posyandu</div><select id="pilihPosyanduLaporan" onchange="renderLaporan()"><option value="SEMUA">Semua Posyandu</option></select></div><div id="boxKelompokUmurLaporan" style="display:none"><div class="label">Kelompok Umur</div><select id="kelompokUmurLaporan" onchange="renderLaporan()"><option value="TOTAL">Total / Semua Sasaran 0-59 bln</option><option value="BAYI">Bayi (&lt;12 bln)</option><option value="BADUTA">Baduta (12-&lt;24 bln)</option><option value="BALITA">Balita (&gt;24-&lt;60 bln)</option></select></div></div></div><section id="laporanPreview"></section></main></section>
+    <section id="viewLaporan" class="view"><main><div class="input-filter"><div class="filter-grid"><div><div class="label">Bulan Mulai</div><input id="bulanLaporan" type="month" onchange="renderLaporan()"></div><div id="boxBulanSampaiLaporan" style="display:none"><div class="label">Sampai Bulan</div><input id="bulanSampaiLaporan" type="month" onchange="renderLaporan()"></div><div><div class="label">Jenis Laporan</div><select id="jenisLaporan" onchange="renderLaporan()"><option value="HASIL_PUSKESMAS">Rekapitulasi Hasil Imunisasi Puskesmas</option><option value="DESA">Laporan Hasil Imunisasi Desa</option><option value="PUSKESMAS">Rekapitulasi EWS Puskesmas</option><option value="VAKSIN">Laporan Pemakaian Vaksin</option><option value="KEJAR">Laporan Imunisasi Kejar</option><option value="DAFTAR_KEJAR">Daftar Kebutuhan Imunisasi Kejar (Belum Dilayani)</option><option value="IDL_IBL">Laporan IDL dan IBL</option><option value="ASIK">Laporan Belum Input ASIK</option></select></div><div id="boxDesaLaporan"><div class="label">Pilih Desa/Kelurahan</div><select id="pilihDesaLaporan" onchange="onDesaLaporanChange()"></select></div><div id="boxPosyanduLaporan"><div class="label">Pilih Posyandu</div><select id="pilihPosyanduLaporan" onchange="renderLaporan()"><option value="SEMUA">Semua Posyandu</option></select></div><div id="boxKelompokUmurLaporan" style="display:none"><div class="label">Kelompok Umur</div><select id="kelompokUmurLaporan" onchange="renderLaporan()"><option value="TOTAL">Total / Semua Sasaran 0-59 bln</option><option value="BAYI">Bayi (&lt;12 bln)</option><option value="BADUTA">Baduta (12-&lt;24 bln)</option><option value="BALITA">Balita (&gt;24-&lt;60 bln)</option></select></div></div></div><section id="laporanPreview"></section></main></section>
   </div>
   <nav class="bottom-nav"><button class="nav active" onclick="setPage('Dashboard',this)">Pantau</button><button class="nav" onclick="setPage('Input',this)">Input</button><button class="nav" onclick="setPage('Cari',this)">Cari</button><button class="nav" onclick="setPage('Laporan',this)">Laporan</button></nav>
   <div class="overlay" id="overlay"><div class="panel"><div class="panel-head"><div><div class="panel-title" id="panelTitle">Daftar Sasaran</div><div class="panel-subtitle" id="panelSubtitle"></div></div><button class="close-btn" onclick="closePanel()">×</button></div><div class="panel-body" id="panelBody"></div></div></div>
@@ -1859,81 +1859,57 @@ async function simpanEditIdentitas(appId){
   if(document.getElementById('viewLaporan')?.classList.contains('active'))renderLaporan();
   notif('Identitas sasaran tersimpan.');
 }
-async function hapusSasaranPermanen(appId){
+async function hapusSasaranPermanen(appId) {
   const anak = anakData.find(a => String(a.APP_ID) === String(appId));
-  if(!anak){
+  if (!anak) {
     notif('Data anak tidak ditemukan.');
     return;
   }
 
-  if(!navigator.onLine){
+  if (!navigator.onLine) {
     alert('Hapus permanen membutuhkan internet agar Firestore ikut terhapus.');
     return;
   }
 
-  const info = [
-    properCase(anak.NAMA || '-'),
-    'No Buku: ' + (anak.No_Buku || '-'),
-    'APP_ID: ' + (anak.APP_ID || '-')
-  ].join(String.fromCharCode(10));
+  // PESAN PERINGATAN SEDERHANA
+  const pesanKonfirmasi = `Hapus permanen data ${properCase(anak.NAMA)}?\n\nData akan dihapus selamanya dari database dan tidak dapat dikembalikan.`;
+  
+  if (!confirm(pesanKonfirmasi)) return; // Jika klik 'Batal', fungsi berhenti di sini
 
-  const pesan = [
-    'HAPUS PERMANEN SASARAN INI?',
-    '',
-    info,
-    '',
-    'Gunakan hanya untuk data ganda/duplikat.',
-    'Data akan dihapus dari Firestore dan IndexedDB perangkat ini.'
-  ].join(String.fromCharCode(10));
+  try {
+    if (!initFirebase()) throw new Error('Firebase belum siap.');
 
-  if(!confirm(pesan))return;
-
-  const ketik = prompt([
-    'Kontrol keamanan:',
-    'Ketik HAPUS untuk melanjutkan.'
-  ].join(String.fromCharCode(10)));
-
-  if(String(ketik || '').trim().toUpperCase() !== 'HAPUS'){
-    notif('Hapus dibatalkan.');
-    return;
-  }
-
-  const kode = String(appId).slice(-6);
-  const cekAppId = prompt([
-    'Ketik 6 digit terakhir APP_ID untuk konfirmasi:',
-    kode
-  ].join(String.fromCharCode(10)));
-
-  if(String(cekAppId || '').trim() !== kode){
-    notif('APP_ID tidak cocok. Hapus dibatalkan.');
-    return;
-  }
-
-  try{
-    if(!initFirebase())throw new Error('Firebase belum siap.');
-
+    // 1. Hapus dari Cloud (Firestore)
     await dbFirestore.collection(FIRESTORE_COLLECTION).doc(String(appId)).delete();
+    
+    // 2. Hapus dari Database Lokal (IndexedDB)
     await hapusLokalByAPPID(appId);
+    
+    // 3. Hapus dari Antrean Sync (Pending Sync)
     await hapusPendingByAPPID(appId);
 
+    // Hapus dari array data di memori agar tampilan langsung terupdate
     const idx = anakData.findIndex(a => String(a.APP_ID) === String(appId));
-    if(idx >= 0) anakData.splice(idx,1);
+    if (idx >= 0) anakData.splice(idx, 1);
 
+    // Tutup semua modal yang mungkin terbuka
     closeEditIdentitasModal();
     closeFormModal();
     closeDetailAnakModal();
 
+    // Refresh semua tampilan
     renderInputList();
     renderCariList();
     renderDashboard();
-    if(document.getElementById('viewLaporan')?.classList.contains('active'))renderLaporan();
+    if (document.getElementById('viewLaporan')?.classList.contains('active')) renderLaporan();
 
-    notif('Data duplikat berhasil dihapus permanen.');
-  }catch(e){
+    notif('Data berhasil dihapus permanen.');
+  } catch (e) {
     console.error(e);
-    alert('Gagal hapus permanen: ' + (e.message || e));
+    alert('Gagal menghapus permanen: ' + (e.message || e));
   }
 }
+
     function isiPosBaru(defaultPos=''){
   const d = document.getElementById('baruDesa')?.value || desaList[0];
   const select = document.getElementById('baruPos');
@@ -2069,7 +2045,7 @@ async function hapusSasaranPermanen(appId){
 
   notif('Sasaran tersimpan. ID ASIK asli dipakai jika berasal dari ASIK; HB0/manual memakai ID sementara.');
 }
-    function isiDropdownDesaLaporan(){const select=document.getElementById('pilihDesaLaporan');if(!select)return;const lama=select.value;const jenis=document.getElementById('jenisLaporan')?.value||'HASIL_PUSKESMAS';const mesin=buildMesinRekap(dataLaporanAktif(false));const daftar=daftarDesaAktif(mesin);const opsi=(jenis==='KEJAR'||jenis==='IDL_IBL'||jenis==='ASIK')?['SEMUA',...(daftar.length?daftar:desaList)]:(daftar.length?daftar:desaList);select.innerHTML=opsi.map(d=>`<option value="${d}">${d==='SEMUA'?'Semua Desa/Kelurahan':d}</option>`).join('');if(lama&&[...select.options].some(o=>o.value===lama))select.value=lama}
+    function isiDropdownDesaLaporan(){const select=document.getElementById('pilihDesaLaporan');if(!select)return;const lama=select.value;const jenis=document.getElementById('jenisLaporan')?.value||'HASIL_PUSKESMAS';const mesin=buildMesinRekap(dataLaporanAktif(false));const daftar=daftarDesaAktif(mesin);const opsi=(jenis==='KEJAR'|| jenis === 'DAFTAR_KEJAR' ||jenis==='IDL_IBL'||jenis==='ASIK')?['SEMUA',...(daftar.length?daftar:desaList)]:(daftar.length?daftar:desaList);select.innerHTML=opsi.map(d=>`<option value="${d}">${d==='SEMUA'?'Semua Desa/Kelurahan':d}</option>`).join('');if(lama&&[...select.options].some(o=>o.value===lama))select.value=lama}
     function isiDropdownPosyanduLaporan(){const desa=document.getElementById('pilihDesaLaporan')?.value||desaList[0];const select=document.getElementById('pilihPosyanduLaporan');if(!select)return;const lama=select.value;const mesin=buildMesinRekap(dataLaporanAktif(false));let list=[];if(desa==='SEMUA'){list=Object.keys(mesin.posyandu||{}).length?Object.keys(mesin.posyandu):[...new Set(Object.values(posMap).flat())]}else{list=Object.keys(mesin.desa[desa]?.posyandu||{}).length?Object.keys(mesin.desa[desa].posyandu):(posMap[desa]||[])}list=list.sort((a,b)=>String(a).localeCompare(String(b),'id',{numeric:true,sensitivity:'base'}));select.innerHTML='<option value="SEMUA">Semua Posyandu</option>'+list.map(p=>`<option value="${p}">${p}</option>`).join('');select.value=list.includes(lama)?lama:'SEMUA'}
     function onDesaLaporanChange(){isiDropdownPosyanduLaporan();renderLaporan()}
     function pilihLaporanDesa(desa){setPage('Laporan');isiDropdownDesaLaporan();document.getElementById('jenisLaporan').value='DESA';document.getElementById('pilihDesaLaporan').value=desa;isiDropdownPosyanduLaporan();document.getElementById('pilihPosyanduLaporan').value='SEMUA';renderLaporan()}
@@ -2134,13 +2110,179 @@ async function hapusSasaranPermanen(appId){
     function counterKejarKosong(){const r={};daftarAntigenRiwayat().forEach(k=>r[k]=0);return r}
     function tambahKejar(counter,v){v=normalizeAntigen(v);if(counter[v]!==undefined)counter[v]++}
     function isRiwayatKejar(a,tanggal,v){return klasifikasiPemberian(getAnakUntukTanggalLayanan(a,tanggal),normalizeAntigen(v)).isKejar}
-    function dataKejarBulan(){const bulan=getBulanLaporan(),desa=document.getElementById('pilihDesaLaporan')?.value||'SEMUA',pos=getPosyanduLaporan();return dataLaporanAktif(false).filter(a=>desa==='SEMUA'||a.DESA===desa).filter(a=>pos==='SEMUA'||a.POSYANDU===pos).flatMap(a=>riwayatImunisasiBulan(a,bulan).flatMap(r=>{const tgl=ubahTanggalKeISO(r[0]);return String(r[1]||'').split(',').map(x=>x.trim()).filter(Boolean).map(v=>normalizeAntigen(v)).filter(v=>isRiwayatKejar(a,tgl,v)).map(v=>({anak:a,tanggal:tgl,vaksin:v}))}))}
-    function buildLaporanKejar(){const data=dataKejarBulan();const hasil={total:counterKejarKosong(),desa:{},data};data.forEach(x=>{const desa=x.anak.DESA||'TANPA DESA',pos=x.anak.POSYANDU||'TANPA POSYANDU';tambahKejar(hasil.total,x.vaksin);if(!hasil.desa[desa])hasil.desa[desa]={nama:desa,vaksin:counterKejarKosong(),posyandu:{},data:[]};tambahKejar(hasil.desa[desa].vaksin,x.vaksin);hasil.desa[desa].data.push(x);if(!hasil.desa[desa].posyandu[pos])hasil.desa[desa].posyandu[pos]={nama:pos,vaksin:counterKejarKosong(),data:[]};tambahKejar(hasil.desa[desa].posyandu[pos].vaksin,x.vaksin);hasil.desa[desa].posyandu[pos].data.push(x)});return hasil}
     function kejarCells(v,kolom){return kolom.map(k=>`<td style="text-align:center">${v[k]||0}</td>`).join('')}
     function kejarRows(items,kolom){return Object.values(items||{}).sort((a,b)=>String(a.nama).localeCompare(String(b.nama),'id',{numeric:true,sensitivity:'base'})).map(d=>`<tr class="total-row"><td>${d.nama}</td>${kejarCells(d.vaksin,kolom)}</tr>${Object.values(d.posyandu||{}).sort((a,b)=>String(a.nama).localeCompare(String(b.nama),'id',{numeric:true,sensitivity:'base'})).map(p=>`<tr><td>- ${p.nama}</td>${kejarCells(p.vaksin,kolom)}</tr>`).join('')}`).join('')}
     function renderRingkasanKejar(v,kolom){return`<div class="vaksin-summary">${kolom.map(k=>`<div class="vaksin-card"><small>${k}</small><div class="num">${v[k]||0}</div></div>`).join('')}</div>`}
-    function renderDaftarAnakKejar(list){const data=[...(list||[])].sort((a,b)=>String(a.anak.POSYANDU).localeCompare(String(b.anak.POSYANDU),'id',{numeric:true,sensitivity:'base'})||urutNoBuku(a.anak,b.anak));return`<table class="report-table"><thead><tr><th>No</th><th>Posyandu</th><th>Nama Anak</th><th>L/P</th><th>Tgl Lahir (Umur)</th><th>Orang Tua</th><th>Tanggal</th><th>Antigen Kejar</th></tr></thead><tbody>${data.map((x,i)=>`<tr><td style="text-align:center">${i+1}</td><td>${x.anak.POSYANDU||'-'}</td><td><b>${properCase(x.anak.NAMA)}</b></td><td style="text-align:center">${jkText(x.anak.JK)}</td><td style="text-align:center;white-space:nowrap">${formatTanggalIndonesia(x.anak.TGL_LAHIR)}<br><small>${hitungUmurBulanTanggal(x.anak.TGL_LAHIR,x.tanggal)} bln</small></td><td>${properCase(x.anak.ORTU||'-')}</td><td style="text-align:center">${formatTanggalIndonesia(x.tanggal)}</td><td style="text-align:center;font-weight:900;color:#dc2626">${x.vaksin}</td></tr>`).join('')||'<tr><td colspan="8" style="text-align:center">Tidak ada imunisasi kejar pada filter ini.</td></tr>'}</tbody></table>`}
-    function renderLaporanKejarHTML(){const bulanText=formatBulanLaporan(getBulanLaporan());const desa=document.getElementById('pilihDesaLaporan')?.value||'SEMUA';const pos=getPosyanduLaporan();const lap=buildLaporanKejar();const kolom=kolomKejarAktif(lap.total);const labelDesa=desa==='SEMUA'?'Semua Desa/Kelurahan':desa;const labelPos=pos==='SEMUA'?'Semua Posyandu':pos;if(!kolom.length)return`${reportActions()}<div class="report-paper" id="areaCetakLaporan">${kopHTML()}<div class="report-meta-top">Tanggal Cetak : ${formatTanggalCetak()}</div><div class="report-title">LAPORAN IMUNISASI KEJAR</div><div class="report-subtitle"><b>Bulan Pelayanan:</b> ${bulanText} &nbsp; • &nbsp; <b>Desa:</b> ${labelDesa} &nbsp; • &nbsp; <b>Posyandu:</b> ${labelPos}</div><div class="placeholder">Tidak ada imunisasi kejar pada filter ini.</div>${renderTandaTangan()}</div>`;return`${reportActions()}<div class="report-paper" id="areaCetakLaporan">${kopHTML()}<div class="report-meta-top">Tanggal Cetak : ${formatTanggalCetak()}</div><div class="report-title">LAPORAN IMUNISASI KEJAR</div><div class="report-subtitle"><b>Bulan Pelayanan:</b> ${bulanText} &nbsp; • &nbsp; <b>Desa:</b> ${labelDesa} &nbsp; • &nbsp; <b>Posyandu:</b> ${labelPos}<br><span style="font-size:10px">Kolom antigen hanya ditampilkan jika ada dosis kejar pada bulan laporan.</span></div><div class="report-section">REKAPAN JUMLAH IMUNISASI KEJAR</div>${renderRingkasanKejar(lap.total,kolom)}<table class="report-table"><thead><tr><th>WILAYAH KERJA (DESA/POSYANDU)</th>${kolom.map(k=>`<th>${k}</th>`).join('')}</tr></thead><tbody>${kejarRows(lap.desa,kolom)}<tr class="total-row"><td>TOTAL PUSKESMAS LAWAWOI</td>${kejarCells(lap.total,kolom)}</tr></tbody></table><div class="report-section">DAFTAR NAMA ANAK IMUNISASI KEJAR</div>${renderDaftarAnakKejar(lap.data)}${renderTandaTangan()}</div>`}
+    function renderDaftarAnakKejar(list, mode) {
+  const bulanLaporan = getBulanLaporan();
+  const tglAkhirBulan = akhirBulanISO(bulanLaporan);
+  
+  const data = [...(list || [])].sort((a, b) => 
+    String(a.anak.POSYANDU).localeCompare(String(b.anak.POSYANDU), 'id', { numeric: true, sensitivity: 'base' }) || 
+    urutNoBuku(a.anak, b.anak)
+  );
+
+  return `<table class="report-table">
+    <thead>
+      <tr>
+        <th>No</th>
+        <th>Posyandu</th>
+        <th>Nama Anak</th>
+        <th>L/P</th>
+        <th>Tgl Lahir (Umur)</th>
+        <th>Orang Tua</th>
+        <th>Tanggal</th>
+        <th>Antigen Kejar</th>
+      </tr>
+    </thead>
+    <tbody>
+      ${data.map((x, i) => {
+        // LOGIKA HITUNG UMUR BERBEDA BERDASARKAN MODE
+        let umurBulan;
+        if (mode === 'SERVED') {
+          // Laporan Kejar: Umur dihitung sampai tanggal imunisasi
+          umurBulan = hitungUmurBulanTanggal(x.anak.TGL_LAHIR, x.tanggal);
+        } else {
+          // Daftar Kebutuhan: Umur dihitung sampai akhir bulan filter
+          umurBulan = hitungUmurBulanTanggal(x.anak.TGL_LAHIR, tglAkhirBulan);
+        }
+
+        return `
+          <tr>
+            <td style="text-align:center">${i + 1}</td>
+            <td>${x.anak.POSYANDU || '-'}</td>
+            <td><b>${properCase(x.anak.NAMA)}</b></td>
+            <td style="text-align:center">${jkText(x.anak.JK)}</td>
+            <td style="text-align:center;white-space:nowrap">
+              ${formatTanggalIndonesia(x.anak.TGL_LAHIR)}<br>
+              <small>${umurBulan} bln</small>
+            </td>
+            <td>${properCase(x.anak.ORTU || '-')}</td>
+            <td style="text-align:center">${x.tanggal === '-' ? '-' : formatTanggalIndonesia(x.tanggal)}</td>
+            <td style="text-align:center;font-weight:900;color:#dc2626">${x.vaksin}</td>
+          </tr>`;
+      }).join('') || '<tr><td colspan="8" style="text-align:center">Tidak ada data.</td></tr>'}
+    </tbody>
+  </table>`;
+}
+
+
+    // 1. Logika untuk Imunisasi Kejar yang SUDAH dilayani (Satu baris per anak)
+function dataKejarBulan() {
+  const bulan = getBulanLaporan();
+  const desa = document.getElementById('pilihDesaLaporan')?.value || 'SEMUA';
+  const pos = getPosyanduLaporan();
+
+  return dataLaporanAktif(false)
+    .filter(a => desa === 'SEMUA' || a.DESA === desa)
+    .filter(a => pos === 'SEMUA' || a.POSYANDU === pos)
+    .map(a => {
+      const riwayat = riwayatImunisasiBulan(a, bulan);
+      const tglAcuan = riwayat.length > 0 ? riwayat[0][0] : ''; // Ambil tanggal pertama jika ada
+      
+      // Cari vaksin mana saja dari riwayat bulan ini yang masuk kategori KEJAR
+      const vaksinKejar = [];
+      riwayat.forEach(r => {
+        const antigens = String(r[1] || '').split(',').map(v => v.trim());
+        antigens.forEach(v => {
+          if (klasifikasiPemberian(a, v).isKejar) vaksinKejar.push(v);
+        });
+      });
+
+      if (vaksinKejar.length === 0) return null;
+
+      return {
+        anak: a,
+        tanggal: tglAcuan,
+        vaksin: vaksinKejar.join(', ') // Gabungkan vaksin jadi satu string
+      };
+    }).filter(Boolean);
+}
+
+// 2. Logika untuk Daftar Kebutuhan Kejar yang BELUM dilayani (Satu baris per anak)
+function dataKebutuhanKejarBulan() {
+  const bulan = getBulanLaporan();
+  const desa = document.getElementById('pilihDesaLaporan')?.value || 'SEMUA';
+  const pos = getPosyanduLaporan();
+
+  return dataLaporanAktif(false)
+    .filter(a => desa === 'SEMUA' || a.DESA === desa)
+    .filter(a => pos === 'SEMUA' || a.POSYANDU === pos)
+    .map(a => {
+      const tglAcuan = akhirBulanISO(bulan);
+      const analisa = analisaAnak(a, tglAcuan);
+      
+      // Cari semua rekomendasi yang statusnya 'Kejar'
+      const antigenKejar = analisa.rekomendasi.filter(v => 
+        klasifikasiPemberian(a, v).isKejar
+      );
+
+      if (antigenKejar.length === 0) return null;
+
+      return {
+        anak: a,
+        tanggal: '-', // Sesuai permintaan: diisi tanda "-"
+        vaksin: antigenKejar.join(', ') // Gabungkan vaksin jadi satu string
+      };
+    }).filter(Boolean);
+}
+
+
+function buildLaporanKejar() {
+  const data = dataKejarBulan();
+  const hasil = { total: counterKejarKosong(), desa: {}, data };
+
+  data.forEach(x => {
+    const desa = x.anak.DESA || 'TANPA DESA';
+    const pos = x.anak.POSYANDU || 'TANPA POSYANDU';
+    const vaks = x.vaksin.split(', '); // Pecah kembali untuk hitungan rekap
+
+    vaks.forEach(v => tambahKejar(hasil.total, v));
+    if (!hasil.desa[desa]) hasil.desa[desa] = { nama: desa, vaksin: counterKejarKosong(), posyandu: {}, data: [] };
+    vaks.forEach(v => tambahKejar(hasil.desa[desa].vaksin, v));
+    hasil.desa[desa].data.push(x);
+    if (!hasil.desa[desa].posyandu[pos]) hasil.desa[desa].posyandu[pos] = { nama: pos, vaksin: counterKejarKosong(), data: [] };
+    vaks.forEach(v => tambahKejar(hasil.desa[desa].posyandu[pos].vaksin, v));
+    hasil.desa[desa].posyandu[pos].data.push(x);
+  });
+  return hasil;
+}
+function buildLaporanKebutuhanKejar() {
+  const data = dataKebutuhanKejarBulan();
+  const hasil = { total: counterKejarKosong(), desa: {}, data };
+
+  data.forEach(x => {
+    const desa = x.anak.DESA || 'TANPA DESA';
+    const pos = x.anak.POSYANDU || 'TANPA POSYANDU';
+    const vaks = x.vaksin.split(', '); // Pecah kembali untuk hitungan rekap
+
+    vaks.forEach(v => tambahKejar(hasil.total, v));
+    if (!hasil.desa[desa]) hasil.desa[desa] = { nama: desa, vaksin: counterKejarKosong(), posyandu: {}, data: [] };
+    vaks.forEach(v => tambahKejar(hasil.desa[desa].vaksin, v));
+    hasil.desa[desa].data.push(x);
+    if (!hasil.desa[desa].posyandu[pos]) hasil.desa[desa].posyandu[pos] = { nama: pos, vaksin: counterKejarKosong(), data: [] };
+    vaks.forEach(v => tambahKejar(hasil.desa[desa].posyandu[pos].vaksin, v));
+    hasil.desa[desa].posyandu[pos].data.push(x);
+  });
+  return hasil;
+}
+
+
+    function renderLaporanKejarHTML(){const bulanText=formatBulanLaporan(getBulanLaporan());const desa=document.getElementById('pilihDesaLaporan')?.value||'SEMUA';const pos=getPosyanduLaporan();const lap=buildLaporanKejar();const kolom=kolomKejarAktif(lap.total);const labelDesa=desa==='SEMUA'?'Semua Desa/Kelurahan':desa;const labelPos=pos==='SEMUA'?'Semua Posyandu':pos;if(!kolom.length)return`${reportActions()}<div class="report-paper" id="areaCetakLaporan">${kopHTML()}<div class="report-meta-top">Tanggal Cetak : ${formatTanggalCetak()}</div><div class="report-title">LAPORAN IMUNISASI KEJAR</div><div class="report-subtitle"><b>Bulan Pelayanan:</b> ${bulanText} &nbsp; • &nbsp; <b>Desa:</b> ${labelDesa} &nbsp; • &nbsp; <b>Posyandu:</b> ${labelPos}</div><div class="placeholder">Tidak ada imunisasi kejar pada filter ini.</div>${renderTandaTangan()}</div>`;return`${reportActions()}<div class="report-paper" id="areaCetakLaporan">${kopHTML()}<div class="report-meta-top">Tanggal Cetak : ${formatTanggalCetak()}</div><div class="report-title">LAPORAN IMUNISASI KEJAR</div><div class="report-subtitle"><b>Bulan Pelayanan:</b> ${bulanText} &nbsp; • &nbsp; <b>Desa:</b> ${labelDesa} &nbsp; • &nbsp; <b>Posyandu:</b> ${labelPos}<br><span style="font-size:10px">Kolom antigen hanya ditampilkan jika ada dosis kejar pada bulan laporan.</span></div><div class="report-section">REKAPAN JUMLAH IMUNISASI KEJAR</div>${renderRingkasanKejar(lap.total,kolom)}<table class="report-table"><thead><tr><th>WILAYAH KERJA (DESA/POSYANDU)</th>${kolom.map(k=>`<th>${k}</th>`).join('')}</tr></thead><tbody>${kejarRows(lap.desa,kolom)}<tr class="total-row"><td>TOTAL PUSKESMAS LAWAWOI</td>${kejarCells(lap.total,kolom)}</tr></tbody></table><div class="report-section">DAFTAR NAMA ANAK IMUNISASI KEJAR</div>${renderDaftarAnakKejar(lap.data, 'SERVED')}${renderTandaTangan()}</div>`}
+    function renderDaftarKejarHTML() {
+  const bulanText = formatBulanLaporan(getBulanLaporan());
+  const desa = document.getElementById('pilihDesaLaporan')?.value || 'SEMUA';
+  const pos = getPosyanduLaporan();
+  const lap = buildLaporanKebutuhanKejar();
+  const kolom = kolomKejarAktif(lap.total);
+  const labelDesa = desa === 'SEMUA' ? 'Semua Desa/Kelurahan' : desa;
+  const labelPos = pos === 'SEMUA' ? 'Semua Posyandu' : pos;
+
+  if (!kolom.length) return `${reportActions()}<div class="report-paper" id="areaCetakLaporan">${kopHTML()}<div class="report-meta-top">Tanggal Cetak : ${formatTanggalCetak()}</div><div class="report-title">DAFTAR KEBUTUHAN IMUNISASI KEJAR</div><div class="report-subtitle"><b>Bulan Pelayanan:</b> ${bulanText} &nbsp; • &nbsp; <b>Desa:</b> ${labelDesa} &nbsp; • &nbsp; <b>Posyandu:</b> ${labelPos}</div><div class="placeholder">Tidak ada sasaran yang membutuhkan imunisasi kejar pada filter ini.</div>${renderTandaTangan()}</div>`;
+
+  return `${reportActions()}<div class="report-paper" id="areaCetakLaporan">${kopHTML()}<div class="report-meta-top">Tanggal Cetak : ${formatTanggalCetak()}</div><div class="report-title">DAFTAR KEBUTUHAN IMUNISASI KEJAR</div><div class="report-subtitle"><b>Bulan Pelayanan:</b> ${bulanText} &nbsp; • &nbsp; <b>Desa:</b> ${labelDesa} &nbsp; • &nbsp; <b>Posyandu:</b> ${labelPos}<br><span style="font-size:10px">Daftar sasaran yang masuk kategori KEJAR namun belum mendapatkan pelayanan pada bulan ini.</span></div><div class="report-section">REKAPAN JUMLAH KEBUTUHAN KEJAR</div>${renderRingkasanKejar(lap.total, kolom)}<table class="report-table"><thead><tr><th>WILAYAH KERJA (DESA/POSYANDU)</th>${kolom.map(k => `<th>${k}</th>`).join('')}</tr></thead><tbody>${kejarRows(lap.desa, kolom)}<tr class="total-row"><td>TOTAL PUSKESMAS LAWAWOI</td>${kejarCells(lap.total, kolom)}</tr></tbody></table><div class="report-section">DAFTAR NAMA ANAK KEBUTUHAN KEJAR</div>${renderDaftarAnakKejar(lap.data)}${renderTandaTangan()}</div>`;
+}
+
     function kategoriEWS(nilai){if(nilai>=90)return'HIJAU';if(nilai>=70)return'KUNING';if(nilai>=50)return'MERAH';return'HITAM'}
     function renderGrafikHasilPuskesmas(desa){
   const urut=Object.values(desa||{}).sort((a,b)=>b.layanan.API-a.layanan.API);
@@ -2188,8 +2330,52 @@ async function hapusSasaranPermanen(appId){
     function renderAksiMigrasiIDLIBL(){return`<div class="report-actions" style="justify-content:space-between;gap:8px;align-items:center"><button class="cancel-btn" style="width:auto;padding:10px 12px" onclick="migrasiTanggalIDLIBL()">↻ Isi Tanggal IDL/IBL Data Lama</button><button class="print-btn" onclick="window.print()">🖨 Print Laporan</button></div>`}
     function renderLaporanIDLIBLHTML(){const mulai=formatBulanLaporan(getBulanLaporan()),sampai=formatBulanLaporan(bulanAkhirLaporan());const desa=document.getElementById('pilihDesaLaporan')?.value||'SEMUA',pos=getPosyanduLaporan();const lap=buildLaporanIDLIBL();const labelDesa=desa==='SEMUA'?'Semua Desa/Kelurahan':desa,labelPos=pos==='SEMUA'?'Semua Posyandu':pos;return`${renderAksiMigrasiIDLIBL()}<div class="report-paper" id="areaCetakLaporan">${kopHTML()}<div class="report-meta-top">Tanggal Cetak : ${formatTanggalCetak()}</div><div class="report-title">LAPORAN IDL DAN IBL</div><div class="report-subtitle"><b>Periode:</b> ${mulai} s/d ${sampai} &nbsp; • &nbsp; <b>Desa:</b> ${labelDesa} &nbsp; • &nbsp; <b>Posyandu:</b> ${labelPos}<br><span style="font-size:10px">Sasaran IDL: anak usia 9-&lt;12 bulan dalam periode. Cakupan IDL: sasaran yang sudah memiliki Tanggal_IDL. Sasaran IBL: anak usia 19-&lt;24 bulan dalam periode. Cakupan IBL: sasaran yang sudah memiliki Tanggal_IBL.</span></div><div class="report-top"><div class="report-stat total"><small>Sasaran IDL</small><div class="num">${lap.total.sasaranIDL}</div></div><div class="report-stat suntik"><small>Lengkap IDL</small><div class="num">${lap.total.idl}</div></div><div class="report-stat lengkap"><small>% IDL</small><div class="num">${formatPct(lap.total.pIDL)}</div></div><div class="report-stat total"><small>Sasaran IBL</small><div class="num">${lap.total.sasaranIBL}</div></div><div class="report-stat suntik"><small>Lengkap IBL</small><div class="num">${lap.total.ibl}</div></div></div>${desa==='SEMUA'?renderGrafikIDLIBL(lap):''}<div class="report-section">REKAPITULASI IDL DAN IBL</div><table class="report-table"><thead><tr><th>Desa/Posyandu</th><th>Sasaran 9-&lt;12 bln</th><th>Cakupan IDL</th><th>% IDL</th><th>Sasaran 19-&lt;24 bln</th><th>Cakupan IBL</th><th>% IBL</th></tr></thead><tbody>${tabelIDLIBL(lap)}</tbody></table>${desa!=='SEMUA'||pos!=='SEMUA'?`<div class="report-section">DAFTAR NAMA SASARAN BELUM LENGKAP</div>${renderDaftarBelumIDLIBL(lap)}`:''}${renderTandaTangan()}</div>`}
     function dataBelumASIK(){const bulan=getBulanLaporan(),desa=document.getElementById('pilihDesaLaporan')?.value||'SEMUA',pos=getPosyanduLaporan();return anakData.filter(a=>isNoBukuValid(a.No_Buku)).filter(a=>desa==='SEMUA'||a.DESA===desa).filter(a=>pos==='SEMUA'||a.POSYANDU===pos).map(a=>{const belum=normalisasiVaksinBelumASIK(a.Vaksin_Belum_ASIK||[]);const riwayat=riwayatImunisasiBulan(a,bulan);const vaksinBulan=[...new Set(riwayat.flatMap(r=>String(r[1]||'').split(',').map(x=>normalizeAntigen(x)).filter(Boolean)))];const belumBulan=belum.filter(v=>vaksinBulan.includes(v));const tanggal=riwayat.map(r=>ubahTanggalKeISO(r[0])).filter(Boolean).sort()[0]||a.TGL_PELAYANAN||'';return{a,belum,belumBulan,tanggal}}).filter(x=>x.belum.length).filter(x=>!bulan||x.belumBulan.length||!riwayatImunisasiBulan(x.a,bulan).length).sort((x,y)=>String(x.a.POSYANDU).localeCompare(String(y.a.POSYANDU),'id',{numeric:true,sensitivity:'base'})||urutNoBuku(x.a,y.a))}
-    function renderLaporanBelumASIKHTML(){const bulanText=formatBulanLaporan(getBulanLaporan());const desa=document.getElementById('pilihDesaLaporan')?.value||'SEMUA',pos=getPosyanduLaporan();const labelDesa=desa==='SEMUA'?'Semua Desa/Kelurahan':desa,labelPos=pos==='SEMUA'?'Semua Posyandu':pos;const data=dataBelumASIK();return`${reportActions()}<div class="report-paper" id="areaCetakLaporan"><div class="report-title" style="text-decoration:none">LAPORAN BELUM INPUT ASIK</div><div class="report-subtitle"><b>Bulan Pelayanan:</b> ${bulanText} &nbsp; • &nbsp; <b>Desa:</b> ${labelDesa} &nbsp; • &nbsp; <b>Posyandu:</b> ${labelPos}<br><span style="font-size:10px">Daftar kerja operator untuk memasukkan imunisasi dari SIPAKAINGE yang belum tercatat di ASIK.</span></div><table class="report-table"><thead><tr><th>No</th><th>Tanggal Pelayanan</th><th>ID ASIK</th><th>Posyandu</th><th>No Buku</th><th>Nama Anak</th><th>Orang Tua</th><th>Tgl Lahir</th><th>Tgl BCG</th><th>Vaksin Belum ASIK</th></tr></thead><tbody>${data.map((x,i)=>`<tr><td style="text-align:center">${i+1}</td><td style="text-align:center;white-space:nowrap">${formatTanggalIndonesia(x.tanggal)}</td><td style="text-align:center">${fieldBackup(x.a,['ID_ASIK','Id_Asik','id_asik'])||'-'}</td><td>${x.a.POSYANDU||'-'}</td><td style="text-align:center">${x.a.No_Buku||'-'}</td><td><b>${properCase(x.a.NAMA)}</b></td><td>${properCase(x.a.ORTU||'-')}</td><td style="text-align:center;white-space:nowrap">${formatTanggalIndonesia(x.a.TGL_LAHIR)}</td><td style="text-align:center;white-space:nowrap">${formatTanggalIndonesia(getTanggalAntigen(x.a,'BCG'))}</td><td style="font-weight:900;color:#dc2626">${(x.belumBulan.length?x.belumBulan:x.belum).join(', ')}</td></tr>`).join('')||'<tr><td colspan="10" style="text-align:center">Tidak ada data belum input ASIK pada filter ini.</td></tr>'}</tbody></table></div>`}
-    function renderLaporan(){resetAnalisaCache();isiDropdownDesaLaporan();isiDropdownPosyanduLaporan();const bulanBox=document.getElementById('bulanLaporan');if(bulanBox&&!bulanBox.value)bulanBox.value=getBulanBerjalan();const sampaiBox=document.getElementById('bulanSampaiLaporan');if(sampaiBox&&!sampaiBox.value)sampaiBox.value=bulanBox?.value||getBulanBerjalan();const jenis=document.getElementById('jenisLaporan')?.value||'HASIL_PUSKESMAS';const boxSampai=document.getElementById('boxBulanSampaiLaporan');const boxDesa=document.getElementById('boxDesaLaporan');const boxPos=document.getElementById('boxPosyanduLaporan');const boxKelompok=document.getElementById('boxKelompokUmurLaporan');if(boxSampai)boxSampai.style.display=(jenis==='IDL_IBL')?'block':'none';if(boxDesa)boxDesa.style.display=(jenis==='DESA'||jenis==='KEJAR'||jenis==='IDL_IBL'||jenis==='ASIK')?'block':'none';if(boxPos)boxPos.style.display=(jenis==='DESA'||jenis==='KEJAR'||jenis==='IDL_IBL'||jenis==='ASIK')?'block':'none';if(boxKelompok)boxKelompok.style.display=(jenis==='PUSKESMAS')?'block':'none';const target=document.getElementById('laporanPreview');if(!target)return;if(jenis==='HASIL_PUSKESMAS')target.innerHTML=renderLaporanHasilPuskesmasHTML();else if(jenis==='DESA')target.innerHTML=renderLaporanDesaHTML();else if(jenis==='PUSKESMAS')target.innerHTML=renderLaporanPuskesmasHTML();else if(jenis==='VAKSIN')target.innerHTML=renderLaporanPemakaianVaksinHTML();else if(jenis==='KEJAR')target.innerHTML=renderLaporanKejarHTML();else if(jenis==='IDL_IBL')target.innerHTML=renderLaporanIDLIBLHTML();else if(jenis==='ASIK')target.innerHTML=renderLaporanBelumASIKHTML();simpanStateUI()}
+    function renderLaporanBelumASIKHTML() {
+  const bulanText = formatBulanLaporan(getBulanLaporan());
+  const desa = document.getElementById('pilihDesaLaporan')?.value || 'SEMUA';
+  const pos = getPosyanduLaporan();
+  const labelDesa = desa === 'SEMUA' ? 'Semua Desa/Kelurahan' : desa;
+  const labelPos = pos === 'SEMUA' ? 'Semua Posyandu' : pos;
+  const data = dataBelumASIK();
+
+  return `${reportActions()}
+    <div class="report-paper" id="areaCetakLaporan">
+      <div class="report-title" style="text-decoration:none">LAPORAN BELUM INPUT ASIK</div>
+      <div class="report-subtitle">
+        <b>Bulan Pelayanan:</b> ${bulanText} &nbsp; • &nbsp; <b>Desa:</b> ${labelDesa} &nbsp; • &nbsp; <b>Posyandu:</b> ${labelPos}<br>
+        <span style="font-size:10px">Daftar kerja operator untuk memasukkan imunisasi dari SIPAKAINGE yang belum tercatat di ASIK.</span>
+      </div>
+      <table class="report-table">
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>Tanggal Pelayanan</th>
+            <th>Posyandu</th>
+            <th>No Buku</th>
+            <th>Nama Anak</th>
+            <th>Orang Tua</th>
+            <th>Tgl Lahir</th>
+            <th>Vaksin Belum ASIK</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${data.map((x, i) => `
+            <tr>
+              <td style="text-align:center">${i + 1}</td>
+              <td style="text-align:center;white-space:nowrap">${formatTanggalIndonesia(x.tanggal)}</td>
+              <td>${x.a.POSYANDU || '-'}</td>
+              <td style="text-align:center">${x.a.No_Buku || '-'}</td>
+              <td><b>${properCase(x.a.NAMA)}</b></td>
+              <td>${properCase(x.a.ORTU || '-')}</td>
+              <td style="text-align:center;white-space:nowrap">${formatTanggalIndonesia(x.a.TGL_LAHIR)}</td>
+              <td style="font-weight:900;color:#dc2626">${(x.belumBulan.length ? x.belumBulan : x.belum).join(', ')}</td>
+            </tr>`).join('') || '<tr><td colspan="8" style="text-align:center">Tidak ada data belum input ASIK pada filter ini.</td></tr>'}
+        </tbody>
+      </table>
+    </div>`;
+}
+
+    function renderLaporan(){resetAnalisaCache();isiDropdownDesaLaporan();isiDropdownPosyanduLaporan();const bulanBox=document.getElementById('bulanLaporan');if(bulanBox&&!bulanBox.value)bulanBox.value=getBulanBerjalan();const sampaiBox=document.getElementById('bulanSampaiLaporan');if(sampaiBox&&!sampaiBox.value)sampaiBox.value=bulanBox?.value||getBulanBerjalan();const jenis=document.getElementById('jenisLaporan')?.value||'HASIL_PUSKESMAS';const boxSampai=document.getElementById('boxBulanSampaiLaporan');const boxDesa=document.getElementById('boxDesaLaporan');const boxPos=document.getElementById('boxPosyanduLaporan');const boxKelompok=document.getElementById('boxKelompokUmurLaporan');if(boxSampai)boxSampai.style.display=(jenis==='IDL_IBL')?'block':'none';if(boxDesa)boxDesa.style.display=(jenis==='DESA'||jenis==='KEJAR'||jenis==='DAFTAR_KEJAR'||jenis==='IDL_IBL'||jenis==='ASIK')?'block':'none';if(boxPos)boxPos.style.display=(jenis==='DESA'||jenis==='KEJAR'||jenis==='DAFTAR_KEJAR'||jenis==='IDL_IBL'||jenis==='ASIK')?'block':'none';if(boxKelompok)boxKelompok.style.display=(jenis==='PUSKESMAS')?'block':'none';const target=document.getElementById('laporanPreview');if(!target)return;if(jenis==='HASIL_PUSKESMAS')target.innerHTML=renderLaporanHasilPuskesmasHTML();else if(jenis==='DESA')target.innerHTML=renderLaporanDesaHTML();else if(jenis==='PUSKESMAS')target.innerHTML=renderLaporanPuskesmasHTML();else if(jenis==='VAKSIN')target.innerHTML=renderLaporanPemakaianVaksinHTML();else if(jenis==='KEJAR')target.innerHTML=renderLaporanKejarHTML();else if(jenis==='DAFTAR_KEJAR')target.innerHTML=renderDaftarKejarHTML();else if(jenis==='IDL_IBL')target.innerHTML=renderLaporanIDLIBLHTML();else if(jenis==='ASIK')target.innerHTML=renderLaporanBelumASIKHTML();simpanStateUI()}
 
     const UI_STATE_KEY='SIPAKAINGE_UI_STATE_V1';
     let uiStateDipulihkan=false;
