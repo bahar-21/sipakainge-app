@@ -77,7 +77,8 @@
   <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
   <script>
-    let kategoriAktif='SEMUA',openDesa='',searchText='',openInputId='',inputMode='',inputFilter='BELUM',riwayatInputTerbuka='';
+let kategoriAktif='SEMUA',openDesa='',searchText='',openInputId='',inputMode='',inputFilter='BELUM',riwayatInputTerbuka='';
+let isSavingSasaran = false;
 let hasilCariASIKCache = [];
 let riwayatASIKTerpilihTambah = [];
 let sumberASIKTerpilihTambah = '';
@@ -1929,122 +1930,123 @@ async function hapusSasaranPermanen(appId) {
     select.value = defaultPos;
   }
 }
-    async function simpanSasaranBaru(){
+    async function simpanSasaranBaru() {
+  // 1. CEK APAKAH SEDANG DALAM PROSES SIMPAN?
+  if (isSavingSasaran) {
+    // Jika sedang proses, jangan jalankan fungsi ini lagi
+    return; 
+  }
+
   const nama = document.getElementById('baruNama')?.value.trim().toUpperCase();
   const lahir = document.getElementById('baruLahir')?.value || '';
   const jk = document.getElementById('baruJK')?.value || '♂';
   const ortu = document.getElementById('baruOrtu')?.value.trim() || '';
   const pos = document.getElementById('baruPos')?.value || '';
-  const noBuku = String(document.getElementById('baruNoBuku')?.value || '').replace(/\D/g,'').slice(0,4);
+  const noBuku = String(document.getElementById('baruNoBuku')?.value || '').replace(/\D/g, '').slice(0, 4);
   const hp = document.getElementById('baruHP')?.value.trim() || '';
   const desa = desaDariPosyandu(pos);
 
-  if(!nama){
-    alert('Nama anak wajib diisi.');
-    return;
-  }
+  if (!nama) { alert('Nama anak wajib diisi.'); return; }
+  if (!lahir) { alert('Tanggal lahir wajib diisi.'); return; }
+  if (!isNoBukuValid(noBuku)) { alert('No. Buku wajib tepat 4 digit angka, contoh 2424.'); return; }
 
-  if(!lahir){
-    alert('Tanggal lahir wajib diisi.');
-    return;
-  }
-
-  if(!isNoBukuValid(noBuku)){
-    alert('No. Buku wajib tepat 4 digit angka, contoh 2424.');
-    return;
-  }
-
-  const now = new Date();
-
-  const appId = 'APP-' +
-    now.getFullYear() +
-    String(now.getMonth() + 1).padStart(2,'0') +
-    String(now.getDate()).padStart(2,'0') +
-    '-' +
-    String(Date.now()).slice(-6);
-
-  const idTemp = 'TEMP-' + appId;
-  const idAsikFinal = idAsikTerpilihTambah || idTemp;
-
-  const jkText = jk === '♀' ? 'Perempuan' : 'Laki-laki';
-  const tanggalTampil = ubahISOkeTanggal(lahir) || lahir;
-
-  const riwayatAwal = normalisasiRiwayatASIKUntukTambah(
-    riwayatASIKTerpilihTambah,
-    tanggalTampil
+  // CEK DATA GANDA
+  const dataGanda = anakData.find(a => 
+    String(a.NAMA || '').trim().toUpperCase() === nama && 
+    String(a.TGL_LAHIR || '').slice(0, 10) === lahir && 
+    String(a.ORTU || '').trim().toUpperCase() === ortu.toUpperCase()
   );
 
-  const vaksinBelumASIK = [...new Set(
-    riwayatAwal
-      .map(r => String(r[1] || '').split(',').map(x => x.trim()))
-      .flat()
-      .filter(Boolean)
-  )];
+  if (dataGanda) {
+    const konfirmasi = confirm(`PERINGATAN: Data Identik Ditemukan!\n\nNama: ${nama}\nTgl Lahir: ${lahir}\nOrtu: ${ortu.toUpperCase()}\n\nApakah Anda yakin ingin menambahkannya lagi?`);
+    if (!konfirmasi) return;
+  }
 
-  const data = {
-    APP_ID: appId,
-    ID_ASIK: idAsikFinal,
+  // 2. AKTIFKAN KUNCI (LOCK)
+  isSavingSasaran = true;
+  
+  // Opsional: Ubah teks tombol agar user tahu sedang diproses
+  const btnSimpan = document.querySelector('button[onclick="simpanSasaranBaru()"]');
+  if (btnSimpan) btnSimpan.innerText = 'Menyimpan...';
+  if (btnSimpan) btnSimpan.disabled = true;
 
-    NIK_Anak: '',
-    Nama_Anak: nama,
-    Tanggal_Lahir_Anak: lahir,
-    Jenis_Kelamin_Anak: jkText,
-    Nama_Orang_Tua: ortu || '-',
-    Kelurahan_atau_Desa: desa,
-    Pos_Imunisasi_BCG_1: pos,
-    No_Buku: noBuku,
-    No__HP: hp,
+  try {
+    const now = new Date();
+    const appId = 'APP-' + now.getFullYear() + String(now.getMonth() + 1).padStart(2, '0') + String(now.getDate()).padStart(2, '0') + '-' + String(Date.now()).slice(-6);
+    const idTemp = 'TEMP-' + appId;
+    const idAsikFinal = idAsikTerpilihTambah || idTemp;
+    const jkText = jk === '♀' ? 'Perempuan' : 'Laki-laki';
+    const tanggalTampil = ubahISOkeTanggal(lahir) || lahir;
+    const riwayatAwal = normalisasiRiwayatASIKUntukTambah(riwayatASIKTerpilihTambah, tanggalTampil);
+    const vaksinBelumASIK = [...new Set(riwayatAwal.map(r => String(r[1] || '').split(',').map(x => x.trim())).flat().filter(Boolean))];
 
-    NAMA: nama,
-    TGL_LAHIR: lahir,
-    JK: jk,
-    ORTU: ortu || '-',
-    DESA: desa,
-    POSYANDU: pos,
-    NO_HP: hp,
+    const data = {
+      APP_ID: appId,
+      ID_ASIK: idAsikFinal,
+      NIK_Anak: '',
+      Nama_Anak: nama,
+      Tanggal_Lahir_Anak: lahir,
+      Jenis_Kelamin_Anak: jkText,
+      Nama_Orang_Tua: ortu || '-',
+      Kelurahan_atau_Desa: desa,
+      Pos_Imunisasi_BCG_1: pos,
+      No_Buku: noBuku,
+      No__HP: hp,
+      NAMA: nama,
+      TGL_LAHIR: lahir,
+      JK: jk,
+      ORTU: ortu || '-',
+      DESA: desa,
+      POSYANDU: pos,
+      NO_HP: hp,
+      Tanggal_Imunisasi_HB0: lahir,
+      RIWAYAT: riwayatAwal,
+      STATUS_DATA: 'SEMENTARA',
+      RIWAYAT_LENGKAP: !!riwayatASIKTerpilihTambah.length,
+      SUMBER_DATA_AWAL: sumberASIKTerpilihTambah || 'MANUAL',
+      INPUT_BULAN: '',
+      TGL_PELAYANAN: getTanggalLayananInput(),
+      VAKSIN_BULAN_INI: '',
+      Catatan: '',
+      CATATAN: '',
+      Keterangan: '',
+      KETERANGAN: '',
+      Vaksin_Belum_ASIK: vaksinBelumASIK,
+      Status_ASIK: vaksinBelumASIK.length ? 'BELUM' : 'YA',
+      Tanggal_Cek_ASIK: '',
+      UMUR_BULAN: hitungUmurBulanTanggal(lahir, new Date()),
+      Updated_At: nowISO()
+    };
 
-    Tanggal_Imunisasi_HB0: lahir,
-    RIWAYAT: riwayatAwal,
+    perbaruiStatusIDL_IBL(data);
+    anakData.unshift(data);
+    
+    // Proses simpan yang membutuhkan jaringan
+    await simpanAman(data);
 
-    STATUS_DATA: 'SEMENTARA',
-    RIWAYAT_LENGKAP: !!riwayatASIKTerpilihTambah.length,
-    SUMBER_DATA_AWAL: sumberASIKTerpilihTambah || 'MANUAL',
+    riwayatASIKTerpilihTambah = [];
+    hasilCariASIKCache = [];
+    sumberASIKTerpilihTambah = '';
+    idAsikTerpilihTambah = '';
 
-    INPUT_BULAN: '',
-    TGL_PELAYANAN: getTanggalLayananInput(),
-    VAKSIN_BULAN_INI: '',
+    closePanel();
+    renderDashboard();
+    renderInputList();
+    renderCariList();
+    notif('Sasaran tersimpan.');
 
-    Catatan: '',
-    CATATAN: '',
-    Keterangan: '',
-    KETERANGAN: '',
-
-    Vaksin_Belum_ASIK: vaksinBelumASIK,
-    Status_ASIK: vaksinBelumASIK.length ? 'BELUM' : 'YA',
-    Tanggal_Cek_ASIK: '',
-
-    UMUR_BULAN: hitungUmurBulanTanggal(lahir, new Date()),
-    Updated_At: nowISO()
-  };
-
-  perbaruiStatusIDL_IBL(data);
-
-  anakData.unshift(data);
-
-  await simpanAman(data);
-
-  riwayatASIKTerpilihTambah = [];
-  hasilCariASIKCache = [];
-  sumberASIKTerpilihTambah = '';
-  idAsikTerpilihTambah = '';
-
-  closePanel();
-  renderDashboard();
-  renderInputList();
-  renderCariList();
-
-  notif('Sasaran tersimpan. ID ASIK asli dipakai jika berasal dari ASIK; HB0/manual memakai ID sementara.');
+  } catch (e) {
+    console.error(e);
+    alert('Gagal menyimpan: ' + e.message);
+  } finally {
+    // 3. BUKA KEMBALI KUNCI (UNLOCK)
+    // Bagian ini akan selalu dijalankan baik simpan berhasil maupun gagal
+    isSavingSasaran = false;
+    if (btnSimpan) btnSimpan.innerText = 'SIMPAN SASARAN';
+    if (btnSimpan) btnSimpan.disabled = false;
+  }
 }
+
     function isiDropdownDesaLaporan(){const select=document.getElementById('pilihDesaLaporan');if(!select)return;const lama=select.value;const jenis=document.getElementById('jenisLaporan')?.value||'HASIL_PUSKESMAS';const mesin=buildMesinRekap(dataLaporanAktif(false));const daftar=daftarDesaAktif(mesin);const opsi=(jenis==='KEJAR'|| jenis === 'DAFTAR_KEJAR' ||jenis==='IDL_IBL'||jenis==='ASIK')?['SEMUA',...(daftar.length?daftar:desaList)]:(daftar.length?daftar:desaList);select.innerHTML=opsi.map(d=>`<option value="${d}">${d==='SEMUA'?'Semua Desa/Kelurahan':d}</option>`).join('');if(lama&&[...select.options].some(o=>o.value===lama))select.value=lama}
     function isiDropdownPosyanduLaporan(){const desa=document.getElementById('pilihDesaLaporan')?.value||desaList[0];const select=document.getElementById('pilihPosyanduLaporan');if(!select)return;const lama=select.value;const mesin=buildMesinRekap(dataLaporanAktif(false));let list=[];if(desa==='SEMUA'){list=Object.keys(mesin.posyandu||{}).length?Object.keys(mesin.posyandu):[...new Set(Object.values(posMap).flat())]}else{list=Object.keys(mesin.desa[desa]?.posyandu||{}).length?Object.keys(mesin.desa[desa].posyandu):(posMap[desa]||[])}list=list.sort((a,b)=>String(a).localeCompare(String(b),'id',{numeric:true,sensitivity:'base'}));select.innerHTML='<option value="SEMUA">Semua Posyandu</option>'+list.map(p=>`<option value="${p}">${p}</option>`).join('');select.value=list.includes(lama)?lama:'SEMUA'}
     function onDesaLaporanChange(){isiDropdownPosyanduLaporan();renderLaporan()}
